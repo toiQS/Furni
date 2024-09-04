@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furni.Entities", "Furni.Entities\Furni.Entities.csproj", "{8E819388-163F-4FF0-9C0A-733DFEF3F054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furni.Entities", "Furni.Entities\Furni.Entities.csproj", "{8E819388-163F-4FF0-9C0A-733DFEF3F054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furni.Data", "Furni.Data\Furni.Data.csproj", "{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furni.Data", "Furni.Data\Furni.Data.csproj", "{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furni.Services", "Furni.Services\Furni.Services.csproj", "{BC44E527-23D6-4AB0-A4DD-22E574556F8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC44E527-23D6-4AB0-A4DD-22E574556F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC44E527-23D6-4AB0-A4DD-22E574556F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC44E527-23D6-4AB0-A4DD-22E574556F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC44E527-23D6-4AB0-A4DD-22E574556F8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
