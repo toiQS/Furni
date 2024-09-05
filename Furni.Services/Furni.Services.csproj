@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Furni.Data\Furni.Data.csproj" />
+    <ProjectReference Include="..\Furni.Entities\Furni.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
