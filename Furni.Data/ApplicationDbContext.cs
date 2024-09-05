@@ -11,6 +11,7 @@ namespace Furni.Data
 {
     public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Blog> Blog {  get; set; }
         public DbSet<Cart> Cart { get; set; }
         public DbSet<Item> Item { get; set; }

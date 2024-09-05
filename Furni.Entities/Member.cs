@@ -16,7 +16,7 @@ namespace Furni.Entities
         [Column(name:"First Name")]
         public string FirstName { get; set; } = string.Empty;
         [Column(name:"Middle Name")]
-        public string MiddleName { get; set; } = string.Empty ;
+        public string? MiddleName { get; set; } = string.Empty ;
         [Column(name:"Last Name")]
         public string LastName { get; set; } = string.Empty;
         [Column(name:"Full Name")]
@@ -25,5 +25,6 @@ namespace Furni.Entities
         public string Summary {  get; set; } = string.Empty ;
         [Column(name:"URL Image")]
         public string URLImage {  get; set; } = string.Empty ;
+        public bool IsDeleted { get; set; }
     }
 }

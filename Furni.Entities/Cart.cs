@@ -14,6 +14,8 @@ namespace Furni.Entities
         [Column(name:"Cart Id")]
         public string CartId { get; set; } = string.Empty;
         public bool Status { get; set; }
+        [Column(name:"User Id")]
+        public string UserId { get; set; } = string.Empty ;
         public List<Item> Items = new List<Item>();
     }
 }
