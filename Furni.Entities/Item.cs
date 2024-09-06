@@ -19,7 +19,7 @@ namespace Furni.Entities
         public virtual Product Product { get; set; }
         public float Price { get; set; }
         public int Quantity { get; set; }
-        private float Total {  get; set; }
+        public float Total {  get; set; }
         [ForeignKey(nameof(Cart))]
         [Column(name:"Cart Id")]
         public string CartId { get; set; } = string.Empty;

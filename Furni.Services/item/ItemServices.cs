@@ -71,7 +71,8 @@ namespace Furni.Services.item
                     Quantity = quantity,
                     ProductId = productId,
                     Price = isCheckProduct.Price,
-                    ItemId = $"item{DateTime.Now}"
+                    ItemId = $"item{DateTime.Now}",
+                    Total = quantity * isCheckProduct.Price,
                 };
                 return await _repository.Create(item);
             }
@@ -88,6 +89,7 @@ namespace Furni.Services.item
                 var data = await _context.Item.AsNoTracking().FirstOrDefaultAsync(x => x.ItemId == itemId);
                 if (data == null) return false;
                 data.Quantity = quantity;
+                data.Total = quantity * data.Price;
                 return await _repository.Update(data);
             }
             catch (Exception ex)

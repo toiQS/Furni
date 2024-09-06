@@ -94,6 +94,9 @@ namespace Furni.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
+
                     b.HasKey("ItemId");
 
                     b.HasIndex("CartId");
