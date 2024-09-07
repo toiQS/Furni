@@ -100,11 +100,11 @@ namespace Furni.Services.cart
             };
             return await _cartRepository.Create(cart);
         }
-        public async Task<bool> UpdateAsync(string cartId)
+        public async Task<bool> UpdateAsync(string cartId, string userId)
         {
             try
             {
-                var data = await _context.Cart.AsNoTracking().Where(x => x.CartId == cartId).FirstOrDefaultAsync();
+                var data = await _context.Cart.AsNoTracking().Where(x => x.CartId == cartId && x.UserId == userId).FirstOrDefaultAsync();
                 if (data == null) return false;
                 data.Status = !data.Status;
                 return await _cartRepository.Update(data);

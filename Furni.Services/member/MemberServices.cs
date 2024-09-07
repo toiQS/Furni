@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Furni.Services.member
 {
-    public class MemberServices
+    public class MemberServices : IMemberServices
     {
         private readonly ApplicationDbContext _context;
         private readonly IRepositoryAsync<Member> _repositoryMember;

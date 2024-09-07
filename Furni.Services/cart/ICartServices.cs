@@ -16,7 +16,7 @@ namespace Furni.Services.cart
         public Task<IEnumerable<Cart>> GetCartsByUserId(string userId);
         public Task<IEnumerable<Cart>> AdvancedSearch(string userId, bool status);
         public Task<bool> CreateAsync(string userId);
-        public Task<bool> UpdateAsync(string cartId);
+        public Task<bool> UpdateAsync(string cartId,string userId);
         public Task<bool> DeleteAsync(string cartId, string userId);
     }
 }

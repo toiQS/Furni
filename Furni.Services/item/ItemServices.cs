@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Furni.Services.item
 {
-    public class ItemServices
+    public class ItemServices : IItemServices
     {
         private readonly ApplicationDbContext _context;
         private IRepositoryAsync<Item> _repository;

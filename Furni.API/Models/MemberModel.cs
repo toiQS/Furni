@@ -10,5 +10,10 @@ namespace Furni.API.Models
         public string Summary { get; set; } = string.Empty;
         public string URLImage { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
+
+        internal object ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,8 +13,8 @@ namespace Furni.Services.member
         public Task<IEnumerable<Member>> GetMembersByTextAsync(string text);
         public Task<Member> GetMemberById(string memberId);
         public Task<bool> CreateAsync(string firstName, string? middleName, string lastName, string position, string summary, string urlImage);
-        public Task<bool> UpdateAsync(string memeberId, string fistName, string? middleName, string lastName, string position, string summary, string urlImage);
-        public Task<bool> UpdateAsync(string memeberId);
+        public Task<bool> UpdateAsync(string memberId, string fistName, string? middleName, string lastName, string position, string summary, string urlImage);
+        public Task<bool> UpdateAsync(string memberId);
         public Task<bool> DeleteAsync(string memberId);
     }
 }
