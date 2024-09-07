@@ -5,19 +5,19 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Furni.Services.member
 {
     public class MemberServices : IMemberServices
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IRepositoryAsync<Member> _repositoryMember;
-        private string _path = string.Empty, _fileName = "LogMemberFile.txt", _folderName = "member";
-        // Constructor for api controller
+        private readonly ApplicationDbContext _context; // Database context
+        private readonly IRepositoryAsync<Member> _repositoryMember; // Repository for managing Member entities
+        private readonly string _path; // Path for logging errors
+        private readonly string _fileName = "LogMemberFile.txt"; // Log file name for error logging
+        private readonly string _folderName = "member"; // Folder name for error logging
+
+        // Constructor for the service, initializing the repository and logging setup
         public MemberServices(ApplicationDbContext context)
         {
             _context = context;
@@ -26,104 +26,153 @@ namespace Furni.Services.member
             _repositoryMember.GetFolderName(_folderName);
             _path = _repositoryMember.GetPathFolderCurrent();
         }
+
+        // Fetches all members asynchronously
         public async Task<IEnumerable<Member>> GetMembersAsync()
         {
             return await _repositoryMember.GetValuesAsync();
         }
+
+        // Fetches members by searching for a text in their names (case-insensitive)
         public async Task<IEnumerable<Member>> GetMembersByTextAsync(string text)
         {
             try
             {
-                return await _context.Member.AsNoTracking().Where(x => x.FirstName.ToLower().Contains(text.ToLower()) ||
-                                                                        x.FirstName.ToLower().Contains(text.ToLower()) ||
-                                                                        x.FirstName.ToLower().Contains(text.ToLower())).ToListAsync();
-
+                // Searching for text in the FirstName, MiddleName, or LastName
+                return await _context.Member.AsNoTracking()
+                    .Where(x => x.FirstName.ToLower().Contains(text.ToLower()) ||
+                                x.MiddleName.ToLower().Contains(text.ToLower()) ||
+                                x.LastName.ToLower().Contains(text.ToLower()))
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
+                // Log the error and rethrow the exception
                 await _repositoryMember.LogErrorAsync(_path, ex);
                 throw;
             }
         }
+
+        // Fetches a specific member by their ID
         public async Task<Member> GetMemberById(string memberId)
         {
             try
             {
-                return await _context.Member.AsNoTracking().FirstOrDefaultAsync(x => x.MemberId == memberId);
-
+                return await _context.Member.AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.MemberId == memberId);
             }
             catch (Exception ex)
             {
+                // Log the error and rethrow the exception
                 await _repositoryMember.LogErrorAsync(_path, ex);
                 throw;
             }
         }
+
+        // Creates a new member entity and saves it to the database
         public async Task<bool> CreateAsync(string firstName, string? middleName, string lastName, string position, string summary, string urlImage)
         {
-            var memeber = new Member()
+            try
             {
-                FirstName = firstName,
-                LastName = lastName,
-                MiddleName = middleName,
-                FullName = $"{firstName} {middleName??string.Empty} {lastName}",
-                IsDeleted = false ,
-                MemberId = $"1211{DateTime.Now}",
-                Position = position,
-                Summary = summary,
-                URLImage = urlImage
-            };
-            return await _repositoryMember.Create(memeber);
+                var member = new Member()
+                {
+                    FirstName = firstName,
+                    MiddleName = middleName,
+                    LastName = lastName,
+                    FullName = $"{firstName} {middleName ?? string.Empty} {lastName}", // Build full name dynamically
+                    Position = position,
+                    Summary = summary,
+                    URLImage = urlImage,
+                    MemberId = $"1211{DateTime.Now.Ticks}", // Generate a unique MemberId using current timestamp
+                    IsDeleted = false
+                };
+
+                return await _repositoryMember.Create(member);
+            }
+            catch (Exception ex)
+            {
+                // Log the error and rethrow the exception
+                await _repositoryMember.LogErrorAsync(_path, ex);
+                throw;
+            }
         }
+
+        // Updates an existing member entity
         public async Task<bool> UpdateAsync(string memberId, string firstName, string? middleName, string lastName, string position, string summary, string urlImage)
         {
             try
             {
-                var data = await _context.Member.AsNoTracking().FirstOrDefaultAsync(x => x.MemberId == memberId);
-                if (data == null)
-                    return false;
-                data.FirstName = firstName;
-                data.MiddleName = middleName;
-                data.LastName = lastName;
-                data.FullName = $"{firstName} {middleName ?? string.Empty} {lastName}";
-                data.Position = position;
-                data.Summary = summary;
-                data.URLImage = urlImage;
-                return await _repositoryMember.Update(data);
+                // Fetch the member entity by their ID
+                var member = await _context.Member.AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.MemberId == memberId);
 
+                if (member == null)
+                    return false; // Return false if the member is not found
+
+                // Update member fields
+                member.FirstName = firstName;
+                member.MiddleName = middleName;
+                member.LastName = lastName;
+                member.FullName = $"{firstName} {middleName ?? string.Empty} {lastName}";
+                member.Position = position;
+                member.Summary = summary;
+                member.URLImage = urlImage;
+
+                // Update the member in the repository
+                return await _repositoryMember.Update(member);
             }
             catch (Exception ex)
             {
+                // Log the error and rethrow the exception
                 await _repositoryMember.LogErrorAsync(_path, ex);
                 throw;
             }
         }
+
+        // Toggles the IsDeleted status of a member
         public async Task<bool> UpdateAsync(string memberId)
         {
             try
             {
-                var data = await _context.Member.AsNoTracking().FirstOrDefaultAsync(x => x.MemberId == memberId);
-                if (data == null)
-                    return false;
-                data.IsDeleted = !data.IsDeleted;
-                return await _repositoryMember.Update(data);
+                // Fetch the member by their ID
+                var member = await _context.Member.AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.MemberId == memberId);
+
+                if (member == null)
+                    return false; // Return false if the member is not found
+
+                // Toggle the IsDeleted status
+                member.IsDeleted = !member.IsDeleted;
+
+                // Update the member in the repository
+                return await _repositoryMember.Update(member);
             }
             catch (Exception ex)
             {
+                // Log the error and rethrow the exception
                 await _repositoryMember.LogErrorAsync(_path, ex);
                 throw;
             }
         }
+
+        // Deletes a member by their ID
         public async Task<bool> DeleteAsync(string memberId)
         {
             try
             {
-                var data = await _context.Member.AsNoTracking().FirstOrDefaultAsync(x => x.MemberId == memberId);
-                if (data == null)
-                    return false;
-                return await _repositoryMember.Delete(data);
+                // Fetch the member entity by their ID
+                var member = await _context.Member.AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.MemberId == memberId);
+
+                if (member == null)
+                    return false; // Return false if the member is not found
+
+                // Delete the member in the repository
+                return await _repositoryMember.Delete(member);
             }
             catch (Exception ex)
             {
+                // Log the error and rethrow the exception
                 await _repositoryMember.LogErrorAsync(_path, ex);
                 throw;
             }
