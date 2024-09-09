@@ -1,6 +1,7 @@
 ﻿using Furni.API.Models;
 using Furni.Services.auth;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace Furni.API.Controllers
 {
@@ -100,7 +101,14 @@ namespace Furni.API.Controllers
             // Attempt to log the user in
             var result = await _authServices.Login(email, password);
             if (result)
-                return Ok(ServiceResult<string>.SuccessResult("Success"));
+            {
+                var roleResult = await _authServices.GennerateTokenString(email, password);
+                var stringResult = new StringBuilder();
+                stringResult.AppendLine("Success\n");
+                stringResult.AppendLine($"\nToken: {roleResult}");
+                return Ok(ServiceResult<string>.SuccessResult($"Token: {roleResult}"));
+                //return Ok(ServiceResult<StringBuilder>.SuccessResult(stringResult));
+            }
 
             return BadRequest(ServiceResult<string>.FailureResult("Can't login"));
         }

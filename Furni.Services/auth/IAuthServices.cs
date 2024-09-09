@@ -13,5 +13,6 @@ namespace Furni.Services.auth
         public Task<bool> RegisterManager(string userName, string memberId, string email, string password);
         public Task<bool> RegisterMember(string userName, string memberId, string email, string password);
         public Task<bool> Login(string email, string password);
+        public Task<string> GennerateTokenString(string email, string password);
     }
 }
