@@ -1,4 +1,5 @@
 using Furni.Data;
+using Furni.Services.auth;
 using Furni.Services.blog;
 using Furni.Services.cart;
 using Furni.Services.item;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<ICartServices, CartServices>();
 builder.Services.AddScoped<IItemServices, ItemServices>();
 builder.Services.AddScoped<IMemberServices, MemberServices>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<IAuthServices, AuthServices>();
 
 var app = builder.Build();
 
