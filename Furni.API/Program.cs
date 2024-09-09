@@ -4,12 +4,17 @@ using Furni.Services.cart;
 using Furni.Services.item;
 using Furni.Services.member;
 using Furni.Services.product;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Connect to sql server
 builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 // Add services to the container.
 
@@ -34,6 +39,20 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "Manager", "Member", "User" };
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+
+    }
 }
 
 app.UseHttpsRedirection();
