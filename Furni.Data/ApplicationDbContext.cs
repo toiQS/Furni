@@ -13,7 +13,7 @@ namespace Furni.Data
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        public DbSet<User> User {  get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Blog> Blog {  get; set; }
         public DbSet<Cart> Cart { get; set; }
         public DbSet<Item> Item { get; set; }
