@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Furni.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class BlogController : ControllerBase
     {
