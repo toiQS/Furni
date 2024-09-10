@@ -7,7 +7,7 @@ using System.Security;
 
 namespace Furni.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CartController : ControllerBase
     {

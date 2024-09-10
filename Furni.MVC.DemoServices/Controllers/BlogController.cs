@@ -24,5 +24,15 @@ namespace Furni.MVC.DemoServices.Controllers
             });
             return View(result);
         }
+        public async Task<IActionResult> Add(BlogModelRequest model)
+        {
+            return View(model);
+        }
+        public async Task<IActionResult> Add(string blogName, string userIdCreate)
+        {
+            if (!ModelState.IsValid) return View();
+            var result = await _blogServices.CreateAsync(blogName, userIdCreate);
+            return RedirectToAction("Index");
+        }
     }
 }
