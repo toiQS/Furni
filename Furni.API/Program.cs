@@ -14,7 +14,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Connect to sql server
-builder.Services.AddDbContext<ApplicationDbContext>();
+    
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
