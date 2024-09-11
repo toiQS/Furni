@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Furni.API.Controllers
 {
@@ -13,7 +14,7 @@ namespace Furni.API.Controllers
     public class BlogController : ControllerBase
     {
         private readonly IBlogServices _blogServices;
-
+        
         public BlogController(IBlogServices blogServices)
         {
             _blogServices = blogServices;
@@ -21,6 +22,7 @@ namespace Furni.API.Controllers
 
         // Get all blogs asynchronously
         [HttpGet("list")]
+        [Authorize(Roles ="Member")]
         public async Task<IActionResult> GetBlogListAsync()
         {
             var data = await _blogServices.GetBlogListAsync();
