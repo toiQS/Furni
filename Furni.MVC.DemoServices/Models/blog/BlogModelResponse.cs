@@ -7,5 +7,6 @@
         public string UserIdCreated { get; set; } = string.Empty;
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
+        public string UrlImage { get; set; } = string.Empty;
     }
 }

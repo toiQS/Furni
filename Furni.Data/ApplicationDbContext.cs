@@ -12,7 +12,7 @@ namespace Furni.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<User> User { get; set; }
         public DbSet<Blog> Blog {  get; set; }
         public DbSet<Cart> Cart { get; set; }
@@ -76,11 +76,11 @@ namespace Furni.Data
 
             // Seeding Blogs
             builder.Entity<Blog>().HasData(
-                new Blog { BlogId = "B1", BlogName = "Furniture Tips", UserIdCreated = "M1", CreateAt = DateTime.Now.AddMonths(-1), UpdateAt = DateTime.Now },
-                new Blog { BlogId = "B2", BlogName = "Interior Design Ideas", UserIdCreated = "M2", CreateAt = DateTime.Now.AddMonths(-2), UpdateAt = DateTime.Now },
-                new Blog { BlogId = "B3", BlogName = "Latest Trends in Furniture", UserIdCreated = "M3", CreateAt = DateTime.Now.AddMonths(-3), UpdateAt = DateTime.Now },
-                new Blog { BlogId = "B4", BlogName = "Home Decor Essentials", UserIdCreated = "M4", CreateAt = DateTime.Now.AddMonths(-4), UpdateAt = DateTime.Now },
-                new Blog { BlogId = "B5", BlogName = "Choosing the Right Furniture", UserIdCreated = "M5", CreateAt = DateTime.Now.AddMonths(-5), UpdateAt = DateTime.Now }
+                new Blog { BlogId = "B1", BlogName = "Furniture Tips", UserIdCreated = "M1", CreateAt = DateTime.Now.AddMonths(-1), UpdateAt = DateTime.Now, URLImage = "images/blogs/b1.png" },
+                new Blog { BlogId = "B2", BlogName = "Interior Design Ideas", UserIdCreated = "M2", CreateAt = DateTime.Now.AddMonths(-2), UpdateAt = DateTime.Now, URLImage = "images/blogs/b1.png" },
+                new Blog { BlogId = "B3", BlogName = "Latest Trends in Furniture", UserIdCreated = "M3", CreateAt = DateTime.Now.AddMonths(-3), UpdateAt = DateTime.Now, URLImage = "images/blogs/b1.png" },
+                new Blog { BlogId = "B4", BlogName = "Home Decor Essentials", UserIdCreated = "M4", CreateAt = DateTime.Now.AddMonths(-4), UpdateAt = DateTime.Now, URLImage = "images/blogs/b1.png" },
+                new Blog { BlogId = "B5", BlogName = "Choosing the Right Furniture", UserIdCreated = "M5", CreateAt = DateTime.Now.AddMonths(-5), UpdateAt = DateTime.Now, URLImage = "images/blogs/b1.png" }
             );
         }
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

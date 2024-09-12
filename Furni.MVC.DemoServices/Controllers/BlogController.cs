@@ -46,7 +46,7 @@ namespace Furni.MVC.DemoServices.Controllers
             if (ModelState.IsValid)
             {
                 // Tạo mới blog
-                await _blogService.CreateAsync(model.BlogName, model.UserIdCreated);
+                await _blogService.CreateAsync(model.BlogName, model.UserIdCreated,model.UrlImage);
 
                 // Chuyển hướng đến trang index sau khi tạo thành công
                 return RedirectToAction(nameof(Index));
@@ -93,7 +93,7 @@ namespace Furni.MVC.DemoServices.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(string id, BlogModelRequest model)
         {
-            var result = await _blogService.UpdateAsync(id, model.BlogName, model.UserIdCreated);
+            var result = await _blogService.UpdateAsync(id, model.BlogName, model.UserIdCreated, model.UrlImage);
             if (result) return RedirectToAction("Index");
             return View(model);
             //return Json(id, new {model.BlogName, model.UserIdCreated});

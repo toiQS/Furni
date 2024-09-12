@@ -23,5 +23,7 @@ namespace Furni.Entities
         public DateTime CreateAt { get; set; }
         [Column(name:"Update At")]
         public DateTime UpdateAt { get; set; }
+        [Column(name: "URL Image")]
+        public string URLImage { get; set; } = string.Empty;
     }
 }

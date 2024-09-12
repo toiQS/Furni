@@ -4,5 +4,6 @@
     {
         public string BlogName { get; set; } = string.Empty;
         public string UserIdCreated { get; set; } = string.Empty;
+        public string UrlImage {  get; set; } = string.Empty ;
     }
 }

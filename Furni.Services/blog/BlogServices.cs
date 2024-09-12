@@ -4,6 +4,7 @@ using Furni.Services.repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -69,7 +70,7 @@ namespace Furni.Services.blog
         }
 
         // Creates a new blog asynchronously
-        public async Task<bool> CreateAsync(string blogName, string userIdCreated)
+        public async Task<bool> CreateAsync(string blogName, string userIdCreated,string urlImage)
         {
             var newBlog = new Blog()
             {
@@ -78,13 +79,14 @@ namespace Furni.Services.blog
                 CreateAt = DateTime.Now,
                 UserIdCreated = userIdCreated,
                 UpdateAt = DateTime.Now,
+                URLImage = urlImage
             };
 
             return await _blogRepository.Create(newBlog);
         }
 
         // Updates an existing blog asynchronously
-        public async Task<bool> UpdateAsync(string blogId, string blogName, string userIdCreated)
+        public async Task<bool> UpdateAsync(string blogId, string blogName, string userIdCreated, string urlImage)
         {
             try
             {
@@ -98,6 +100,7 @@ namespace Furni.Services.blog
                 existingBlog.BlogName = blogName;
                 existingBlog.UserIdCreated = userIdCreated;
                 existingBlog.UpdateAt = DateTime.Now;
+                existingBlog.URLImage = urlImage;
 
                 return await _blogRepository.Update(existingBlog); // Update blog in the repository
             }

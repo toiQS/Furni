@@ -37,7 +37,8 @@ namespace Furni.API.Controllers
                 BlogId = x.BlogId,
                 CreateAt = DateTime.Now,  // You should use x.CreateAt if available
                 UpdateAt = DateTime.Now,  // Same with x.UpdateAt
-                UserIdCreated = x.UserIdCreated
+                UserIdCreated = x.UserIdCreated,
+                URLImage = x.URLImage,
             }).ToArray();
 
             return Ok(ServiceResult<IEnumerable<BlogModel>>.SuccessResult(result));
@@ -62,9 +63,10 @@ namespace Furni.API.Controllers
             {
                 BlogName = data.BlogName,
                 BlogId = data.BlogId,
-                CreateAt = DateTime.Now, // You should use data.CreateAt if available
-                UpdateAt = DateTime.Now, // Same with data.UpdateAt
-                UserIdCreated = data.UserIdCreated
+                CreateAt = data.CreateAt,// You should use data.CreateAt if available
+                UpdateAt = data.UpdateAt, // Same with data.UpdateAt
+                UserIdCreated = data.UserIdCreated,
+                URLImage = data.URLImage,
             };
 
             return Ok(ServiceResult<BlogModel>.SuccessResult(result));
@@ -91,7 +93,8 @@ namespace Furni.API.Controllers
                 BlogId = x.BlogId,
                 CreateAt = x.CreateAt, 
                 UpdateAt = x.UpdateAt,
-                UserIdCreated = x.UserIdCreated
+                UserIdCreated = x.UserIdCreated,
+                URLImage = x.URLImage,
             }).ToArray();
 
             return Ok(ServiceResult<IEnumerable<BlogModel>>.SuccessResult(result));
@@ -99,14 +102,14 @@ namespace Furni.API.Controllers
 
         // Create a new blog asynchronously
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(string blogName, string userIdCreated)
+        public async Task<IActionResult> CreateAsync(string blogName, string userIdCreated,string urlImage)
         {
-            if (string.IsNullOrEmpty(blogName) || string.IsNullOrEmpty(userIdCreated))
+            if (string.IsNullOrEmpty(blogName) || string.IsNullOrEmpty(userIdCreated) || string.IsNullOrEmpty(urlImage))
             {
                 return BadRequest(ServiceResult<string>.FailureResult("Blog name and creator ID cannot be null or empty."));
             }
 
-            var result = await _blogServices.CreateAsync(blogName, userIdCreated);
+            var result = await _blogServices.CreateAsync(blogName, userIdCreated,urlImage);
             if (result)
             {
                 return Ok(ServiceResult<string>.SuccessResult("Blog created successfully."));
@@ -117,14 +120,14 @@ namespace Furni.API.Controllers
 
         // Update an existing blog asynchronously
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(string blogId, string blogName, string userIdCreated)
+        public async Task<IActionResult> UpdateAsync(string blogId, string blogName, string userIdCreated, string urlImage)
         {
-            if (string.IsNullOrEmpty(blogId) || string.IsNullOrEmpty(blogName) || string.IsNullOrEmpty(userIdCreated))
+            if (string.IsNullOrEmpty(blogId) || string.IsNullOrEmpty(blogName) || string.IsNullOrEmpty(userIdCreated) || string.IsNullOrEmpty(urlImage))
             {
                 return BadRequest(ServiceResult<string>.FailureResult("Blog ID, name, and creator ID cannot be null or empty."));
             }
 
-            var result = await _blogServices.UpdateAsync(blogId, blogName, userIdCreated);
+            var result = await _blogServices.UpdateAsync(blogId, blogName, userIdCreated,urlImage);
             if (result)
             {
                 return Ok(ServiceResult<string>.SuccessResult("Blog updated successfully."));
