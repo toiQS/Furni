@@ -98,7 +98,51 @@ namespace Furni.MVC.DemoServices.Controllers
             return View(model);
             //return Json(id, new {model.BlogName, model.UserIdCreated});
         }
-        
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest();
+            }
 
+            var blog = await _blogService.GetBlogByIdAsync(id);
+            if (blog == null)
+            {
+                return NotFound();
+            }
+
+            var model = new BlogModelResponse
+            {
+                BlogId = blog.BlogId,
+                BlogName = blog.BlogName,
+                CreateAt = blog.CreateAt,
+                UpdateAt = blog.UpdateAt,
+                UserIdCreated = blog.UserIdCreated
+            };
+
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest();
+            }
+
+            var result = await _blogService.DeleteAsync(id);
+            if (result)
+            {
+                return RedirectToAction("Index");
+            }
+
+            // Return to Delete view if deletion fails
+            ModelState.AddModelError("", "Failed to delete the blog.");
+            return View();
+            //return Json(id);
+        }
     }
 }
