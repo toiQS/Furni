@@ -27,6 +27,7 @@ namespace Furni.MVC.DemoServices.Controllers
                 CreateAt = DateTime.Now,
                 UpdateAt = DateTime.Now,
                 UserIdCreated = x.UserIdCreated,
+                UrlImage = x.URLImage,
             });
             return View(result);
         }
@@ -72,7 +73,8 @@ namespace Furni.MVC.DemoServices.Controllers
                 BlogName = blog.BlogName,
                 UserIdCreated = blog.UserIdCreated,
                 CreateAt = blog.CreateAt,
-                UpdateAt = blog.UpdateAt
+                UpdateAt = blog.UpdateAt,
+                UrlImage = blog.URLImage
             };
 
             return View(model);
