@@ -11,7 +11,7 @@ namespace Furni.MVC.DemoServices.Controllers
         private readonly ICartServices _cartServices;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IItemServices _itemServices;
-        public CartController(ICartServices cartServices, ItemServices, IWebHostEnvironment webHostEnvironment)
+        public CartController(ICartServices cartServices, IWebHostEnvironment webHostEnvironment)
         {
             _cartServices = cartServices;
             _webHostEnvironment = webHostEnvironment;
