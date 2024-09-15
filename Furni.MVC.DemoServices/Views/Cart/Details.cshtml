@@ -1,0 +1,67 @@
+﻿@model Furni.MVC.DemoServices.Models.cart.CartModelDetail
+
+@{
+    ViewData["Title"] =  "Details";
+}
+
+<h1>Cart Details</h1>
+
+<div>
+    <h4>Cart Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Cart ID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.CartId
+        </dd>
+
+        <dt class="col-sm-2">
+            User ID
+        </dt>
+        <dd class="col-sm-10">
+            @Model.UserId
+        </dd>
+    </dl>
+</div>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <div>
+        <h4>Items in Cart</h4>
+        <hr />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Item ID</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.ItemId</td>
+                        <td>@item.Quantity</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div>
+        <p>No items found in this cart.</p>
+    </div>
+}
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to Cart List</a>
+</div>

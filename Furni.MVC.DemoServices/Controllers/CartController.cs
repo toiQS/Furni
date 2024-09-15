@@ -1,8 +1,10 @@
-﻿using Furni.MVC.DemoServices.Models.cart;
+﻿using Furni.Data;
+using Furni.MVC.DemoServices.Models.cart;
 using Furni.MVC.DemoServices.Models.item;
 using Furni.Services.cart;
 using Furni.Services.item;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Printing;
 
 namespace Furni.MVC.DemoServices.Controllers
 {
@@ -11,10 +13,13 @@ namespace Furni.MVC.DemoServices.Controllers
         private readonly ICartServices _cartServices;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IItemServices _itemServices;
+        private readonly ApplicationDbContext _context;
         public CartController(ICartServices cartServices, IWebHostEnvironment webHostEnvironment)
         {
+            _context = new ApplicationDbContext();
             _cartServices = cartServices;
             _webHostEnvironment = webHostEnvironment;
+            _itemServices = new ItemServices(_context);
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -48,6 +53,18 @@ namespace Furni.MVC.DemoServices.Controllers
                 Items = resultItem.ToList(),
             };
             return View(resultcart);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+
+        }
+        [HttpPost]
+        public IActionResult Create(string userId)
+        {
+            //var result = await _cartServices.CreateAsync(userId);
+            return Json(userId);
         }
         
     }
