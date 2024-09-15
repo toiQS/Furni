@@ -56,6 +56,7 @@
     <div>
         @RenderBody()
     </div>
+
 	<!-- Start Footer Section -->
 	<footer class="footer-section">
 		<div class="container relative">
@@ -161,6 +162,9 @@
 		</div>
 	</footer>
 	<!-- End Footer Section -->
-
+	<script src="~/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/tiny-slider.js"></script>
+	<script src="~/js/custom.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
