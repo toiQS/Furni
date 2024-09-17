@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furni.Services", "Furni.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furni.API", "Furni.API\Furni.API.csproj", "{36DE9425-D20B-4243-840C-FA810F82B1B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furni.MVC.DemoServices", "Furni.MVC.DemoServices\Furni.MVC.DemoServices.csproj", "{AE61E830-ADD3-4E8B-BE78-90659D7BF6D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furni.MVC.DemoServices", "Furni.MVC.DemoServices\Furni.MVC.DemoServices.csproj", "{AE61E830-ADD3-4E8B-BE78-90659D7BF6D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Furni.MVC", "Furni.MVC\Furni.MVC.csproj", "{B7E0B554-EFBD-4222-8A98-DF46B65BCD7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Furni.MVC", "Furni.MVC\Furni.MVC.csproj", "{B7E0B554-EFBD-4222-8A98-DF46B65BCD7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{3C2F2818-E329-45A8-9016-A916D7CB8373}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B7E0B554-EFBD-4222-8A98-DF46B65BCD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7E0B554-EFBD-4222-8A98-DF46B65BCD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7E0B554-EFBD-4222-8A98-DF46B65BCD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2F2818-E329-45A8-9016-A916D7CB8373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2F2818-E329-45A8-9016-A916D7CB8373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2F2818-E329-45A8-9016-A916D7CB8373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2F2818-E329-45A8-9016-A916D7CB8373}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
