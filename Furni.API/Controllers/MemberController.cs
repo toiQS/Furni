@@ -1,7 +1,11 @@
 ﻿using Furni.API.Models;
 using Furni.Entities;
 using Furni.Services.member;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Furni.API.Controllers
 {
@@ -16,7 +20,9 @@ namespace Furni.API.Controllers
             _memberService = memberService;
         }
 
+        // Chỉ cho phép Admin hoặc Manager xem danh sách các thành viên
         [HttpGet]
+        [Authorize(Roles = "Admin, Manager")]
         public async Task<IActionResult> GetMembersAsync()
         {
             var members = await _memberService.GetMembersAsync();
@@ -36,7 +42,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<IEnumerable<MemberModel>>.SuccessResult(result));
         }
 
+        // Tìm kiếm thành viên theo text (Admin hoặc Manager)
         [HttpGet("search")]
+        [Authorize(Roles = "Admin, Manager")]
         public async Task<IActionResult> GetMembersByTextAsync([FromQuery] string text)
         {
             if (string.IsNullOrEmpty(text))
@@ -59,7 +67,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<IEnumerable<MemberModel>>.SuccessResult(result));
         }
 
+        // Lấy thành viên theo ID (Admin hoặc Manager)
         [HttpGet("{memberId}")]
+        [Authorize(Roles = "Admin, Manager")]
         public async Task<IActionResult> GetMemberById(string memberId)
         {
             if (string.IsNullOrEmpty(memberId))
@@ -82,7 +92,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<MemberModel>.SuccessResult(result));
         }
 
+        // Tạo thành viên mới (Chỉ dành cho Admin)
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAsync(string firstName, string? middleName, string lastName, string position, string summary, string urlImage)
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(position) || string.IsNullOrEmpty(urlImage) || string.IsNullOrEmpty(summary))
@@ -95,7 +107,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Failed to create member"));
         }
 
+        // Cập nhật thông tin thành viên (Admin hoặc Manager)
         [HttpPut("{memberId}")]
+        [Authorize(Roles = "Admin, Manager")]
         public async Task<IActionResult> UpdateAsync(string memberId, string firstName, string? middleName, string lastName, string position, string summary, string urlImage)
         {
             if (string.IsNullOrEmpty(memberId) || string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(position) || string.IsNullOrEmpty(urlImage) || string.IsNullOrEmpty(summary))
@@ -108,8 +122,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Failed to update member"));
         }
 
-        // Renamed to avoid method overload conflict
+        // Đánh dấu thành viên đã bị xóa (Admin hoặc Manager)
         [HttpPut("markDeleted/{memberId}")]
+        [Authorize(Roles = "Admin, Manager")]
         public async Task<IActionResult> MarkMemberAsDeletedAsync(string memberId)
         {
             if (string.IsNullOrEmpty(memberId))
@@ -122,7 +137,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Failed to update member"));
         }
 
+        // Xóa thành viên (Chỉ dành cho Admin)
         [HttpDelete("{memberId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(string memberId)
         {
             if (string.IsNullOrEmpty(memberId))

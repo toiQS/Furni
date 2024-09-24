@@ -1,28 +1,19 @@
-﻿using Furni.API.Models;
-using Furni.Entities;
-using Furni.Services.blog;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
-
-namespace Furni.API.Controllers
+﻿namespace Furni.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class BlogController : ControllerBase
     {
         private readonly IBlogServices _blogServices;
-        
+
         public BlogController(IBlogServices blogServices)
         {
             _blogServices = blogServices;
         }
 
-        // Get all blogs asynchronously
+        // Get all blogs asynchronously (Chỉ thành viên đã đăng nhập với vai trò "Member" mới được phép truy cập)
         [HttpGet("list")]
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Member,Admin,Manager")]  // Cho phép các vai trò Member, Admin, Manager truy cập
         public async Task<IActionResult> GetBlogListAsync()
         {
             var data = await _blogServices.GetBlogListAsync();
@@ -44,8 +35,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<IEnumerable<BlogModel>>.SuccessResult(result));
         }
 
-        // Get a blog by ID asynchronously
+        // Get a blog by ID asynchronously (Mở cho tất cả các User đã xác thực)
         [HttpGet("{id}")]
+        [Authorize(Roles = "User,Member,Admin,Manager")]
         public async Task<IActionResult> GetBlogByIdAsync(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -63,8 +55,8 @@ namespace Furni.API.Controllers
             {
                 BlogName = data.BlogName,
                 BlogId = data.BlogId,
-                CreateAt = data.CreateAt,// You should use data.CreateAt if available
-                UpdateAt = data.UpdateAt, // Same with data.UpdateAt
+                CreateAt = data.CreateAt,
+                UpdateAt = data.UpdateAt,
                 UserIdCreated = data.UserIdCreated,
                 URLImage = data.URLImage,
             };
@@ -72,8 +64,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<BlogModel>.SuccessResult(result));
         }
 
-        // Get blogs by search text asynchronously
+        // Get blogs by search text asynchronously (Chỉ cho thành viên "Member" trở lên)
         [HttpGet("search")]
+        [Authorize(Roles = "Member,Admin,Manager")]
         public async Task<IActionResult> GetBlogsByTextAsync(string text)
         {
             if (string.IsNullOrEmpty(text))
@@ -91,7 +84,7 @@ namespace Furni.API.Controllers
             {
                 BlogName = x.BlogName,
                 BlogId = x.BlogId,
-                CreateAt = x.CreateAt, 
+                CreateAt = x.CreateAt,
                 UpdateAt = x.UpdateAt,
                 UserIdCreated = x.UserIdCreated,
                 URLImage = x.URLImage,
@@ -100,16 +93,17 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<IEnumerable<BlogModel>>.SuccessResult(result));
         }
 
-        // Create a new blog asynchronously
+        // Create a new blog asynchronously (Chỉ Admin hoặc Manager có quyền tạo mới blog)
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(string blogName, string userIdCreated,string urlImage)
+        [Authorize(Roles = "Admin,Manager")]
+        public async Task<IActionResult> CreateAsync(string blogName, string userIdCreated, string urlImage)
         {
             if (string.IsNullOrEmpty(blogName) || string.IsNullOrEmpty(userIdCreated) || string.IsNullOrEmpty(urlImage))
             {
                 return BadRequest(ServiceResult<string>.FailureResult("Blog name and creator ID cannot be null or empty."));
             }
 
-            var result = await _blogServices.CreateAsync(blogName, userIdCreated,urlImage);
+            var result = await _blogServices.CreateAsync(blogName, userIdCreated, urlImage);
             if (result)
             {
                 return Ok(ServiceResult<string>.SuccessResult("Blog created successfully."));
@@ -118,8 +112,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Failed to create blog."));
         }
 
-        // Update an existing blog asynchronously
+        // Update an existing blog asynchronously (Chỉ Admin hoặc Manager có quyền sửa blog)
         [HttpPut]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> UpdateAsync(string blogId, string blogName, string userIdCreated, string urlImage)
         {
             if (string.IsNullOrEmpty(blogId) || string.IsNullOrEmpty(blogName) || string.IsNullOrEmpty(userIdCreated) || string.IsNullOrEmpty(urlImage))
@@ -127,7 +122,7 @@ namespace Furni.API.Controllers
                 return BadRequest(ServiceResult<string>.FailureResult("Blog ID, name, and creator ID cannot be null or empty."));
             }
 
-            var result = await _blogServices.UpdateAsync(blogId, blogName, userIdCreated,urlImage);
+            var result = await _blogServices.UpdateAsync(blogId, blogName, userIdCreated, urlImage);
             if (result)
             {
                 return Ok(ServiceResult<string>.SuccessResult("Blog updated successfully."));
@@ -136,8 +131,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Failed to update blog."));
         }
 
-        // Delete a blog asynchronously
+        // Delete a blog asynchronously (Chỉ Admin có quyền xóa blog)
         [HttpDelete("{blogId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(string blogId)
         {
             if (string.IsNullOrEmpty(blogId))

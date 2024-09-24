@@ -1,7 +1,11 @@
 ﻿using Furni.API.Models;
 using Furni.Entities;
 using Furni.Services.item;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Furni.API.Controllers
 {
@@ -16,7 +20,9 @@ namespace Furni.API.Controllers
             _itemServices = itemServices;
         }
 
+        // Lấy danh sách tất cả các item của User
         [HttpGet]
+        [Authorize(Roles = "User")]  // Chỉ User mới có quyền truy cập
         public async Task<IActionResult> GetItemsAsync()
         {
             var data = await _itemServices.GetItemsAsync();
@@ -36,7 +42,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<IEnumerable<ItemModel>>.SuccessResult(result));
         }
 
+        // Lấy thông tin item theo ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "User")]  // Chỉ User mới có quyền truy cập
         public async Task<IActionResult> GetItemAsync(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -59,7 +67,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<ItemModel>.SuccessResult(result));
         }
 
+        // Lấy item theo Cart ID
         [HttpGet("cart/{cartId}")]
+        [Authorize(Roles = "User")]  // Chỉ User mới có quyền truy cập
         public async Task<IActionResult> GetItemByCartId(string cartId)
         {
             if (string.IsNullOrEmpty(cartId))
@@ -82,7 +92,9 @@ namespace Furni.API.Controllers
             return Ok(ServiceResult<IEnumerable<ItemModel>>.SuccessResult(result));
         }
 
+        // Tạo item mới
         [HttpPost]
+        [Authorize(Roles = "User")]  // Chỉ User mới có quyền truy cập
         public async Task<IActionResult> CreateAsync(string productId, int quantity, string cartId)
         {
             if (string.IsNullOrEmpty(productId) || quantity <= 0 || string.IsNullOrEmpty(cartId))
@@ -95,7 +107,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Unable to create item"));
         }
 
+        // Cập nhật số lượng item
         [HttpPut("{itemId}")]
+        [Authorize(Roles = "User")]  // Chỉ User mới có quyền truy cập
         public async Task<IActionResult> UpdateAsync(string itemId, int quantity)
         {
             if (string.IsNullOrEmpty(itemId) || quantity <= 0)
@@ -108,7 +122,9 @@ namespace Furni.API.Controllers
             return BadRequest(ServiceResult<string>.FailureResult("Unable to update item"));
         }
 
+        // Xóa item
         [HttpDelete("{itemId}")]
+        [Authorize(Roles = "User")]  // Chỉ User mới có quyền truy cập
         public async Task<IActionResult> DeleteAsync(string itemId)
         {
             if (string.IsNullOrEmpty(itemId))
