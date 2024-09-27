@@ -1,4 +1,9 @@
-﻿namespace Furni.API.Controllers
+﻿using Furni.API.Models;
+using Furni.Services.blog;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Furni.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
