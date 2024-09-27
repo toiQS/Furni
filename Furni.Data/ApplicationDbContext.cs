@@ -22,7 +22,7 @@ namespace Furni.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=AKAI_DESKTOP\\SQLEXPRESS;Database=Furni;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=AKAI_DESKTOP;Database=Furni;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;User Id =akai dev; password=Akai123");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
