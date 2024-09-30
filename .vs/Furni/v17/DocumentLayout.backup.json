@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Repo\\Local\\Furni\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Repo\\Local\\Furni\\Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}|Furni.Data\\Furni.Data.csproj|f:\\repo\\local\\furni\\furni.data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66E0FB7F-F083-40B1-915E-AB0BC689EFF6}|Furni.Data\\Furni.Data.csproj|solutionrelative:furni.data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36DE9425-D20B-4243-840C-FA810F82B1B8}|Furni.API\\Furni.API.csproj|f:\\repo\\local\\furni\\furni.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{36DE9425-D20B-4243-840C-FA810F82B1B8}|Furni.API\\Furni.API.csproj|solutionrelative:furni.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{36DE9425-D20B-4243-840C-FA810F82B1B8}|Furni.API\\Furni.API.csproj|f:\\repo\\local\\furni\\furni.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{36DE9425-D20B-4243-840C-FA810F82B1B8}|Furni.API\\Furni.API.csproj|solutionrelative:furni.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAwC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-27T07:16:42.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\Furni.Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Furni.Data\\ApplicationDbContext.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\Furni.Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Furni.Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBgAAADBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T04:43:27.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\Furni.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Furni.API\\appsettings.json",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\Furni.API\\appsettings.json",
+              "RelativeToolTip": "Furni.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAACPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-27T04:42:45.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\Furni.API\\Program.cs",
+              "RelativeDocumentMoniker": "Furni.API\\Program.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\Furni.API\\Program.cs",
+              "RelativeToolTip": "Furni.API\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T04:35:40.139Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
