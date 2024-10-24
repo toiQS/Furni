@@ -1,18 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace furni.Entities
 {
-    public class Product : BaseEntity
+    public class Product
     {
-        [Column(name: "Product_Name")]
-        public string ProductName { get; set; }
-
+        [Key]
+        [Column(name:"Product Id")]
+        public string ProductId {  get; set; } = string.Empty;
+        [Column(name:"Product Name")]
+        public string ProductName { get; set; } = string.Empty;
+        //public string Material { get; set; } = string.Empty;
+        //public string Colour {  get; set; } = string.Empty;
         public float Price { get; set; }
-
-        [Column(name: "URL_Image")]
-        public string URLImage { get; set; } = string.Empty;
-
-        [Column(name: "Is_Active")]
+        [Column(name:"URL Image")]
+        public string URLImage { get; set; } = string.Empty ;
+        [Column(name:"Is Active")]
         public bool IsActive { get; set; }
+        public CartDetail CartDetail { get; set; }
+        public OrderDetail OrderDetail { get; set; }
+        public Brand Brand { get; set; }
+        public Category Category { get; set; }
+        public Warehouse Warehouse { get; set; }
     }
 }
