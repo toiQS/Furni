@@ -15,15 +15,13 @@ namespace furni.Entities
         public string ProductId {  get; set; } = string.Empty;
         [Column(name:"Product Name")]
         public string ProductName { get; set; } = string.Empty;
-        //public string Material { get; set; } = string.Empty;
-        //public string Colour {  get; set; } = string.Empty;
         public float Price { get; set; }
         [Column(name:"URL Image")]
         public string URLImage { get; set; } = string.Empty ;
         [Column(name:"Is Active")]
         public bool IsActive { get; set; }
-        public CartDetail CartDetail { get; set; }
-        public OrderDetail OrderDetail { get; set; }
+        public ICollection<CartDetail> CartDetails { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
         public Brand Brand { get; set; }
         public Category Category { get; set; }
         public Warehouse Warehouse { get; set; }
