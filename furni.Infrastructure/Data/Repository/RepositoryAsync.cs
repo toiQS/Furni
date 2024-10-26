@@ -1,18 +1,13 @@
 ﻿using furni.Infrastructure.Data;
 using furni.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Text;
 
 namespace furni.Services.repository
 {
     public class RepositoryAsync<T> : IRepositoryAsync<T> where T : BaseEntity
     {
-        private string _fileName = string.Empty;
-        private string _folderName = string.Empty;
         private readonly ApplicationDbContext _context;
         private readonly DbSet<T> _dbSet;
-        private string _path = string.Empty;
 
         public RepositoryAsync(ApplicationDbContext context)
         {
@@ -29,7 +24,6 @@ namespace furni.Services.repository
             }
             catch (Exception ex)
             {
-                await LogErrorAsync(_path, ex);
                 throw;
             }
         }
@@ -41,7 +35,6 @@ namespace furni.Services.repository
             }
             catch (Exception ex)
             {
-                await LogErrorAsync(_path, ex);
                 throw;
             }
         }
@@ -57,7 +50,6 @@ namespace furni.Services.repository
             }
             catch (Exception ex)
             {
-                await LogErrorAsync(_path, ex);
                 throw;
             }
         }
@@ -73,7 +65,6 @@ namespace furni.Services.repository
             }
             catch (Exception ex)
             {
-                await LogErrorAsync(_path, ex);
                 throw;
             }
         }
@@ -89,41 +80,7 @@ namespace furni.Services.repository
             }
             catch (Exception ex)
             {
-                await LogErrorAsync(_path, ex);
                 throw;
-            }
-        }
-
-        public string GetPathFolderCurrent()
-        {
-            var assemblyLocation = Assembly.GetEntryAssembly().Location;
-            var currentDirectory = Path.GetDirectoryName(assemblyLocation);
-            var appRootFolder = currentDirectory.Split("\\bin")[0];
-            _path = Path.Combine($"{appRootFolder}", $"{_folderName}", $"{_fileName}");
-            return _path;
-        }
-
-        public string GetFolderName(string folderName)
-        {
-            return _folderName = folderName;
-        }
-
-        public string GetFileName(string fileName)
-        {
-            return _folderName = fileName;
-        }
-
-        public async Task LogErrorAsync(string path, Exception ex)
-        {
-            var errorDetails = new StringBuilder();
-            errorDetails.AppendLine($"path: {path}\n");
-            errorDetails.AppendLine($"Message: {ex.Message}\n");
-            errorDetails.AppendLine($"Stack Trace: {ex.StackTrace}\n");
-            errorDetails.AppendLine($"Source: {ex.Source}\n");
-            errorDetails.AppendLine($"Time: {DateTime.Now}\n");
-            if (!string.IsNullOrEmpty(path))
-            {
-                await File.AppendAllTextAsync(path, errorDetails.ToString());
             }
         }
     }

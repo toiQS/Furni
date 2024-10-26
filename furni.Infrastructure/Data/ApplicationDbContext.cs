@@ -19,14 +19,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<Category> Category { get; set; }
     public DbSet<Warehouse> Stocks { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
-    //public DbSet<Payment> Payment { get; set; }
-    //public DbSet<Member> Member { get; set; }
     public DbSet<Product> Product { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Server=(local)\\SQLEXPRESS;Database=WebApplication1;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
-    }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -40,10 +33,11 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
                 entityType.SetTableName(tableName.Substring(6));
             }
         }
+
         builder.Entity<Category>()
             .HasMany(e => e.Products)
             .WithOne(e => e.Category)
-            .HasForeignKey("CategoryId")
+            .HasForeignKey(p => p.Category.Id)
             .IsRequired();
 
         builder.Entity<Product>()

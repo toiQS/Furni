@@ -8,24 +8,27 @@ using System.Threading.Tasks;
 
 namespace furni.Entities
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        [Key]
-        [Column(name:"Product Id")]
-        public string ProductId {  get; set; } = string.Empty;
-        [Column(name:"Product Name")]
+        [Column(name: "Product_Name")]
         public string ProductName { get; set; } = string.Empty;
-        //public string Material { get; set; } = string.Empty;
-        //public string Colour {  get; set; } = string.Empty;
+
         public float Price { get; set; }
-        [Column(name:"URL Image")]
-        public string URLImage { get; set; } = string.Empty ;
-        [Column(name:"Is Active")]
+
+        [Column(name: "URL_Image")]
+        public string URLImage { get; set; } = string.Empty;
+
+        [Column(name: "Is_Active")]
         public bool IsActive { get; set; }
+
         public CartDetail CartDetail { get; set; }
+
         public OrderDetail OrderDetail { get; set; }
+
         public Brand Brand { get; set; }
+
         public Category Category { get; set; }
+
         public Warehouse Warehouse { get; set; }
     }
 }

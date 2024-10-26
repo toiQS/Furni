@@ -1,5 +1,5 @@
-using furni.Application.Interfaces.Service;
-using furni.Application.Service;
+using furni.Application.Interfaces.Management;
+using furni.Application.Management;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +9,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IProductManagement, ProductManagement>();
 
         return services;
     }

@@ -1,4 +1,4 @@
-using furni.Application.Interfaces.Repository;
+using furni.Application.Interfaces.Service;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.Data.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +15,7 @@ public static class DependencyInjection
 
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
-        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IProductService, ProductService>();
 
         return services;
     }

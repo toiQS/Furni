@@ -1,8 +1,8 @@
 using furni.Entities;
 
-namespace furni.Application.Interfaces.Service;
+namespace furni.Application.Interfaces.Management;
 
-public interface IProductService
+public interface IProductManagement
 {
     Task<bool> CreateAsync(Product product);
 
