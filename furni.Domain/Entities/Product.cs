@@ -21,9 +21,8 @@ namespace furni.Entities
         [Column(name: "Is_Active")]
         public bool IsActive { get; set; }
 
-        public CartDetail CartDetail { get; set; }
-
-        public OrderDetail OrderDetail { get; set; }
+        public ICollection<CartDetail> CartDetails { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
 
         public Brand Brand { get; set; }
 
