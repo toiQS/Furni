@@ -1,8 +1,8 @@
-﻿using furni.Infrastructure.Data;
-using furni.Entities;
+﻿using furni.Entities;
 using Microsoft.EntityFrameworkCore;
+using furni.Infrastructure.Interfaces;
 
-namespace furni.Services.repository
+namespace furni.Infrastructure.Data
 {
     public class RepositoryAsync<T> : IRepositoryAsync<T> where T : BaseEntity
     {

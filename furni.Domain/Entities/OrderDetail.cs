@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace furni.Entities
+﻿namespace furni.Entities
 {
     public class OrderDetail : BaseEntity
     {

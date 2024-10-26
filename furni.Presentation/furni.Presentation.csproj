@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\furni.Application\furni.Application.csproj" />
-    <ProjectReference Include="..\furni.Infrastructure\furni.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

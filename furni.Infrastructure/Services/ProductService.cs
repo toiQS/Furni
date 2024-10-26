@@ -1,8 +1,8 @@
-using furni.Application.Interfaces.Service;
 using furni.Entities;
-using furni.Services.repository;
+using furni.Infrastructure.Data;
+using furni.Infrastructure.Interfaces;
 
-namespace furni.Infrastructure.Data.Repository;
+namespace furni.Infrastructure.Service;
 
 public class ProductService(ApplicationDbContext context) : RepositoryAsync<Product>(context), IProductService
 {

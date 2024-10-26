@@ -1,7 +1,6 @@
 using furni.Entities;
-using furni.Services.repository;
 
-namespace furni.Application.Interfaces.Service;
+namespace furni.Infrastructure.Interfaces;
 
 public interface IProductService : IRepositoryAsync<Product>
 {

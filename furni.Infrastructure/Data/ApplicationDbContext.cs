@@ -47,13 +47,13 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             .IsRequired();
 
         builder.Entity<Product>()
-            .HasOne(e => e.CartDetail)
+            .HasOne(e => e.CartDetails)
             .WithOne(e => e.Product)
             .HasForeignKey<CartDetail>(e => e.ProductId)
             .IsRequired();
 
         builder.Entity<Product>()
-            .HasOne(e => e.OrderDetail)
+            .HasOne(e => e.OrderDetails)
             .WithOne(e => e.Product)
             .HasForeignKey<OrderDetail>(e => e.ProductId)
             .IsRequired();
