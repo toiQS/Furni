@@ -1,0 +1,108 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Repo\\Local\\Furni\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\repo\\local\\furni\\furni.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\repo\\local\\furni\\furni.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "furni.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "furni.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T15:01:34.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1ce3aef-c78d-49ee-b72b-ec1fbc908313}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Program.cs",
+              "RelativeDocumentMoniker": "furni.Presentation\\Program.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Program.cs",
+              "RelativeToolTip": "furni.Presentation\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T15:00:04.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-27T14:58:19.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\appsettings.json",
+              "RelativeDocumentMoniker": "furni.Presentation\\appsettings.json",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\appsettings.json",
+              "RelativeToolTip": "furni.Presentation\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-27T14:55:07.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
