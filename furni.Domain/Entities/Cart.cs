@@ -7,7 +7,7 @@ namespace furni.Entities
         [ForeignKey("UserId")]
         public string UserId { get; set; }
 
-        public virtual User Id { get; set; }
+        public virtual User User { get; set; }
 
         public bool IsActive { get; set; }
 

@@ -17,8 +17,10 @@ namespace furni.Entities
 
         public ICollection<CartDetail> CartDetails { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public string BrandId { get; set; }
 
         public Brand Brand { get; set; }
+        public string CategoryId { get; set; }
 
         public Category Category { get; set; }
 

@@ -7,6 +7,7 @@ namespace furni.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>, string>
 {
+    public ApplicationDbContext() { }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     public DbSet<User> User { get; set; }
     public DbSet<Blog> Blog { get; set; }
@@ -20,6 +21,11 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<Warehouse> Stocks { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
     public DbSet<Product> Product { get; set; }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.UseSqlServer("Server=LAPTOP-82FTS987\\SQLEXPRESS;Database=Furni;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+    }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -34,10 +40,17 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             }
         }
 
+
+        builder.Entity<Brand>()
+            .HasMany(e => e.Products)
+            .WithOne(e => e.Brand)
+            .HasForeignKey(p => p.BrandId)
+            .IsRequired();
+
         builder.Entity<Category>()
             .HasMany(e => e.Products)
             .WithOne(e => e.Category)
-            .HasForeignKey(p => p.Category.Id)
+            .HasForeignKey(p => p.CategoryId)
             .IsRequired();
 
         builder.Entity<Product>()
@@ -46,16 +59,16 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             .HasForeignKey<Warehouse>(e => e.ProductId)
             .IsRequired();
 
-        builder.Entity<Product>()
-            .HasOne(e => e.CartDetails)
-            .WithOne(e => e.Product)
-            .HasForeignKey<CartDetail>(e => e.ProductId)
+        builder.Entity<CartDetail>()
+            .HasOne(e => e.Product)
+            .WithMany(e => e.CartDetails)
+            .HasForeignKey(e => e.ProductId)
             .IsRequired();
 
-        builder.Entity<Product>()
-            .HasOne(e => e.OrderDetails)
-            .WithOne(e => e.Product)
-            .HasForeignKey<OrderDetail>(e => e.ProductId)
+        builder.Entity<OrderDetail>()
+            .HasOne(e => e.Product)
+            .WithMany(e => e.OrderDetails)
+            .HasForeignKey(e => e.ProductId)
             .IsRequired();
     }
 }

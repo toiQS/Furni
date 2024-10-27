@@ -10,7 +10,7 @@ namespace furni.Entities
         [ForeignKey("Created_By")]
         public string UserIdCreated { get; set; }
 
-        public virtual User CreatedByUser { get; set; }
+        public virtual User User { get; set; }
 
         [Column(name: "Create_At")]
         public DateTime CreateAt { get; set; }

@@ -1,6 +1,6 @@
-using furni.Application.Interfaces.Service;
 using furni.Infrastructure.Data;
-using furni.Infrastructure.Data.Repository;
+using furni.Infrastructure.Interfaces;
+using furni.Infrastructure.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
