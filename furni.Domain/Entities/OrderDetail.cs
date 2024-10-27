@@ -5,6 +5,7 @@
         public string ProductId { get; set; }
 
         public string OrderId { get; set; }
+        public double ProductPrice { get; set; }
 
         public double Quantity { get; set; }
 
