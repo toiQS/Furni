@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "F:\\Repo\\Local\\Furni\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\repo\\local\\furni\\furni.infrastructure\\data\\repositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\data\\repositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\repo\\local\\furni\\furni.infrastructure\\interfaces\\irepositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\interfaces\\irepositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\repo\\local\\furni\\furni.infrastructure\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}|furni.Application\\furni.Application.csproj|f:\\repo\\local\\furni\\furni.application\\managements\\productmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}|furni.Application\\furni.Application.csproj|solutionrelative:furni.application\\managements\\productmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,53 +35,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RepositoryAsync.cs",
-              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\Data\\RepositoryAsync.cs",
-              "RelativeDocumentMoniker": "furni.Infrastructure\\Data\\RepositoryAsync.cs",
-              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\Data\\RepositoryAsync.cs",
-              "RelativeToolTip": "furni.Infrastructure\\Data\\RepositoryAsync.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "ProductManagement.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Application\\Managements\\ProductManagement.cs",
+              "RelativeDocumentMoniker": "furni.Application\\Managements\\ProductManagement.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Application\\Managements\\ProductManagement.cs",
+              "RelativeToolTip": "furni.Application\\Managements\\ProductManagement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T15:20:38.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IRepositoryAsync.cs",
-              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\interfaces\\IRepositoryAsync.cs",
-              "RelativeDocumentMoniker": "furni.Infrastructure\\interfaces\\IRepositoryAsync.cs",
-              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\interfaces\\IRepositoryAsync.cs",
-              "RelativeToolTip": "furni.Infrastructure\\interfaces\\IRepositoryAsync.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T15:19:49.726Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IProductService.cs",
-              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\interfaces\\IProductService.cs",
-              "RelativeDocumentMoniker": "furni.Infrastructure\\interfaces\\IProductService.cs",
-              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Infrastructure\\interfaces\\IProductService.cs",
-              "RelativeToolTip": "furni.Infrastructure\\interfaces\\IProductService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T15:19:43.557Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Program.cs",
-              "RelativeDocumentMoniker": "furni.Presentation\\Program.cs",
-              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Program.cs",
-              "RelativeToolTip": "furni.Presentation\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T15:19:24.185Z",
+              "WhenOpened": "2024-10-28T02:18:16.2Z",
               "EditorCaption": ""
             }
           ]
