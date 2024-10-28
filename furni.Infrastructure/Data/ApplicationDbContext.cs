@@ -19,14 +19,8 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<Category> Category { get; set; }
     public DbSet<Warehouse> Stocks { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
-    //public DbSet<Payment> Payment { get; set; }
-    //public DbSet<Member> Member { get; set; }
     public DbSet<Product> Product { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Server=(local)\\SQLEXPRESS;Database=WebApplication1;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
-    }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -40,10 +34,18 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
                 entityType.SetTableName(tableName.Substring(6));
             }
         }
+
+
+        builder.Entity<Brand>()
+            .HasMany(e => e.Products)
+            .WithOne(e => e.Brand)
+            .HasForeignKey(p => p.BrandId)
+            .IsRequired();
+
         builder.Entity<Category>()
             .HasMany(e => e.Products)
             .WithOne(e => e.Category)
-            .HasForeignKey("CategoryId")
+            .HasForeignKey(p => p.CategoryId)
             .IsRequired();
 
         builder.Entity<Product>()
@@ -52,16 +54,16 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             .HasForeignKey<Warehouse>(e => e.ProductId)
             .IsRequired();
 
-        builder.Entity<Product>()
-            .HasOne(e => e.CartDetail)
-            .WithOne(e => e.Product)
-            .HasForeignKey<CartDetail>(e => e.ProductId)
+        builder.Entity<CartDetail>()
+            .HasOne(e => e.Product)
+            .WithMany(e => e.CartDetails)
+            .HasForeignKey(e => e.ProductId)
             .IsRequired();
 
-        builder.Entity<Product>()
-            .HasOne(e => e.OrderDetail)
-            .WithOne(e => e.Product)
-            .HasForeignKey<OrderDetail>(e => e.ProductId)
+        builder.Entity<OrderDetail>()
+            .HasOne(e => e.Product)
+            .WithMany(e => e.OrderDetails)
+            .HasForeignKey(e => e.ProductId)
             .IsRequired();
     }
 }
