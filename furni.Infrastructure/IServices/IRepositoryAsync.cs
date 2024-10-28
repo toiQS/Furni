@@ -1,4 +1,4 @@
-﻿namespace furni.Infrastructure.Interfaces
+﻿namespace furni.Infrastructure.IServices
 {
     public interface IRepositoryAsync<T>
     {

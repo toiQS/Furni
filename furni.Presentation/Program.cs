@@ -1,6 +1,4 @@
-using furni.Application;
-using furni.Infrastructure;
-using furni.Infrastructure.Data;
+using furni.Infrastructure.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
