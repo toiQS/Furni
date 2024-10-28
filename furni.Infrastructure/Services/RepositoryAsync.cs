@@ -55,33 +55,39 @@ namespace furni.Infrastructure.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(T entity)
+        public async Task<bool> DeleteAsync(string id)
         {
-            if (entity == null) return false;
             try
             {
-                _dbSet.Remove(entity);
+                var getData = await _dbSet.FindAsync(id);
+                if (getData == null) return false;
+                _dbSet.Remove(getData);
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
+                return false;
             }
+
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public async Task<bool> UpdateAsync(string id, T entity)
         {
-            if (entity == null || entity.GetType() != typeof(T)) return false;
             try
             {
-                _dbSet.Update(entity);
+                var getData = await _dbSet.FindAsync(id);
+                if(getData == null) return false;
+                getData = entity;
+                _dbSet.Update(getData);
                 await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
     }

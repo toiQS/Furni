@@ -7,5 +7,5 @@ namespace furni.Infrastructure.Service;
 
 public class ProductService(ApplicationDbContext context) : RepositoryAsync<Product>(context), IProductService
 {
-
+    
 }
