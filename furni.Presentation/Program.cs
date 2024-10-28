@@ -1,3 +1,5 @@
+using furni.Application.Interfaces.Management;
+using furni.Application.Management;
 using furni.Infrastructure.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
 
+builder.Services.AddScoped<ICartManagement, CartManagement>();
 
 var app = builder.Build();
 

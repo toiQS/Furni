@@ -8,20 +8,20 @@ namespace furni.Infrastructure.Services
     public class RepositoryAsync<T> : IRepositoryAsync<T> where T : BaseEntity
     {
         private readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        public DbSet<T> Table { get; set; }
 
         public RepositoryAsync(ApplicationDbContext context)
         {
             _context = context;
             _context.Database.EnsureCreated();
-            _dbSet = _context.Set<T>();
+            Table = _context.Set<T>();
         }
 
         public async Task<IList<T>> GetAsync()
         {
             try
             {
-                return await _dbSet.AsNoTracking().ToListAsync();
+                return await Table.AsNoTracking().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace furni.Infrastructure.Services
         {
             try
             {
-                return await _dbSet.AsNoTracking().FirstAsync(x => x.Id == id);
+                return await Table.AsNoTracking().FirstAsync(x => x.Id == id);
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace furni.Infrastructure.Services
             if (entity == null) return false;
             try
             {
-                await _dbSet.AddAsync(entity);
+                await Table.AddAsync(entity);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -59,13 +59,13 @@ namespace furni.Infrastructure.Services
         {
             try
             {
-                var getData = await _dbSet.FindAsync(id);
+                var getData = await Table.FindAsync(id);
                 if (getData == null) return false;
-                _dbSet.Remove(getData);
+                Table.Remove(getData);
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
@@ -77,10 +77,10 @@ namespace furni.Infrastructure.Services
         {
             try
             {
-                var getData = await _dbSet.FindAsync(id);
-                if(getData == null) return false;
+                var getData = await Table.FindAsync(id);
+                if (getData == null) return false;
                 getData = entity;
-                _dbSet.Update(getData);
+                Table.Update(getData);
                 await _context.SaveChangesAsync();
                 return true;
             }

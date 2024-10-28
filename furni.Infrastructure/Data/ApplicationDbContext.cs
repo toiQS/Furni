@@ -20,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<Warehouse> Stocks { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
     public DbSet<Product> Product { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -65,5 +65,9 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             .WithMany(e => e.OrderDetails)
             .HasForeignKey(e => e.ProductId)
             .IsRequired();
+
+        builder.Entity<Cart>()
+            .HasMany(e => e.CartDetails)
+            .WithOne(e => e.Cart);
     }
 }
