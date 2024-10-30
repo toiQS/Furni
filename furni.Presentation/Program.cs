@@ -1,11 +1,20 @@
+using furni.Application.Interfaces.Management;
+using furni.Application.Management;
+using furni.Entities;
 using furni.Infrastructure.Configurations;
+using furni.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
-
+builder.Services.AddScoped<IBrandManager, BrandManager>();
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 

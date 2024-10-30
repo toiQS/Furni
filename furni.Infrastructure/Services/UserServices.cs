@@ -12,5 +12,29 @@ namespace furni.Infrastructure.IServices
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        public async Task<User> GetUserByIdAsync(string id)
+        {
+            try
+            {
+                return await _userManager.FindByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public async Task<IdentityRole> GetRoleByUserId(string id)
+        {
+            try
+            {
+                return await _roleManager.FindByIdAsync(id);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}", ex);
+                return null;
+            }
+        }
     }
 }
