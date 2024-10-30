@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace furni.Entities
 {
@@ -14,6 +15,7 @@ namespace furni.Entities
 
         [Phone]
         public string BrandPhone { get; set; } = string.Empty;
+        public bool IsActive { get; set; }
 
         public ICollection<Product> Products { get; set; }
     }

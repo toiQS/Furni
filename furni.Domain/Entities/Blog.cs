@@ -20,5 +20,7 @@ namespace furni.Entities
 
         [Column(name: "URL_Image")]
         public string URLImage { get; set; } = string.Empty;
+        [Column(name: "Is_Active")]
+        public bool IsActive { get; set; }
     }
 }
