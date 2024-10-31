@@ -18,6 +18,7 @@ public static class DependencyInjection
     {
         ConfigurationConnectionToDataBase(services, configuration);
         RegisterServices(services);
+        AddAuth(services);
     }
     public static void ConfigurationConnectionToDataBase(this IServiceCollection services, IConfiguration configuration)
     {
