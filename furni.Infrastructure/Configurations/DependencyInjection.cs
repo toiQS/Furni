@@ -1,7 +1,11 @@
+using furni.Entities;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.IServices;
 using furni.Infrastructure.Service;
 using furni.Infrastructure.Services;
+
+using Microsoft.AspNetCore.Identity;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +26,21 @@ public static class DependencyInjection
     }
     public static void RegisterServices(IServiceCollection services)
     {
+
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICartServices, CartServices>();
         services.AddScoped<ICartDetailServices, CartDetailServices>();
+
+        services.AddScoped<IProductService,ProductService>();
+        services.AddScoped<IBrandServices,BrandServices>();
+        services.AddScoped<IUserServices,UserServices>();
+    }
+    
+    public static void AddAuth(this IServiceCollection services)
+    {
+        services.AddIdentity<User, IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
     }
 }

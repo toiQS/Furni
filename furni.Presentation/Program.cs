@@ -1,6 +1,13 @@
 using furni.Application.Interfaces.Management;
 using furni.Application.Management;
+
+
+using furni.Entities;
+
 using furni.Infrastructure.Configurations;
+using furni.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
 
+
 builder.Services.AddScoped<ICartManagement, CartManagement>();
+
+builder.Services.AddScoped<IBrandManager, BrandManager>();
+
 
 var app = builder.Build();
 
