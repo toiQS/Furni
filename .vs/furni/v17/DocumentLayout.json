@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "F:\\Repo\\Local\\Furni\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}|furni.Application\\furni.Application.csproj|f:\\repo\\local\\furni\\furni.application\\interfaces\\management\\icategorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}|furni.Application\\furni.Application.csproj|solutionrelative:furni.application\\interfaces\\management\\icategorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\controllers\\brandcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\controllers\\brandcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\views\\brand\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\views\\brand\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{48F3E140-3DF3-41BE-B84A-63E544CB1E79}|furni.Domain\\furni.Domain.csproj|f:\\repo\\local\\furni\\furni.domain\\entities\\brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{48F3E140-3DF3-41BE-B84A-63E544CB1E79}|furni.Domain\\furni.Domain.csproj|solutionrelative:furni.domain\\entities\\brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\views\\brand\\index2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\views\\brand\\index2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}|furni.Application\\furni.Application.csproj|f:\\repo\\local\\furni\\furni.application\\managements\\brandmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}|furni.Application\\furni.Application.csproj|solutionrelative:furni.application\\managements\\brandmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\repo\\local\\furni\\furni.presentation\\models\\brandresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\models\\brandresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,36 +46,88 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ICategoryManager.cs",
-              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Application\\Interfaces\\Management\\ICategoryManager.cs",
-              "RelativeDocumentMoniker": "furni.Application\\Interfaces\\Management\\ICategoryManager.cs",
-              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Application\\Interfaces\\Management\\ICategoryManager.cs",
-              "RelativeToolTip": "furni.Application\\Interfaces\\Management\\ICategoryManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T04:14:25.757Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Add.cshtml",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Views\\Brand\\Add.cshtml",
+              "RelativeDocumentMoniker": "furni.Presentation\\Views\\Brand\\Add.cshtml",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Views\\Brand\\Add.cshtml",
+              "RelativeToolTip": "furni.Presentation\\Views\\Brand\\Add.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-07T06:58:55.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index2.cshtml",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Views\\Brand\\Index2.cshtml",
+              "RelativeDocumentMoniker": "furni.Presentation\\Views\\Brand\\Index2.cshtml",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Views\\Brand\\Index2.cshtml",
+              "RelativeToolTip": "furni.Presentation\\Views\\Brand\\Index2.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-07T06:55:09.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Brand.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Domain\\Entities\\Brand.cs",
+              "RelativeDocumentMoniker": "furni.Domain\\Entities\\Brand.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Domain\\Entities\\Brand.cs",
+              "RelativeToolTip": "furni.Domain\\Entities\\Brand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T06:42:38.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "BrandManager.cs",
               "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Application\\Managements\\BrandManager.cs",
               "RelativeDocumentMoniker": "furni.Application\\Managements\\BrandManager.cs",
               "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Application\\Managements\\BrandManager.cs",
               "RelativeToolTip": "furni.Application\\Managements\\BrandManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwCoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T04:11:59.966Z",
+              "WhenOpened": "2024-11-07T06:27:47.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BrandResponse.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Models\\BrandResponse.cs",
+              "RelativeDocumentMoniker": "furni.Presentation\\Models\\BrandResponse.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Models\\BrandResponse.cs",
+              "RelativeToolTip": "furni.Presentation\\Models\\BrandResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T06:27:22.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BrandController.cs",
+              "DocumentMoniker": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Controllers\\BrandController.cs",
+              "RelativeDocumentMoniker": "furni.Presentation\\Controllers\\BrandController.cs",
+              "ToolTip": "F:\\Repo\\Local\\Furni\\furni.Presentation\\Controllers\\BrandController.cs",
+              "RelativeToolTip": "furni.Presentation\\Controllers\\BrandController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAowBsAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T06:24:49.743Z",
               "EditorCaption": ""
             }
           ]
