@@ -18,6 +18,7 @@ public static class DependencyInjection
     {
         ConfigurationConnectionToDataBase(services, configuration);
         RegisterServices(services);
+        AddAuth(services);
     }
     public static void ConfigurationConnectionToDataBase(this IServiceCollection services, IConfiguration configuration)
     {
@@ -41,6 +42,8 @@ public static class DependencyInjection
         services.AddIdentity<User, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
+
+        
 
     }
 }
