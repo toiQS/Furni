@@ -1,16 +1,22 @@
 using furni.Entities;
 using furni.Infrastructure.IServices;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 namespace furni.Infrastructure.IServices
 {
     public class UserServices : IUserServices
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public UserServices(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly SignInManager<User> _signInManager;
+        public UserServices(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
         }
         public async Task<User> GetUserByIdAsync(string id)
         {
@@ -36,5 +42,54 @@ namespace furni.Infrastructure.IServices
                 return null;
             }
         }
+        public async Task<bool> Login(string email, string password)
+        {
+            try
+            {
+                var identityUser = await _userManager.FindByEmailAsync(email);
+                if (identityUser == null) return false;
+                var check = await _signInManager.CheckPasswordSignInAsync(identityUser, password,false);
+                if (!check.Succeeded) return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine (ex.Message);
+                return false;
+            }
+        }
+        public async Task<bool> Register(string userName, string email, string password)
+        {
+            try
+            {
+                var identityUser = new User
+                {
+                    UserName = userName,
+                    Email = email,
+                };
+                var result = await _userManager.CreateAsync(identityUser, password);
+                if (!result.Succeeded) return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public async Task LogOut()
+        {
+            try
+            {
+                await _signInManager.SignOutAsync();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+       
     }
 }
