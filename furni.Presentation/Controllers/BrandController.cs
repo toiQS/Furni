@@ -7,10 +7,10 @@ namespace furni.Presentation.Controllers
 {
     public class BrandController : Controller
     {
-        private readonly IBrandManager _brandManager;
+        private readonly IBrandManageServices _brandManager;
         private readonly IUserServices _userServices;
         private readonly IBrandServices _brandServices;
-        public BrandController(IBrandManager brandManager)
+        public BrandController(IBrandManageServices brandManager)
         {
             _brandManager = brandManager;
         }
