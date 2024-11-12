@@ -1,4 +1,4 @@
-﻿namespace furni.Entities
+﻿namespace furni.Domain.Entities
 {
     public class OrderDetail : BaseEntity
     {

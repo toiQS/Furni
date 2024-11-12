@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace furni.Entities
+namespace furni.Domain.Entities
 {
     public class Brand : BaseEntity
     {

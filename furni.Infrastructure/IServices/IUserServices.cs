@@ -1,4 +1,4 @@
-using furni.Entities;
+using furni.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 namespace furni.Infrastructure.IServices
 {

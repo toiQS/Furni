@@ -155,7 +155,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("furni.Entities.Blog", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Blog", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,7 +197,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Blog");
                 });
 
-            modelBuilder.Entity("furni.Entities.Brand", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Brand", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,7 +227,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Brand");
                 });
 
-            modelBuilder.Entity("furni.Entities.Cart", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Cart", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -248,7 +248,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Cart");
                 });
 
-            modelBuilder.Entity("furni.Entities.CartDetail", b =>
+            modelBuilder.Entity("furni.Domain.Entities.CartDetail", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,7 +281,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("CartDetail");
                 });
 
-            modelBuilder.Entity("furni.Entities.Category", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Category", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,7 +303,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("furni.Entities.Coupon", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Coupon", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -337,7 +337,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Coupon");
                 });
 
-            modelBuilder.Entity("furni.Entities.DeliveryInformation", b =>
+            modelBuilder.Entity("furni.Domain.Entities.DeliveryInformation", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -397,7 +397,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("DeliveryInformation");
                 });
 
-            modelBuilder.Entity("furni.Entities.Order", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Order", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -427,7 +427,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("furni.Entities.OrderDetail", b =>
+            modelBuilder.Entity("furni.Domain.Entities.OrderDetail", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -456,7 +456,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("OrderDetail");
                 });
 
-            modelBuilder.Entity("furni.Entities.Product", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Product", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -496,7 +496,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("furni.Entities.User", b =>
+            modelBuilder.Entity("furni.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -592,7 +592,7 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("furni.Entities.Warehouse", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Warehouse", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -627,7 +627,7 @@ namespace furni.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("furni.Entities.User", null)
+                    b.HasOne("furni.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -636,7 +636,7 @@ namespace furni.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("furni.Entities.User", null)
+                    b.HasOne("furni.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -651,7 +651,7 @@ namespace furni.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("furni.Entities.User", null)
+                    b.HasOne("furni.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -660,42 +660,42 @@ namespace furni.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("furni.Entities.User", null)
+                    b.HasOne("furni.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("furni.Entities.Blog", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Blog", b =>
                 {
-                    b.HasOne("furni.Entities.User", "User")
+                    b.HasOne("furni.Domain.Entities.User", "User")
                         .WithMany("Blogs")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("furni.Entities.Cart", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Cart", b =>
                 {
-                    b.HasOne("furni.Entities.User", "User")
+                    b.HasOne("furni.Domain.Entities.User", "User")
                         .WithOne("Cart")
-                        .HasForeignKey("furni.Entities.Cart", "UserId")
+                        .HasForeignKey("furni.Domain.Entities.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("furni.Entities.CartDetail", b =>
+            modelBuilder.Entity("furni.Domain.Entities.CartDetail", b =>
                 {
-                    b.HasOne("furni.Entities.Cart", "Cart")
+                    b.HasOne("furni.Domain.Entities.Cart", "Cart")
                         .WithMany()
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("furni.Entities.Product", "Product")
+                    b.HasOne("furni.Domain.Entities.Product", "Product")
                         .WithMany("CartDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -706,24 +706,24 @@ namespace furni.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("furni.Entities.DeliveryInformation", b =>
+            modelBuilder.Entity("furni.Domain.Entities.DeliveryInformation", b =>
                 {
-                    b.HasOne("furni.Entities.Order", "Order")
+                    b.HasOne("furni.Domain.Entities.Order", "Order")
                         .WithOne("DeliveryInformation")
-                        .HasForeignKey("furni.Entities.DeliveryInformation", "OrderId")
+                        .HasForeignKey("furni.Domain.Entities.DeliveryInformation", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("furni.Entities.Order", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("furni.Entities.Coupon", "Coupon")
+                    b.HasOne("furni.Domain.Entities.Coupon", "Coupon")
                         .WithOne("Order")
-                        .HasForeignKey("furni.Entities.Order", "CouponId");
+                        .HasForeignKey("furni.Domain.Entities.Order", "CouponId");
 
-                    b.HasOne("furni.Entities.User", "User")
+                    b.HasOne("furni.Domain.Entities.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -734,15 +734,15 @@ namespace furni.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("furni.Entities.OrderDetail", b =>
+            modelBuilder.Entity("furni.Domain.Entities.OrderDetail", b =>
                 {
-                    b.HasOne("furni.Entities.Order", "Order")
+                    b.HasOne("furni.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("furni.Entities.Product", "Product")
+                    b.HasOne("furni.Domain.Entities.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -753,15 +753,15 @@ namespace furni.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("furni.Entities.Product", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("furni.Entities.Brand", "Brand")
+                    b.HasOne("furni.Domain.Entities.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("furni.Entities.Category", "Category")
+                    b.HasOne("furni.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -772,34 +772,34 @@ namespace furni.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("furni.Entities.Warehouse", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Warehouse", b =>
                 {
-                    b.HasOne("furni.Entities.Product", "Product")
+                    b.HasOne("furni.Domain.Entities.Product", "Product")
                         .WithOne("Warehouse")
-                        .HasForeignKey("furni.Entities.Warehouse", "ProductId")
+                        .HasForeignKey("furni.Domain.Entities.Warehouse", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("furni.Entities.Brand", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("furni.Entities.Category", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("furni.Entities.Coupon", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Coupon", b =>
                 {
                     b.Navigation("Order")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("furni.Entities.Order", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Order", b =>
                 {
                     b.Navigation("DeliveryInformation")
                         .IsRequired();
@@ -807,7 +807,7 @@ namespace furni.Infrastructure.Migrations
                     b.Navigation("OrderDetails");
                 });
 
-            modelBuilder.Entity("furni.Entities.Product", b =>
+            modelBuilder.Entity("furni.Domain.Entities.Product", b =>
                 {
                     b.Navigation("CartDetails");
 
@@ -817,7 +817,7 @@ namespace furni.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("furni.Entities.User", b =>
+            modelBuilder.Entity("furni.Domain.Entities.User", b =>
                 {
                     b.Navigation("Blogs");
 

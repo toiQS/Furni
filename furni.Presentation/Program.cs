@@ -2,7 +2,7 @@ using furni.Application.Interfaces.Management;
 using furni.Application.Management;
 
 
-using furni.Entities;
+using furni.Domain.Entities;
 
 using furni.Infrastructure.Configurations;
 using furni.Infrastructure.Data;

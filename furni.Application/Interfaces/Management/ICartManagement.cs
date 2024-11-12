@@ -1,4 +1,4 @@
-using furni.Entities;
+using furni.Domain.Entities;
 
 namespace furni.Application.Interfaces.Management;
 

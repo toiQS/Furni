@@ -1,5 +1,5 @@
 ﻿using Azure.Core;
-using furni.Entities;
+using furni.Domain.Entities;
 using furni.Infrastructure.IServices;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;

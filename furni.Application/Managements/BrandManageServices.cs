@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using furni.Application.Interfaces.Management;
-using furni.Entities;
+using furni.Domain.Entities;
 using furni.Infrastructure.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
