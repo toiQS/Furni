@@ -64,7 +64,7 @@ namespace furni.Application.Managements
                 {
                     _finalResultList.Add(new Dictionary<string, object>()
                      {
-                         {"Message","Can't find product" }
+                        {"Message","Can't find product" }
                      });
                     return _finalResultList;
                 }
@@ -76,7 +76,8 @@ namespace furni.Application.Managements
                         {
                             {"ProductName",x.ProductName },
                             {"Price",x.Price },
-                            {"ProductImage",x.URLImage }
+                            {"ProductImage",x.URLImage },
+                            {"Message", "" }
                         })
                     }
                 });
@@ -100,7 +101,7 @@ namespace furni.Application.Managements
                 {
                     {"Id",item.Id },
                     {"Name",item.BrandName},
-
+                    {"Message", "" }
                 });
             }
             return _finalResultList ;
@@ -127,7 +128,8 @@ namespace furni.Application.Managements
                 {"Id",getCategory.Id },
                 {"Name",getCategory.CategoryName },
                 {"Description",getCategory.CategoryDescription },
-                {"IsActive",getCategory.IsActive }
+                {"IsActive",getCategory.IsActive },
+                {"Message", "" }
             };
             return _finalResult = result ;
         }
@@ -160,7 +162,8 @@ namespace furni.Application.Managements
                 {
                     {"Id",item.Id },
                     {"Name",item.CategoryName },
-                    {"IsActive",item.IsActive }
+                    {"IsActive",item.IsActive },
+                    {"Message", "" }
                 });
                 return _finalResultList ;
             }
