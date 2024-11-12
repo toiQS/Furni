@@ -18,7 +18,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddScoped<ICartManagement, CartManagement>();
 
-builder.Services.AddScoped<IBrandManager, BrandManager>();
+builder.Services.AddScoped<IBrandManageServices, BrandManageServices>();
 
 
 var app = builder.Build();

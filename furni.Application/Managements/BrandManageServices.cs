@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using furni.Application.Interfaces.Management;
 using furni.Entities;
 using furni.Infrastructure.IServices;
@@ -6,11 +7,11 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace furni.Application.Management
 {
-    public class BrandManager :IBrandManager
+    public class BrandManageServices :IBrandManageServices
     {
         private readonly IUserServices _userServices;
         private readonly IBrandServices _brandServices;
-        public BrandManager(IUserServices userServices, IBrandServices brandServices)
+        public BrandManageServices(IUserServices userServices, IBrandServices brandServices)
         {
             _userServices = userServices;
             _brandServices = brandServices;
@@ -31,7 +32,7 @@ namespace furni.Application.Management
             {
                 finalResult.Add(new Dictionary<string, object>()
                 {
-                    {"Message:","Can't get data from brand table"}
+                    {"Message","Can't get data from brand table"}
                 });
             }
             else
@@ -62,7 +63,7 @@ namespace furni.Application.Management
             {
                 finalResult.Add(new Dictionary<string, object>
                 {
-                    {"Message:","Brand name is null"}
+                    {"Message","Brand name is null"}
                 });
                 return finalResult;
             } 
@@ -71,7 +72,7 @@ namespace furni.Application.Management
             {
                 finalResult.Add(new Dictionary<string, object>
                 {
-                    {"Message:","Can't get list brand by name or data wasn't existed"}
+                    {"Message","Can't get list brand by name or data wasn't existed"}
                 });
                 return finalResult;
             }
@@ -88,7 +89,7 @@ namespace furni.Application.Management
             }
             return finalResult;
         }
-        public async Task<Dictionary<string,string>> AddNewBrand(string userId, Brand brand)
+        public async Task<Dictionary<string,string>> AddNewBrand(string userId, string name, string description, string email, string phone)
         {
             ///kiểm tra dữ liệu đầu vào đã được cung cấp hay chưa
             ///kiểm tra mã người dùng có tồn tại hay không
@@ -100,53 +101,64 @@ namespace furni.Application.Management
             //declare value return
             var finalResult = new Dictionary<string,string>();
             // check data input (user id and brand ) are null?
-            if(string.IsNullOrEmpty(userId) || brand == null)
+            if(string.IsNullOrEmpty(userId) || name == null || description == null|| email == null || phone == null)
             {
-                finalResult.Add("Message:","Data input is invalid");
+                finalResult.Add("Message","Data input is invalid");
                 return finalResult;
             }
             // find user in database
             var findUser = await _userServices.GetUserByIdAsync(userId);
             if (findUser == null)
             {
-                finalResult.Add("Message:","Can't find user");
+                finalResult.Add("Message","Can't find user");
                 return finalResult;
             }
-            // get role name of user
-            var getRole = await _userServices.GetRoleByUserId(userId);
-            if(getRole == null)
-            {
-                finalResult.Add("Message:","Can't get role of user");
-                return finalResult;
-            }
-            if(getRole.Name != "Admin")
-            {
-                finalResult.Add("Message:","Insufficient authority");
-                return finalResult;
-            }
+            // // get role name of user
+            // var getRole = await _userServices.GetRoleByUserId(userId);
+            // if(getRole == null)
+            // {
+            //     finalResult.Add("Message","Can't get role of user");
+            //     return finalResult;
+            // }
+            // if(getRole.Name != "Admin")
+            // {
+            //     finalResult.Add("Message","Insufficient authority");
+            //     return finalResult;
+            // }
 
             // check brand name is existed
-            var getBrandsByName = await _brandServices.GetBrandsByName(brand.BrandName);
-            if (getBrandsByName == null)
+            var getBrandsByName = await _brandServices.GetBrandsByName(name);
+            if (getBrandsByName.Any())
             {
-                finalResult.Add("Message:","Brand name was existed");
+                finalResult.Add("Message","Brand name was existed");
                 return finalResult;
             }
+            var timeCurrent = DateTime.Now;
+            var random = new Random().Next(1,100000);
+            var brand = new Brand
+            {
+                Id =$"1001-{timeCurrent}-{random}",
+                BrandName = name,
+                BrandDescription = description,
+                BrandEmail = email,
+                BrandPhone = phone,
+                IsActive = true
+            };
             // todo add new brand 
             var addBrand = await _brandServices.CreateAsync(brand);
             if (addBrand == false)
             {
-                finalResult.Add("Message:","There are some issue when creating a new brand");
+                finalResult.Add("Message","There are some issue when creating a new brand");
                 return finalResult;
             }
             else
             {
-                finalResult.Add("Message:","Add a new brand is success");
+                finalResult.Add("Message","Add a new brand is success");
                 return finalResult;
             }
             
         }
-        public async Task<Dictionary<string,string>> EditBrand(string userId,string brandId, Brand brand)
+        public async Task<Dictionary<string,string>> UpdateBrandInfo(string userId,string brandId, string name, string description, string email, string phone)
         {
             //kiểm tra dữ liệu đầu vào đã được cung cấp hay chưa
             ///kiểm tra mã người dùng có tồn tại hay không
@@ -158,52 +170,102 @@ namespace furni.Application.Management
             //declare value return
             var finalResult = new Dictionary<string,string>();
             // check data input (user id and brand ) are null?
-            if(string.IsNullOrEmpty(userId) || brand == null)
+            if(string.IsNullOrEmpty(userId) || name == null || description == null|| email == null || phone == null)
             {
-                finalResult.Add("Message:","Data input is invalid");
+                finalResult.Add("Message","Data input is invalid");
                 return finalResult;
             }
             // find user in database
             var findUser = await _userServices.GetUserByIdAsync(userId);
             if (findUser == null)
             {
-                finalResult.Add("Message:","Can't find user");
+                finalResult.Add("","Can't find user");
                 return finalResult;
             }
-            // get role name of user
-            var getRole = await _userServices.GetRoleByUserId(userId);
-            if(getRole == null)
-            {
-                finalResult.Add("Message:","Can't get role of user");
-                return finalResult;
-            }
-            if(getRole.Name != "Admin")
-            {
-                finalResult.Add("Message:","Insufficient authority");
-                return finalResult;
-            }
+            // // get role name of user
+            // var getRole = await _userServices.GetRoleByUserId(userId);
+            // if(getRole == null)
+            // {
+            //     finalResult.Add("Message","Can't get role of user");
+            //     return finalResult;
+            // }
+            // if(getRole.Name != "Admin")
+            // {
+            //     finalResult.Add("Message","Insufficient authority");
+            //     return finalResult;
+            // }
 
             // get brand by brand id
             var oldBrand = await _brandServices.GetByIdAsync(brandId);
             if (oldBrand == null)
             {
-                finalResult.Add("Message:","Brand wasn't existed");
+                finalResult.Add("Message","Brand wasn't existed");
                 return finalResult;
             }
             //todo update brand
-            oldBrand.BrandName = brand.BrandName;
-            oldBrand.BrandPhone = brand.BrandPhone;
-            oldBrand.BrandEmail = brand.BrandEmail;
-            oldBrand.BrandDescription = brand.BrandDescription;
+            oldBrand.BrandName = name;
+            oldBrand.BrandDescription = description;
+            oldBrand.BrandPhone = phone;
+            oldBrand.BrandEmail = email;
+            
             var updateBrand = await _brandServices.UpdateAsync(brandId, oldBrand);
             if(updateBrand == true)
             {
-                finalResult.Add("Message:","Update brand is success");
+                finalResult.Add("Message","Update brand is success");
                 return finalResult;
             }
             else
             {
-                finalResult.Add("Message:", "There are some issue when update brand.");
+                finalResult.Add("Message", "There are some issue when update brand.");
+                return finalResult;
+            }
+            
+        }
+        public async Task<Dictionary<string,string>> UpdateBrandStastus(string userId, string brandId)
+        {
+             //declare value return
+            var finalResult = new Dictionary<string,string>();
+            // check data input (user id and brand ) are null?
+            if(string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(brandId))
+            {
+                finalResult.Add("Message","Data input is invalid");
+                return finalResult;
+            }
+            // find user in database
+            var findUser = await _userServices.GetUserByIdAsync(userId);
+            if (findUser == null)
+            {
+                finalResult.Add("Message","Can't find user");
+                return finalResult;
+            }
+            // // get role name of user
+            // var getRole = await _userServices.GetRoleByUserId(userId);
+            // if(getRole == null)
+            // {
+            //     finalResult.Add("Message","Can't get role of user");
+            //     return finalResult;
+            // }
+            // if(getRole.Name != "Admin")
+            // {
+            //     finalResult.Add("Message","Insufficient authority");
+            //     return finalResult;
+            // }
+
+            var oldBrand = await _brandServices.GetByIdAsync(brandId);
+            if (oldBrand == null)
+            {
+                finalResult.Add("Message","Brand wasn't existed");
+                return finalResult;
+            }
+            oldBrand.IsActive = !oldBrand.IsActive;
+            if(await _brandServices.UpdateAsync(brandId, oldBrand))
+            {
+                finalResult.Add("Message","Update brand is success");
+                return finalResult;
+            }
+            else
+            {
+                finalResult.Add("Message", "There are some issue when update brand.");
                 return finalResult;
             }
         }
@@ -221,38 +283,38 @@ namespace furni.Application.Management
             // check data input (user id and brand ) are null?
             if(string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(brandId))
             {
-                finalResult.Add("Message:","Data input is invalid");
+                finalResult.Add("Message","Data input is invalid");
                 return finalResult;
             }
             // find user in database
             var findUser = await _userServices.GetUserByIdAsync(userId);
             if (findUser == null)
             {
-                finalResult.Add("Message:","Can't find user");
+                finalResult.Add("Message","Can't find user");
                 return finalResult;
             }
-            // get role name of user
-            var getRole = await _userServices.GetRoleByUserId(userId);
-            if(getRole == null)
-            {
-                finalResult.Add("Message:","Can't get role of user");
-                return finalResult;
-            }
-            if(getRole.Name != "Admin")
-            {
-                finalResult.Add("Message:","Insufficient authority");
-                return finalResult;
-            }
+            // // get role name of user
+            // var getRole = await _userServices.GetRoleByUserId(userId);
+            // if(getRole == null)
+            // {
+            //     finalResult.Add("Message","Can't get role of user");
+            //     return finalResult;
+            // }
+            // if(getRole.Name != "Admin")
+            // {
+            //     finalResult.Add("Message","Insufficient authority");
+            //     return finalResult;
+            // }
             //todo delete brand
             var deleteBrand = await _brandServices.DeleteAsync(brandId);
             if (deleteBrand == false)
             {
-                finalResult.Add("Message:","There are have some issue when trying delete brand data.");
+                finalResult.Add("Message","There are have some issue when trying delete brand data.");
                 return finalResult;
             }
             else
             {
-                finalResult.Add("Message:","Delete brand is success");
+                finalResult.Add("Message","Delete brand is success");
                 return finalResult;
             }
         }
