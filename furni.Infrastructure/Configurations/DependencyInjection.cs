@@ -20,30 +20,28 @@ public static class DependencyInjection
         RegisterServices(services);
         AddAuth(services);
     }
+
     public static void ConfigurationConnectionToDataBase(this IServiceCollection services, IConfiguration configuration)
     {
         string connectionString = configuration.GetConnectionString("DefaultConnectString") ?? string.Empty;
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
     }
+
     public static void RegisterServices(IServiceCollection services)
     {
-
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICartServices, CartServices>();
         services.AddScoped<ICartDetailServices, CartDetailServices>();
 
-        services.AddScoped<IProductService,ProductService>();
-        services.AddScoped<IBrandServices,BrandServices>();
-        services.AddScoped<IUserServices,UserServices>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IBrandServices, BrandServices>();
+        services.AddScoped<IUserServices, UserServices>();
     }
-    
+
     public static void AddAuth(this IServiceCollection services)
     {
         services.AddIdentity<User, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
-
-        
-
     }
 }

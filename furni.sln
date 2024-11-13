@@ -11,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "furni.Infrastructure", "fur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "furni.Presentation", "furni.Presentation\furni.Presentation.csproj", "{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "furni.API", "furni.API\furni.API.csproj", "{FD01FD80-C940-4825-AB01-CB0CB9E440CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AE8B276B-0D1D-4D3E-BCE1-698A8DC3EC9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE8B276B-0D1D-4D3E-BCE1-698A8DC3EC9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE8B276B-0D1D-4D3E-BCE1-698A8DC3EC9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE8B276B-0D1D-4D3E-BCE1-698A8DC3EC9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{426FF0F0-FC1E-4DF3-B699-FF3B9923D333}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +35,10 @@ Global
 		{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD01FD80-C940-4825-AB01-CB0CB9E440CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD01FD80-C940-4825-AB01-CB0CB9E440CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD01FD80-C940-4825-AB01-CB0CB9E440CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD01FD80-C940-4825-AB01-CB0CB9E440CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

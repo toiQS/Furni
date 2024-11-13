@@ -8,8 +8,16 @@ namespace furni.Infrastructure.Services
     {
         public async Task<Cart> GetByIdAsync(string id)
         {
-            return await Table.Include(c => c.CartDetails).FirstOrDefaultAsync();
+            return await Table
+                .Where(cart => cart.Id == id)
+                .Include(c => c.CartDetails)
+                .ThenInclude(cd => cd.Product)
+                .FirstAsync();
         }
 
+        public async Task<Cart> GetByUserIdAsync(string userId)
+        {
+            return await Table.Where(cart => cart.UserId == userId).Include(c => c.CartDetails).FirstAsync();
+        }
     }
 }

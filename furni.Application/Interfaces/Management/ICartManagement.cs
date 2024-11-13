@@ -1,8 +1,9 @@
 using furni.Domain.Entities;
+using furni.Application.Dtos;
 
 namespace furni.Application.Interfaces.Management;
 
 public interface ICartManagement
 {
-    Task<BaseResponse<Cart>> GetByIdAsync(string id);
+    Task<BaseResponse<CartDto>> GetByIdAsync(string id);
 }
