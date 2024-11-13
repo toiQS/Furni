@@ -9,6 +9,8 @@ namespace furni.Domain.Entities
 
         public string CouponName { get; set; } = string.Empty;
 
+        public int Quantity { get; set; }
+
         public int Discount { get; set; }
 
         public double MinRequire { get; set; }
@@ -18,7 +20,5 @@ namespace furni.Domain.Entities
         public DateTime DateExpire { get; set; }
 
         public DateTime DateStart { get; set; }
-
-        public Order Order { get; set; }
     }
 }

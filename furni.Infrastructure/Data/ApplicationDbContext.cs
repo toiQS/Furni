@@ -20,6 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<Warehouse> Stocks { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
     public DbSet<Product> Product { get; set; }
+    public DbSet<Warehouse> Warehouse { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -35,7 +36,6 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             }
         }
 
-
         builder.Entity<Brand>()
             .HasMany(e => e.Products)
             .WithOne(e => e.Brand)
@@ -50,24 +50,15 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
 
         builder.Entity<Product>()
             .HasOne(e => e.Warehouse)
-            .WithOne(e => e.Product)
-            .HasForeignKey<Warehouse>(e => e.ProductId)
-            .IsRequired();
+            .WithOne(e => e.Product);
 
         builder.Entity<CartDetail>()
-            .HasOne(e => e.Product)
-            .WithMany(e => e.CartDetails)
-            .HasForeignKey(e => e.ProductId)
-            .IsRequired();
+            .HasOne(e => e.Product);
 
         builder.Entity<OrderDetail>()
-            .HasOne(e => e.Product)
-            .WithMany(e => e.OrderDetails)
-            .HasForeignKey(e => e.ProductId)
-            .IsRequired();
+            .HasOne(e => e.Product);
 
         builder.Entity<Cart>()
-            .HasMany(e => e.CartDetails)
-            .WithOne(e => e.Cart);
+            .HasMany(e => e.CartDetails);
     }
 }
