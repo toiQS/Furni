@@ -12,8 +12,8 @@ using furni.Infrastructure.Data;
 namespace furni.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241027053508_Initial")]
-    partial class Initial
+    [Migration("20241116135135_update-entity")]
+    partial class updateentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,39 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("furni.Domain.Entities.Address", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Address");
+                });
+
             modelBuilder.Entity("furni.Domain.Entities.Blog", b =>
                 {
                     b.Property<string>("Id")
@@ -169,9 +202,20 @@ namespace furni.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Blog_Name");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("Create_At");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TopicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("URLImage")
                         .IsRequired()
@@ -191,6 +235,8 @@ namespace furni.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TopicId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Blog");
@@ -202,21 +248,12 @@ namespace furni.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("BrandDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BrandEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("BrandName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BrandPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -283,51 +320,16 @@ namespace furni.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CategoryDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("furni.Domain.Entities.Coupon", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CouponCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CouponName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateExpire")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Discount")
-                        .HasColumnType("int");
-
-                    b.Property<double>("MaxTotalDiscount")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MinRequire")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Coupon");
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.DeliveryInformation", b =>
@@ -336,56 +338,34 @@ namespace furni.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AddressDetail")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Address_Detail");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Company_Name");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
+                    b.Property<string>("OrderDescription")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("First_Name");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Last_Name");
 
                     b.Property<string>("OrderId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("OrderNote")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Posta")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ShippingMethodId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("StreetAddress")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Street_Address");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId")
                         .IsUnique();
+
+                    b.HasIndex("ShippingMethodId");
 
                     b.ToTable("DeliveryInformation");
                 });
@@ -397,7 +377,10 @@ namespace furni.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CouponId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ShippingFee")
+                        .HasColumnType("float");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -410,10 +393,6 @@ namespace furni.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CouponId")
-                        .IsUnique()
-                        .HasFilter("[CouponId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -433,6 +412,9 @@ namespace furni.Infrastructure.Migrations
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("ProductPrice")
+                        .HasColumnType("float");
 
                     b.Property<double>("Quantity")
                         .HasColumnType("float");
@@ -486,6 +468,39 @@ namespace furni.Infrastructure.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("furni.Domain.Entities.ShippingMethod", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Cost")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShippingMethod");
+                });
+
+            modelBuilder.Entity("furni.Domain.Entities.Topic", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TopicName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Topic");
+                });
+
             modelBuilder.Entity("furni.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -505,11 +520,6 @@ namespace furni.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("First_Name");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -518,20 +528,11 @@ namespace furni.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Last_Name");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Middle_Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -551,10 +552,6 @@ namespace furni.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -603,7 +600,7 @@ namespace furni.Infrastructure.Migrations
                     b.HasIndex("ProductId")
                         .IsUnique();
 
-                    b.ToTable("Stocks");
+                    b.ToTable("Warehouse");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -657,11 +654,30 @@ namespace furni.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("furni.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("furni.Domain.Entities.User", "User")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("furni.Domain.Entities.Blog", b =>
                 {
+                    b.HasOne("furni.Domain.Entities.Topic", "Topic")
+                        .WithMany("Blogs")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("furni.Domain.Entities.User", "User")
                         .WithMany("Blogs")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Topic");
 
                     b.Navigation("User");
                 });
@@ -680,7 +696,7 @@ namespace furni.Infrastructure.Migrations
             modelBuilder.Entity("furni.Domain.Entities.CartDetail", b =>
                 {
                     b.HasOne("furni.Domain.Entities.Cart", "Cart")
-                        .WithMany()
+                        .WithMany("CartDetails")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -704,22 +720,22 @@ namespace furni.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("furni.Domain.Entities.ShippingMethod", "ShippingMethod")
+                        .WithMany("DeliveryInformation")
+                        .HasForeignKey("ShippingMethodId");
+
                     b.Navigation("Order");
+
+                    b.Navigation("ShippingMethod");
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("furni.Domain.Entities.Coupon", "Coupon")
-                        .WithOne("Order")
-                        .HasForeignKey("furni.Domain.Entities.Order", "CouponId");
-
                     b.HasOne("furni.Domain.Entities.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Coupon");
 
                     b.Navigation("User");
                 });
@@ -778,15 +794,14 @@ namespace furni.Infrastructure.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("furni.Domain.Entities.Cart", b =>
+                {
+                    b.Navigation("CartDetails");
+                });
+
             modelBuilder.Entity("furni.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("furni.Domain.Entities.Coupon", b =>
-                {
-                    b.Navigation("Order")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Order", b =>
@@ -807,8 +822,20 @@ namespace furni.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("furni.Domain.Entities.ShippingMethod", b =>
+                {
+                    b.Navigation("DeliveryInformation");
+                });
+
+            modelBuilder.Entity("furni.Domain.Entities.Topic", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
             modelBuilder.Entity("furni.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("Blogs");
 
                     b.Navigation("Cart")

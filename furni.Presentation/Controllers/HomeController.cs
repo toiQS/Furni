@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using furni.Presentation.Models;
 using furni.Application.Interfaces.Management;
-using furni.Entities;
+using furni.Domain.Entities;
 
 namespace furni.Presentation.Controllers;
 

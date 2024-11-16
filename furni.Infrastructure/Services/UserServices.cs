@@ -1,4 +1,4 @@
-using furni.Entities;
+using furni.Domain.Entities;
 using furni.Infrastructure.IServices;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;

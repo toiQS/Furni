@@ -1,4 +1,4 @@
-using furni.Entities;
+using furni.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,12 +14,15 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<CartDetail> CartDetail { get; set; }
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderDetail> OrderDetail { get; set; }
-    public DbSet<Coupon> Coupon { get; set; }
     public DbSet<Brand> Brand { get; set; }
     public DbSet<Category> Category { get; set; }
     public DbSet<Warehouse> Stocks { get; set; }
     public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
     public DbSet<Product> Product { get; set; }
+    public DbSet<Warehouse> Warehouse { get; set; }
+    public DbSet<Address> Address { get; set; }
+    public DbSet<ShippingMethod> ShippingMethod { get; set; }
+    public DbSet<Topic> Topic { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -35,7 +38,6 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             }
         }
 
-
         builder.Entity<Brand>()
             .HasMany(e => e.Products)
             .WithOne(e => e.Brand)
@@ -50,24 +52,18 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
 
         builder.Entity<Product>()
             .HasOne(e => e.Warehouse)
-            .WithOne(e => e.Product)
-            .HasForeignKey<Warehouse>(e => e.ProductId)
-            .IsRequired();
+            .WithOne(e => e.Product);
 
         builder.Entity<CartDetail>()
-            .HasOne(e => e.Product)
-            .WithMany(e => e.CartDetails)
-            .HasForeignKey(e => e.ProductId)
-            .IsRequired();
+            .HasOne(e => e.Product);
 
         builder.Entity<OrderDetail>()
-            .HasOne(e => e.Product)
-            .WithMany(e => e.OrderDetails)
-            .HasForeignKey(e => e.ProductId)
-            .IsRequired();
+            .HasOne(e => e.Product);
 
         builder.Entity<Cart>()
             .HasMany(e => e.CartDetails)
-            .WithOne(e => e.Cart);
+            .WithOne(e => e.Cart)
+            .HasForeignKey(p => p.CartId)
+            .IsRequired();
     }
 }

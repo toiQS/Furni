@@ -1,4 +1,4 @@
-﻿using furni.Entities;
+﻿using furni.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using furni.Infrastructure.IServices;
 using furni.Infrastructure.Data;

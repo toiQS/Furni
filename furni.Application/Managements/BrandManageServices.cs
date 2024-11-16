@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using furni.Application.Interfaces.Management;
-using furni.Entities;
+using furni.Domain.Entities;
 using furni.Infrastructure.IServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -139,9 +139,9 @@ namespace furni.Application.Management
             {
                 Id =$"1001-{timeCurrent}-{random}",
                 BrandName = name,
-                BrandDescription = description,
-                BrandEmail = email,
-                BrandPhone = phone,
+                //BrandDescription = description,
+                //BrandEmail = email,
+                //BrandPhone = phone,
                 IsActive = true
             };
             // todo add new brand 
@@ -204,9 +204,9 @@ namespace furni.Application.Management
             }
             //todo update brand
             oldBrand.BrandName = name;
-            oldBrand.BrandDescription = description;
-            oldBrand.BrandPhone = phone;
-            oldBrand.BrandEmail = email;
+            //oldBrand.BrandDescription = description;
+            //oldBrand.BrandPhone = phone;
+            //oldBrand.BrandEmail = email;
             
             var updateBrand = await _brandServices.UpdateAsync(brandId, oldBrand);
             if(updateBrand == true)

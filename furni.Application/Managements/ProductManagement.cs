@@ -1,6 +1,6 @@
 using furni.Application.Interfaces.Management;
 //using furni.Application.Interfaces.Service;
-using furni.Entities;
+using furni.Domain.Entities;
 using furni.Infrastructure.IServices;
 
 namespace furni.Application.Management;

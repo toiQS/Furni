@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace furni.Entities
+namespace furni.Domain.Entities
 {
     public class Cart : BaseEntity
     {

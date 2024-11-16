@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace furni.Entities
+namespace furni.Domain.Entities
 {
     public class Blog : BaseEntity
     {
@@ -20,7 +20,11 @@ namespace furni.Entities
 
         [Column(name: "URL_Image")]
         public string URLImage { get; set; } = string.Empty;
-        [Column(name: "Is_Active")]
+
+        public string Content { get; set; }
+
         public bool IsActive { get; set; }
+        public string TopicId { get; set; }
+        public Topic Topic { get; set; }
     }
 }

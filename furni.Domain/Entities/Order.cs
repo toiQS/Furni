@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace furni.Entities
+namespace furni.Domain.Entities
 {
     public class Order : BaseEntity
     {
         public string? CouponId { get; set; }
 
-        public Coupon? Coupon { get; set; } = null;
+        public double ShippingFee { get; set; }
 
         public double Total { get; set; }
 

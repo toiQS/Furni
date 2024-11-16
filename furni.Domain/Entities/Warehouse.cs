@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace furni.Entities
+namespace furni.Domain.Entities
 {
     public class Warehouse : BaseEntity
     {

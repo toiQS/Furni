@@ -1,5 +1,5 @@
 ﻿using Azure.Core;
-using furni.Entities;
+using furni.Domain.Entities;
 using furni.Infrastructure.IServices;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
@@ -127,7 +127,7 @@ namespace furni.Application.Managements
             {
                 {"Id",getCategory.Id },
                 {"Name",getCategory.CategoryName },
-                {"Description",getCategory.CategoryDescription },
+                //{"Description",getCategory.CategoryDescription },
                 {"IsActive",getCategory.IsActive },
                 {"Message", "" }
             };
@@ -182,7 +182,7 @@ namespace furni.Application.Managements
             {
                 Id = $"1002{timeCurrent}{random}",
                 CategoryName = name,
-                CategoryDescription = description,
+                //CategoryDescription = description,
                 IsActive = true,
             };
             if (await _categoryServices.CreateAsync(category))
@@ -207,7 +207,7 @@ namespace furni.Application.Managements
                 return _finalResult;
             }
             getCategory.CategoryName = name;
-            getCategory.CategoryDescription = description;
+            //getCategory.CategoryDescription = description;
             if (await _categoryServices.UpdateAsync(categoryId,getCategory))
             {
                 _finalResult.Add("Message", "Action update is success");
