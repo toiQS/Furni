@@ -12,6 +12,9 @@ namespace furni.Domain.Entities
         [Column(name: "URL_Image")]
         public string URLImage { get; set; } = string.Empty;
 
+        public string Color { get; set; }
+        public string Size { get; set; }
+
         [Column(name: "Is_Active")]
         public bool IsActive { get; set; }
 
