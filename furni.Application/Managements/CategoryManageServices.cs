@@ -76,7 +76,6 @@ namespace furni.Application.Managements
                         {
                             {"ProductName",x.ProductName },
                             {"Price",x.Price },
-                            //{"ProductImage",x.URLImage },
                             {"Message", "" }
                         })
                     }
@@ -169,9 +168,9 @@ namespace furni.Application.Managements
             }
             return _finalResultList;
         }
-        public async Task<Dictionary<string, object>> Add(string userId, string name, string description)
+        public async Task<Dictionary<string, object>> Add(string userId, string name)
         {
-            if (userId == null || name == null || description == null)
+            if (userId == null || name == null)
             {
                 _finalResult.Add("Message", "Values input is invalid");
                 return _finalResult;
@@ -182,7 +181,6 @@ namespace furni.Application.Managements
             {
                 Id = $"1002{timeCurrent}{random}",
                 CategoryName = name,
-                //CategoryDescription = description,
                 IsActive = true,
             };
             if (await _categoryServices.CreateAsync(category))
@@ -193,9 +191,9 @@ namespace furni.Application.Managements
             _finalResult.Add("Message", "There are some issue when trying create new data");
             return _finalResult;
         }
-        public async Task<Dictionary<string, object>> UpdateInfo(string userId, string categoryId , string name, string description)
+        public async Task<Dictionary<string, object>> UpdateInfo(string userId, string categoryId , string name)
         {
-            if(string.IsNullOrWhiteSpace(userId)||string.IsNullOrEmpty(name)||string.IsNullOrEmpty(description) || string.IsNullOrEmpty(categoryId))
+            if(string.IsNullOrWhiteSpace(userId)||string.IsNullOrEmpty(name) || string.IsNullOrEmpty(categoryId))
             {
                 _finalResult.Add("Message", "Values input is invalid");
                 return _finalResult;
@@ -207,7 +205,6 @@ namespace furni.Application.Managements
                 return _finalResult;
             }
             getCategory.CategoryName = name;
-            //getCategory.CategoryDescription = description;
             if (await _categoryServices.UpdateAsync(categoryId,getCategory))
             {
                 _finalResult.Add("Message", "Action update is success");

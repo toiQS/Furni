@@ -8,9 +8,9 @@ namespace furni.Domain.Entities
 
         public float Price { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
-        public float PriceSale { get; set; }
+        public float PriceSale { get; set; } = 0;
 
         public string Slug { get; set; }
 
