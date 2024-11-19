@@ -17,7 +17,7 @@ namespace furni.Infrastructure.Service
         {
             try
             {
-                return await _context.Brand.Where(x => x.BrandName.ToLower().Contains(name.ToLower())).ToArrayAsync();
+                return await _context.Brand.Where(x => x.Name.ToLower().Contains(name.ToLower())).ToArrayAsync();
             }
             catch (Exception ex)
             {

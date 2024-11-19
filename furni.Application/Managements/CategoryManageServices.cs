@@ -70,11 +70,11 @@ namespace furni.Application.Managements
                 }
                 _finalResultList.Add(new Dictionary<string, object>
                 {
-                    {"BrandName",brand.BrandName},
+                    {"BrandName",brand.Name},
                     {"Products",
                         getProductList.Select(x => new Dictionary<string,object>()
                         {
-                            {"ProductName",x.ProductName },
+                            {"ProductName",x.Name },
                             {"Price",x.Price },
                             {"Message", "" }
                         })
@@ -99,7 +99,7 @@ namespace furni.Application.Managements
                 _finalResultList.Add(new Dictionary<string, object>
                 {
                     {"Id",item.Id },
-                    {"Name",item.BrandName},
+                    {"Name",item.Name},
                     {"Message", "" }
                 });
             }
@@ -125,7 +125,7 @@ namespace furni.Application.Managements
             var result = new Dictionary<string, object>
             {
                 {"Id",getCategory.Id },
-                {"Name",getCategory.CategoryName },
+                {"Name",getCategory.Name },
                 //{"Description",getCategory.CategoryDescription },
                 {"IsActive",getCategory.IsDeleted },
                 {"Message", "" }
@@ -160,7 +160,7 @@ namespace furni.Application.Managements
                 _finalResultList.Add(new Dictionary<string, object>
                 {
                     {"Id",item.Id },
-                    {"Name",item.CategoryName },
+                    {"Name",item.Name },
                     {"IsActive",item.IsDeleted },
                     {"Message", "" }
                 });
@@ -180,7 +180,7 @@ namespace furni.Application.Managements
             var category = new Category
             {
                 Id = $"1002{timeCurrent}{random}",
-                CategoryName = name,
+                Name = name,
                 IsDeleted = true,
             };
             if (await _categoryServices.CreateAsync(category))
@@ -204,7 +204,7 @@ namespace furni.Application.Managements
                 _finalResult.Add("Message", "Can't found category");
                 return _finalResult;
             }
-            getCategory.CategoryName = name;
+            getCategory.Name = name;
             if (await _categoryServices.UpdateAsync(categoryId,getCategory))
             {
                 _finalResult.Add("Message", "Action update is success");

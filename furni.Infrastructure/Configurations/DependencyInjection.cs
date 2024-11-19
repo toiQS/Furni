@@ -39,7 +39,7 @@ public static class DependencyInjection
     
     public static void AddAuth(this IServiceCollection services)
     {
-        services.AddIdentity<User, IdentityRole>()
+        services.AddIdentity<AppUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 

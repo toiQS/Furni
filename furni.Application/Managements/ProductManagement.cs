@@ -18,7 +18,7 @@ public class ProductManagement : IProductManagement
     {
         try
         {
-            var temp = new Product { ProductName = "abc1" };
+            var temp = new Product { Name = "abc1" };
             return await _productService.CreateAsync(temp);
         }
         catch (Exception ex)

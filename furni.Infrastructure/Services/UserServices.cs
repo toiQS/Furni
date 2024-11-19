@@ -9,16 +9,16 @@ namespace furni.Infrastructure.IServices
 {
     public class UserServices : IUserServices
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<User> _signInManager;
-        public UserServices(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
+        private readonly SignInManager<AppUser> _signInManager;
+        public UserServices(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
         }
-        public async Task<User> GetUserByIdAsync(string id)
+        public async Task<AppUser> GetUserByIdAsync(string id)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace furni.Infrastructure.IServices
         {
             try
             {
-                var identityUser = new User
+                var identityUser = new AppUser
                 {
                     UserName = userName,
                     Email = email,

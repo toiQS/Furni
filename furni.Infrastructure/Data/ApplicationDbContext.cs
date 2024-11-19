@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace furni.Infrastructure.Data;
 
-public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>, string>
+public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole<string>, string>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-    public DbSet<User> User { get; set; }
+    public DbSet<AppUser> User { get; set; }
     public DbSet<Blog> Blog { get; set; }
     //public DbSet<Cart> Cart { get; set; }
     //public DbSet<CartDetail> CartDetail { get; set; }
@@ -22,7 +22,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<ShippingMethod> ShippingMethod { get; set; }
     public DbSet<Topic> Topic { get; set; }
     public DbSet<Color> Color { get; set; }
-    public DbSet<ProductVariant> ProductVariant { get; set; }
+    public DbSet<Variant> ProductVariant { get; set; }
     public DbSet<Size> Size { get; set; }
     public DbSet<Review> Review { get; set; }
 
@@ -56,7 +56,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
         //    .HasOne(e => e.ProductVariant);
 
         builder.Entity<OrderDetail>()
-            .HasOne(e => e.ProductVariant);
+            .HasOne(e => e.VariantSize);
 
         builder.Entity<Order>()
             .HasOne(e => e.Address)

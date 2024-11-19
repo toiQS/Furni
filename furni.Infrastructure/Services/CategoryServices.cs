@@ -10,7 +10,7 @@ namespace furni.Infrastructure.Services
         {
             try
             {
-                return await Table.Where(x => x.CategoryName.ToLower().Contains(categoryName.ToLower())).ToListAsync();
+                return await Table.Where(x => x.Name.ToLower().Contains(categoryName.ToLower())).ToListAsync();
             }
             catch (Exception ex)
             {

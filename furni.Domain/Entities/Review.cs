@@ -11,9 +11,9 @@ namespace furni.Domain.Entities
     {
         public string ProductId { get; set; }
         public Product Product { get; set; }
-        [ForeignKey("UserId")]
-        public string UserId { get; set; }
-        public virtual User User { get; set; }
+        [ForeignKey("AppUserId")]
+        public string AppUserId { get; set; }
+        public virtual AppUser AppUser { get; set; }
         public int Rating { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;

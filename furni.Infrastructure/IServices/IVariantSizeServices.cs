@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace furni.Infrastructure.IServices
 {
-    public interface IProductVariantServices : IRepositoryAsync<ProductVariant>
+    public interface IVariantSizeServices : IRepositoryAsync<VariantSize>
     {
     }
 }

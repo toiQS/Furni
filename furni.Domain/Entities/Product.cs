@@ -4,7 +4,7 @@ namespace furni.Domain.Entities
 {
     public class Product : BaseEntity
     {
-        public string ProductName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public float Price { get; set; }
 
@@ -18,9 +18,9 @@ namespace furni.Domain.Entities
 
         public Label Label { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
-        public string URLImage { get; set; } = string.Empty;
+        public string Thumbnail { get; set; } = string.Empty;
 
         public Status Status { get; set; }
 
@@ -34,7 +34,7 @@ namespace furni.Domain.Entities
 
         public Category Category { get; set; }
 
-        public ICollection<ProductVariant> ProductVariants { get; set; }
+        public ICollection<Variant> ProductVariants { get; set; }
     }
 
     public enum Label

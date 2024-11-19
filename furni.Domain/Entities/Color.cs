@@ -12,6 +12,6 @@ namespace furni.Domain.Entities
 
         public bool IsDeleted { get; set; } = false;
 
-        public ICollection<ProductVariant> ProductVariants { get; set; }
+        public ICollection<Variant> ProductVariants { get; set; }
     }
 }

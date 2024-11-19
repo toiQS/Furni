@@ -9,9 +9,9 @@ namespace furni.Domain.Entities
 {
     public class Address : BaseEntity
     {
-        [ForeignKey("UserId")]
-        public string UserId { get; set; }
-        public virtual User User { get; set; }
+        [ForeignKey("AppUserId")]
+        public string AppUserId { get; set; }
+        public virtual AppUser AppUser { get; set; }
         public string FullName {  get; set; }
         public string Email {  get; set; }
         public string Phone {  get; set; }

@@ -6,7 +6,7 @@ namespace furni.Domain.Entities
     public class Category : BaseEntity
     {
         [Required]
-        public string CategoryName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public bool IsDeleted { get; set; }
 

@@ -8,7 +8,7 @@ namespace furni.Domain.Entities
 {
     public class Topic : BaseEntity
     {
-        public string TopicName { get; set; }
+        public string Name { get; set; }
         public bool IsDeleted { get; set; } = false;
         public ICollection<Blog> Blogs { get; set; }
     }

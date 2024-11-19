@@ -42,7 +42,7 @@ namespace furni.Application.Management
                     finalResult.Add( new Dictionary<string, object>
                     {
                         {"Brand Id :", brand.Id},
-                        {"Brand Name:",brand.BrandName},
+                        {"Brand Name:",brand.Name},
                     });
                 }
             }
@@ -83,7 +83,7 @@ namespace furni.Application.Management
                     finalResult.Add( new Dictionary<string, object>
                     {
                         {"Brand Id :", brand.Id},
-                        {"Brand Name:",brand.BrandName},
+                        {"Brand Name:",brand.Name},
                     });
                 }
             }
@@ -138,7 +138,7 @@ namespace furni.Application.Management
             var brand = new Brand
             {
                 Id =$"1001-{timeCurrent}-{random}",
-                BrandName = name,
+                Name = name,
                 //BrandDescription = description,
                 //BrandEmail = email,
                 //BrandPhone = phone,
@@ -203,7 +203,7 @@ namespace furni.Application.Management
                 return finalResult;
             }
             //todo update brand
-            oldBrand.BrandName = name;
+            oldBrand.Name = name;
             //oldBrand.BrandDescription = description;
             //oldBrand.BrandPhone = phone;
             //oldBrand.BrandEmail = email;
