@@ -4,29 +4,43 @@ namespace furni.Domain.Entities
 {
     public class Product : BaseEntity
     {
-        [Column(name: "Product_Name")]
         public string ProductName { get; set; } = string.Empty;
 
         public float Price { get; set; }
 
-        [Column(name: "URL_Image")]
-        public string URLImage { get; set; } = string.Empty;
+        public string Description { get; set; }
 
-        public string Color { get; set; }
-        public string Size { get; set; }
+        public float PriceSale { get; set; }
 
-        [Column(name: "Is_Active")]
+        public string Slug { get; set; }
+
+        public Label Label { get; set; }
+
         public bool IsActive { get; set; }
 
-        public ICollection<CartDetail> CartDetails { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public Status Status { get; set; }
+
         public string BrandId { get; set; }
 
         public Brand Brand { get; set; }
+
         public string CategoryId { get; set; }
 
         public Category Category { get; set; }
 
-        public Warehouse Warehouse { get; set; }
+        public ProductVariant ProductVariant { get; set; }
+    }
+
+    public enum Label
+    {
+        Hot,
+        New,
+        NoLabel,
+    }
+
+    public enum Status
+    {
+        Published,
+        Draft
     }
 }

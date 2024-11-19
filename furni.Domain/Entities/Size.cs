@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace furni.Domain.Entities
 {
-    public class Topic : BaseEntity
+    public class Size : BaseEntity
     {
-        public string TopicName { get; set; }
+        public int Value { get; set; }
+
         public bool IsDeleted { get; set; }
-        public ICollection<Blog> Blogs { get; set; }
+
+        public ICollection<ProductVariant> ProductVariants { get; set; }
     }
 }

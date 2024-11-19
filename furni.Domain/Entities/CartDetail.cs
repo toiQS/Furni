@@ -2,11 +2,9 @@
 {
     public class CartDetail : BaseEntity
     {
-        public string OrderDetailId { get; set; }
+        public string ProductVariantId { get; set; }
 
-        public string ProductId { get; set; }
-
-        public Product Product { get; set; }
+        public ProductVariant ProductVariant { get; set; }
 
         public int Quantity { get; set; }
 

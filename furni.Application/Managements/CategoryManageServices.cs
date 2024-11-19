@@ -76,7 +76,7 @@ namespace furni.Application.Managements
                         {
                             {"ProductName",x.ProductName },
                             {"Price",x.Price },
-                            {"ProductImage",x.URLImage },
+                            //{"ProductImage",x.URLImage },
                             {"Message", "" }
                         })
                     }

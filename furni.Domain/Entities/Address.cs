@@ -16,6 +16,7 @@ namespace furni.Domain.Entities
         public string Email {  get; set; }
         public string Phone {  get; set; }
         public string StreetAddress {  get; set; }
+        public bool IsDeleted { get; set; }
         
     }
 }

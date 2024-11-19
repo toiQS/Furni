@@ -10,6 +10,7 @@ namespace furni.Domain.Entities
     {
         public String Description { get; set; }
         public double Cost { get; set; }
+        public bool IsDeleted { get; set; }
         public ICollection<DeliveryInformation> DeliveryInformation { get; set; }
     }
 }
