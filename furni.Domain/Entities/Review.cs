@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace furni.Domain.Entities
 {
-    public class Address : BaseEntity
+    public class Review : BaseEntity
     {
+        public string ProductId { get; set; }
+        public Product Product { get; set; }
         [ForeignKey("UserId")]
         public string UserId { get; set; }
         public virtual User User { get; set; }
-        public string FullName {  get; set; }
-        public string Email {  get; set; }
-        public string Phone {  get; set; }
-        public string SpecificAddress {  get; set; }
-        public bool IsDefault { get; set; } = false;
+        public int Rating { get; set; }
+        public string Description { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
         public bool IsDeleted { get; set; } = false;
-        public ICollection<Order> Orders { get; set; }
     }
 }

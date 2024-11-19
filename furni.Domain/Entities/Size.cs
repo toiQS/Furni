@@ -10,7 +10,7 @@ namespace furni.Domain.Entities
     {
         public int Value { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         public ICollection<ProductVariant> ProductVariants { get; set; }
     }

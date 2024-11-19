@@ -10,13 +10,13 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     public DbSet<User> User { get; set; }
     public DbSet<Blog> Blog { get; set; }
-    public DbSet<Cart> Cart { get; set; }
-    public DbSet<CartDetail> CartDetail { get; set; }
+    //public DbSet<Cart> Cart { get; set; }
+    //public DbSet<CartDetail> CartDetail { get; set; }
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderDetail> OrderDetail { get; set; }
     public DbSet<Brand> Brand { get; set; }
     public DbSet<Category> Category { get; set; }
-    public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
+    //public DbSet<DeliveryInformation> DeliveryInformation { get; set; }
     public DbSet<Product> Product { get; set; }
     public DbSet<Address> Address { get; set; }
     public DbSet<ShippingMethod> ShippingMethod { get; set; }
@@ -24,6 +24,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
     public DbSet<Color> Color { get; set; }
     public DbSet<ProductVariant> ProductVariant { get; set; }
     public DbSet<Size> Size { get; set; }
+    public DbSet<Review> Review { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -51,16 +52,17 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>
             .HasForeignKey(p => p.CategoryId)
             .IsRequired();
 
-        builder.Entity<CartDetail>()
-            .HasOne(e => e.ProductVariant);
+        //builder.Entity<CartDetail>()
+        //    .HasOne(e => e.ProductVariant);
 
         builder.Entity<OrderDetail>()
             .HasOne(e => e.ProductVariant);
 
-        builder.Entity<Cart>()
-            .HasMany(e => e.CartDetails)
-            .WithOne(e => e.Cart)
-            .HasForeignKey(p => p.CartId)
-            .IsRequired();
+        builder.Entity<Order>()
+            .HasOne(e => e.Address)
+            .WithMany(e => e.Orders)
+            .HasForeignKey(p => p.AddressId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

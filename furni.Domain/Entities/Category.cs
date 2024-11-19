@@ -8,8 +8,8 @@ namespace furni.Domain.Entities
         [Required]
         public string CategoryName { get; set; } = string.Empty;
 
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
 
-        public IList<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

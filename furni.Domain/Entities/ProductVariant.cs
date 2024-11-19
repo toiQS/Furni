@@ -14,9 +14,9 @@ namespace furni.Domain.Entities
         public Color Color { get; set; }
         public string SizeId { get; set; }
         public Size Size { get; set; }
-        public string URLImage { get; set; } = string.Empty;
+        public List<string> URLImages { get; set; } = [];
         public double Quantity { get; set; }
-        public ICollection<CartDetail> CartDetails { get; set; }
+        //public ICollection<CartDetail> CartDetails { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

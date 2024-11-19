@@ -142,7 +142,7 @@ namespace furni.Application.Management
                 //BrandDescription = description,
                 //BrandEmail = email,
                 //BrandPhone = phone,
-                IsActive = true
+                IsDeleted = true
             };
             // todo add new brand 
             var addBrand = await _brandServices.CreateAsync(brand);
@@ -257,7 +257,7 @@ namespace furni.Application.Management
                 finalResult.Add("Message","Brand wasn't existed");
                 return finalResult;
             }
-            oldBrand.IsActive = !oldBrand.IsActive;
+            oldBrand.IsDeleted = !oldBrand.IsDeleted;
             if(await _brandServices.UpdateAsync(brandId, oldBrand))
             {
                 finalResult.Add("Message","Update brand is success");

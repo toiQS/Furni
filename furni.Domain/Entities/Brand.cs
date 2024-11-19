@@ -8,7 +8,7 @@ namespace furni.Domain.Entities
         [Required]
         public string BrandName { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         public ICollection<Product> Products { get; set; }
     }

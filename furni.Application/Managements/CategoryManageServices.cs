@@ -127,7 +127,7 @@ namespace furni.Application.Managements
                 {"Id",getCategory.Id },
                 {"Name",getCategory.CategoryName },
                 //{"Description",getCategory.CategoryDescription },
-                {"IsActive",getCategory.IsActive },
+                {"IsActive",getCategory.IsDeleted },
                 {"Message", "" }
             };
             return _finalResult = result ;
@@ -161,7 +161,7 @@ namespace furni.Application.Managements
                 {
                     {"Id",item.Id },
                     {"Name",item.CategoryName },
-                    {"IsActive",item.IsActive },
+                    {"IsActive",item.IsDeleted },
                     {"Message", "" }
                 });
                 return _finalResultList ;
@@ -181,7 +181,7 @@ namespace furni.Application.Managements
             {
                 Id = $"1002{timeCurrent}{random}",
                 CategoryName = name,
-                IsActive = true,
+                IsDeleted = true,
             };
             if (await _categoryServices.CreateAsync(category))
             {
@@ -226,7 +226,7 @@ namespace furni.Application.Managements
                 _finalResult.Add("Message", "Can't found category");
                 return _finalResult;
             }
-            getCategory.IsActive = !getCategory.IsActive;
+            getCategory.IsDeleted = !getCategory.IsDeleted;
             if (await _categoryServices.UpdateAsync(categoryId, getCategory))
             {
                 _finalResult.Add("Message", "Action update is success");

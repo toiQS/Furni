@@ -12,13 +12,19 @@ namespace furni.Domain.Entities
 
         public float PriceSale { get; set; } = 0;
 
+        public bool IsFeatured { get; set; } = false;
+
         public string Slug { get; set; }
 
         public Label Label { get; set; }
 
         public bool IsActive { get; set; }
 
+        public string URLImage { get; set; } = string.Empty;
+
         public Status Status { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public string BrandId { get; set; }
 
@@ -28,7 +34,7 @@ namespace furni.Domain.Entities
 
         public Category Category { get; set; }
 
-        public ProductVariant ProductVariant { get; set; }
+        public ICollection<ProductVariant> ProductVariants { get; set; }
     }
 
     public enum Label

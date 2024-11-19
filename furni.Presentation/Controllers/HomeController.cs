@@ -23,11 +23,11 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Privacy()
-    {
-        BaseResponse<Cart> cart = await _cartManagement.GetByIdAsync("0BE78C01-E104-40E2-A972-FD985F7FF45C");
-        return View(cart);
-    }
+    //public async Task<IActionResult> Privacy()
+    //{
+    //    BaseResponse<Cart> cart = await _cartManagement.GetByIdAsync("0BE78C01-E104-40E2-A972-FD985F7FF45C");
+    //    return View(cart);
+    //}
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
