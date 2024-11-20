@@ -15,9 +15,9 @@ namespace furni.Domain.Entities
         [ForeignKey("AppUserId")]
         public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
-        public string ShippingMethodId { get; set; }
+        public int ShippingMethodId { get; set; }
         public ShippingMethod ShippingMethod { get; set; }
-        public string AddressId { get; set; }
+        public int AddressId { get; set; }
         public Address Address { get; set; }
         public List<OrderDetail> Details { get; set; }
     }

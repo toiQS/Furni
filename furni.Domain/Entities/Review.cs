@@ -9,7 +9,7 @@ namespace furni.Domain.Entities
 {
     public class Review : BaseEntity
     {
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         public Product Product { get; set; }
         [ForeignKey("AppUserId")]
         public string AppUserId { get; set; }

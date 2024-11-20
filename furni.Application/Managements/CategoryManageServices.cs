@@ -28,9 +28,9 @@ namespace furni.Application.Managements
             _finalResult = new Dictionary<string, object>();
             _finalResultList = new List<Dictionary<string, object>>();
         }
-        public async Task<List<Dictionary<string, object>>> GetAllBrandAndProductByCategoryId(string Id)
+        public async Task<List<Dictionary<string, object>>> GetAllBrandAndProductByCategoryId(int Id)
         {
-            if(string.IsNullOrEmpty(Id))
+            if(Id==null)
             {
                 _finalResultList.Add(new Dictionary<string, object>()
                 {
@@ -105,7 +105,7 @@ namespace furni.Application.Managements
             }
             return _finalResultList ;
         }
-        public async Task<Dictionary<string, object>> GetCategoryById(string categoryId)
+        public async Task<Dictionary<string, object>> GetCategoryById(int categoryId)
         {
             /// kiểm tra dữ liệu đầu vào có hợp lệ hay không
             /// kiểm tra truy xuất dữ liệu
@@ -179,7 +179,7 @@ namespace furni.Application.Managements
             var random = new Random().Next(1, 100000);
             var category = new Category
             {
-                Id = $"1002{timeCurrent}{random}",
+                //Id = $"1002{timeCurrent}{random}",
                 Name = name,
                 IsDeleted = true,
             };
@@ -191,9 +191,9 @@ namespace furni.Application.Managements
             _finalResult.Add("Message", "There are some issue when trying create new data");
             return _finalResult;
         }
-        public async Task<Dictionary<string, object>> UpdateInfo(string userId, string categoryId , string name)
+        public async Task<Dictionary<string, object>> UpdateInfo(string userId, int categoryId , string name)
         {
-            if(string.IsNullOrWhiteSpace(userId)||string.IsNullOrEmpty(name) || string.IsNullOrEmpty(categoryId))
+            if(string.IsNullOrWhiteSpace(userId)||string.IsNullOrEmpty(name) || categoryId==null)
             {
                 _finalResult.Add("Message", "Values input is invalid");
                 return _finalResult;
@@ -213,9 +213,9 @@ namespace furni.Application.Managements
             _finalResult.Add("Message", "There are some issue when trying update a data");
             return _finalResult;
         }
-        public async Task<Dictionary<string, object>> UpdateStatus(string userId, string categoryId)
+        public async Task<Dictionary<string, object>> UpdateStatus(string userId, int categoryId)
         {
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrEmpty(categoryId))
+            if (string.IsNullOrWhiteSpace(userId) || categoryId==null)
             {
                 _finalResult.Add("Message", "Values input is invalid");
                 return _finalResult;
@@ -235,9 +235,9 @@ namespace furni.Application.Managements
             _finalResult.Add("Message", "There are some issue when trying update a data");
             return _finalResult;
         }
-        public async Task<Dictionary<string, object>> Delete(string userId, string categoryId)
+        public async Task<Dictionary<string, object>> Delete(string userId, int categoryId)
         {
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrEmpty(categoryId))
+            if (string.IsNullOrWhiteSpace(userId) || categoryId==null)
             {
                 _finalResult.Add("Message", "Values input is invalid");
                 return _finalResult;

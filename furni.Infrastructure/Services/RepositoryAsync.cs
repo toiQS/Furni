@@ -28,7 +28,7 @@ namespace furni.Infrastructure.Services
                 throw;
             }
         }
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<T> GetByIdAsync(int id)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace furni.Infrastructure.Services
             }
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(int id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace furni.Infrastructure.Services
 
         }
 
-        public async Task<bool> UpdateAsync(string id, T entity)
+        public async Task<bool> UpdateAsync(int id, T entity)
         {
             try
             {

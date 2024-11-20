@@ -26,11 +26,11 @@ namespace furni.Domain.Entities
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public string BrandId { get; set; }
+        public int BrandId { get; set; }
 
         public Brand Brand { get; set; }
 
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public Category Category { get; set; }
 

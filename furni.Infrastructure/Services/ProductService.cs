@@ -8,7 +8,7 @@ namespace furni.Infrastructure.Service;
 
 public class ProductService(ApplicationDbContext context) : RepositoryAsync<Product>(context), IProductService
 {
-    public async Task<List<Product>> GetProductByBrandIdAndCategoryId(string category, string brand)
+    public async Task<List<Product>> GetProductByBrandIdAndCategoryId(int category, int brand)
     {
         try
         {

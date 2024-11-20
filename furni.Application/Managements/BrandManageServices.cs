@@ -137,7 +137,7 @@ namespace furni.Application.Management
             var random = new Random().Next(1,100000);
             var brand = new Brand
             {
-                Id =$"1001-{timeCurrent}-{random}",
+                //Id =$"1001-{timeCurrent}-{random}",
                 Name = name,
                 //BrandDescription = description,
                 //BrandEmail = email,
@@ -158,7 +158,7 @@ namespace furni.Application.Management
             }
             
         }
-        public async Task<Dictionary<string,string>> UpdateBrandInfo(string userId,string brandId, string name, string description, string email, string phone)
+        public async Task<Dictionary<string,string>> UpdateBrandInfo(string userId,int brandId, string name, string description, string email, string phone)
         {
             //kiểm tra dữ liệu đầu vào đã được cung cấp hay chưa
             ///kiểm tra mã người dùng có tồn tại hay không
@@ -221,12 +221,12 @@ namespace furni.Application.Management
             }
             
         }
-        public async Task<Dictionary<string,string>> UpdateBrandStastus(string userId, string brandId)
+        public async Task<Dictionary<string,string>> UpdateBrandStastus(string userId, int brandId)
         {
              //declare value return
             var finalResult = new Dictionary<string,string>();
             // check data input (user id and brand ) are null?
-            if(string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(brandId))
+            if(string.IsNullOrEmpty(userId) || brandId==null)
             {
                 finalResult.Add("Message","Data input is invalid");
                 return finalResult;
@@ -269,7 +269,7 @@ namespace furni.Application.Management
                 return finalResult;
             }
         }
-        public async Task<Dictionary<string ,string>> DeleteBrand(string userId,string brandId)
+        public async Task<Dictionary<string ,string>> DeleteBrand(string userId,int brandId)
         {
             //kiểm tra dữ liệu đầu vào đã được cung cấp hay chưa
             ///kiểm tra mã người dùng có tồn tại hay không
@@ -281,7 +281,7 @@ namespace furni.Application.Management
             //declare value return
             var finalResult = new Dictionary<string,string>();
             // check data input (user id and brand ) are null?
-            if(string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(brandId))
+            if(string.IsNullOrEmpty(userId) || brandId==null)
             {
                 finalResult.Add("Message","Data input is invalid");
                 return finalResult;
