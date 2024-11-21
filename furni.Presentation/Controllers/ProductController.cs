@@ -91,7 +91,8 @@ namespace furni.Presentation.Controllers
                     });
                 }
                 ViewBag.PriceRanges = ProductWithPrices;
-                ViewBag.Product = await _context.Product.Include(product => product.Thumbnail)
+                ViewBag.Product = await _context.Product
+                    //.Include(product => product.Thumbnail)
                     .OrderByDescending(product => product.CreatedAt)
                     .ToListAsync();
                 return View();
