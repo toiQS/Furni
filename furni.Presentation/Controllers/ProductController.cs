@@ -236,7 +236,7 @@ namespace furni.Presentation.Controllers
                         Productlug = v.Variant.Product.Slug,
                         SizeName = v.Size.Value,
                         ColorName = v.Variant.Color.Name,
-                        Thumbnail = v.Variant.Im,
+                        Thumbnail = v.Variant.Thumbnail,
                         Title = v.Variant.Product.Name,
                         Price = v.Variant.Product.Price,
                         PriceSale = v.Variant.Product.PriceSale,

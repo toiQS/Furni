@@ -2,15 +2,15 @@
 {
     public class PriceRangesConverter
     {
-        public static List<(decimal Min, decimal Max)> Parse(string prices)
+        public static List<(float Min, float Max)> Parse(string prices)
         {
             var priceRanges = prices.Split(',');
-            var rangeList = new List<(decimal Min, decimal Max)>();
+            var rangeList = new List<(float Min, float Max)>();
 
             foreach (var range in priceRanges)
             {
                 var parts = range.Split(':');
-                if (parts.Length == 2 && decimal.TryParse(parts[0], out decimal min) && decimal.TryParse(parts[1], out decimal max))
+                if (parts.Length == 2 && float.TryParse(parts[0], out float min) && float.TryParse(parts[1], out float max))
                 {
                     rangeList.Add((min, max));
                 }
@@ -19,14 +19,14 @@
             return rangeList;
         }
 
-        public static List<(decimal Min, decimal Max)> Parse(string[] prices)
+        public static List<(float Min, float Max)> Parse(string[] prices)
         {
-            var rangeList = new List<(decimal Min, decimal Max)>();
+            var rangeList = new List<(float Min, float Max)>();
 
             foreach (var range in prices)
             {
                 var parts = range.Split(':');
-                if (parts.Length == 2 && decimal.TryParse(parts[0], out decimal min) && decimal.TryParse(parts[1], out decimal max))
+                if (parts.Length == 2 && float.TryParse(parts[0], out float min) && float.TryParse(parts[1], out float max))
                 {
                     rangeList.Add((min, max));
                 }
