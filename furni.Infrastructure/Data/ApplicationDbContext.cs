@@ -25,6 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole<stri
     public DbSet<Variant> ProductVariant { get; set; }
     public DbSet<Size> Size { get; set; }
     public DbSet<Review> Review { get; set; }
+    public DbSet<VariantSize> VariantSize { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
