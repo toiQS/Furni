@@ -1,7 +1,7 @@
-﻿using furni.Infrastructure.Data;
+﻿using furni.Domain.Entities;
+using furni.Infrastructure.Data;
 using furni.Presentation.Models;
 using Microsoft.AspNetCore.Mvc;
-using furni.Domain.Entities;
 
 namespace furni.Presentation.Controllers
 {
@@ -20,19 +20,19 @@ namespace furni.Presentation.Controllers
 
         public async Task<IActionResult> SubmitContact([Bind("Name, Email, Message")] ContactViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    Contact = new ContactViewModel()
-            //    {
-            //        Name = model.Name,
-            //        Email = model.Email,
-            //        Message = model.Message,
-            //    };
-            //    _context.Add(contact);
-            //    await _context.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                Contact contact = new Contact()
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Message = model.Message,
+                };
+                _context.Add(contact);
+                await _context.SaveChangesAsync();
 
-            //    return RedirectToAction("Index");
-            //}
+                return RedirectToAction("Index");
+            }
 
             return RedirectToAction("Index");
         }
