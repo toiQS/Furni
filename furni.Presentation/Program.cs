@@ -6,6 +6,8 @@ using furni.Domain.Entities;
 
 using furni.Infrastructure.Configurations;
 using furni.Infrastructure.Data;
+using furni.Infrastructure.IServices;
+using furni.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 
@@ -13,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
+builder.Services.AddTransient<ISendMailService, SendMailService>();
+
 builder.Services.AddInfrastructure(builder.Configuration);
 
 

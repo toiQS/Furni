@@ -35,6 +35,7 @@ public static class DependencyInjection
         services.AddScoped<IProductService,ProductService>();
         services.AddScoped<IBrandServices,BrandServices>();
         services.AddScoped<IUserServices,UserServices>();
+        services.AddScoped<ISendMailService, SendMailService>();    
     }
     
     public static void AddAuth(this IServiceCollection services)
@@ -46,4 +47,6 @@ public static class DependencyInjection
         
 
     }
+
+
 }

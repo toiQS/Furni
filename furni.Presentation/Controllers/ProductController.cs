@@ -7,7 +7,7 @@ using System.Text.Json;
 using System;
 using furni.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using furni.Presentation.Helpers;
+using furni.Infrastructure.Helpers;
 
 namespace furni.Presentation.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace furni.Presentation.Helpers
+﻿namespace furni.Infrastructure.Helpers
 {
     public class MailContent
     {
