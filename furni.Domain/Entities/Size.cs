@@ -8,7 +8,7 @@ namespace furni.Domain.Entities
 {
     public class Size : BaseEntity
     {
-        public int Value { get; set; }
+        public string Value { get; set; }
 
         public bool IsDeleted { get; set; } = false;
 

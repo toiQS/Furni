@@ -27,6 +27,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, str
     public DbSet<Review> Review { get; set; }
     public DbSet<VariantSize> VariantSize { get; set; }
     public DbSet<Contact> Contact { get; set; }
+    public DbSet<Image> Image { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -180,7 +180,7 @@ namespace furni.Presentation.Areas.Admin
                                     image.CopyTo(fileStream);
                                 }
 
-                                Image img = new Image()
+                                Domain.Entities.Image img = new Domain.Entities.Image()
                                 {
                                     Name = uniqueFileName,
                                     VariantId = variant.Id
@@ -305,7 +305,7 @@ namespace furni.Presentation.Areas.Admin
                             }
                         }
 
-                        var existingImages = await _context.Images
+                        var existingImages = await _context.Image
                             .Where(img => img.VariantId == variant.Id)
                             .ToListAsync();
                         foreach (var existingImage in existingImages)
@@ -315,7 +315,7 @@ namespace furni.Presentation.Areas.Admin
                             {
                                 System.IO.File.Delete(filePath);
                             }
-                            _context.Images.Remove(existingImage);
+                            _context.Image.Remove(existingImage);
                         }
 
                         int thumbI = 0;
@@ -331,7 +331,7 @@ namespace furni.Presentation.Areas.Admin
                                     image.CopyTo(fileStream);
                                 }
 
-                                Image img = new Image()
+                                Domain.Entities.Image img = new Domain.Entities.Image()
                                 {
                                     Name = uniqueFileName,
                                     VariantId = variant.Id
@@ -396,7 +396,7 @@ namespace furni.Presentation.Areas.Admin
             var product = await _context.Product.FindAsync(id);
             if (product != null)
             {
-                product.IsDetele = true;
+                product.IsDeleted = true;
                 _context.Update(product);
                 await _context.SaveChangesAsync();
             }

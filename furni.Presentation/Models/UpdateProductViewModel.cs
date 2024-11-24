@@ -1,14 +1,16 @@
-﻿namespace furni.Presentation.Models
+﻿using furni.Domain.Entities;
+
+namespace furni.Presentation.Models
 {
     public class UpdateProductViewModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public decimal Price { get; set; }
-        public decimal PriceSale { get; set; }
+        public float Price { get; set; }
+        public float PriceSale { get; set; }
         public string? Description { get; set; }
-        public bool Status { get; set; }
-        public int Label { get; set; } = 0;
+        public Status Status { get; set; }
+        public Label Label { get; set; } = 0;
         public bool IsFeatured { get; set; }
         public string? Slug { get; set; }
         public string? Category { get; set; }

@@ -40,7 +40,7 @@ namespace furni.Presentation.Areas.Admin
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int recordsTotal = 0;
-                var categoryData = _context.Brand.Where(b => b.IsDelete == false).AsQueryable();
+                var categoryData = _context.Brand.Where(b => b.IsDeleted == false).AsQueryable();
                 switch (sortColumn.ToLower())
                 {
                     case "id":

@@ -69,7 +69,7 @@ namespace furni.Presentation.Controllers
                         await model.ImageFile.CopyToAsync(stream);
                     }
 
-                    currentUser.URLImage = uniqueFileName;
+                    currentUser.Image = uniqueFileName;
                 }
 
                 var updateResult = await _userManager.UpdateAsync(currentUser);

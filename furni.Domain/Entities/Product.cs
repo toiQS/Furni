@@ -20,7 +20,7 @@ namespace furni.Domain.Entities
 
         public bool IsDeleted { get; set; } = false;
 
-        public string Thumbnail { get; set; } = string.Empty;
+        public Image? Thumbnail { get; set; }
 
         public Status Status { get; set; }
 

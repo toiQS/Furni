@@ -10,12 +10,17 @@ namespace furni.Domain.Entities
         public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
         public int TopicId { get; set; }
-        public Topic Topic { get; set; }
+        public Topic? Topic { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.Now;
-        public string Image { get; set; } = string.Empty;
+        public Image? Thumbnail { get; set; }
         public string Content { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public bool IsPublic { get; set; } = false;
         public bool IsDeteled { get; set; } = false;
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace furni.Presentation.Areas.Admin
         {
             var posts = await _context.Blog
                 .Include(b => b.Topic)
-                .Include(b => b.Image)
+                .Include(b => b.Thumbnail)
                 .Include(b => b.AppUser)
                 .ToListAsync();
             ViewBag.Topics = await _context.Topic.Where(p => !p.IsDeleted).ToListAsync();
@@ -59,7 +59,7 @@ namespace furni.Presentation.Areas.Admin
                 post.Image.CopyTo(fileStream);
             }
 
-            Image img = new Image
+            Domain.Entities.Image img = new Domain.Entities.Image
             {
                 Name = uniqueFileName
             };
@@ -87,7 +87,7 @@ namespace furni.Presentation.Areas.Admin
         {
             if (id == null || _context.Blog == null) return NotFound();
 
-            var blog = await _context.Blog.Include(b => b.Image).FirstOrDefaultAsync(b => b.Id == id);
+            var blog = await _context.Blog.Include(b => b.Thumbnail).FirstOrDefaultAsync(b => b.Id == id);
             if (blog == null) return NotFound();
 
             ViewBag.Topics = await _context.Topic.Where(p => !p.IsDeleted).ToListAsync();
@@ -107,13 +107,13 @@ namespace furni.Presentation.Areas.Admin
 
             if (updatedPost.Image != null)
             {
-                string existingImagePath = Path.Combine("wwwroot/img/blogs", existingPost.Image.Name);
+                string existingImagePath = Path.Combine("wwwroot/img/blogs", existingPost.Thumbnail.Name);
                 if (System.IO.File.Exists(existingImagePath))
                 {
                     System.IO.File.Delete(existingImagePath);
                 }
 
-                _context.Images.Remove(existingPost.Image);
+                _context.Image.Remove(existingPost.Thumbnail);
             }
 
             existingPost.Slug = updatedPost.Slug;
@@ -133,7 +133,7 @@ namespace furni.Presentation.Areas.Admin
                     await updatedPost.Image.CopyToAsync(fileStream);
                 }
 
-                existingPost.Thumbnail = new Image
+                existingPost.Thumbnail = new Domain.Entities.Image
                 {
                     Name = uniqueFileName
                 };
@@ -151,7 +151,7 @@ namespace furni.Presentation.Areas.Admin
             var blog = await _context.Blog.FindAsync(id);
             if (blog != null)
             {
-                blog.IsDetele = true;
+                blog.IsDeteled = true;
                 _context.Update(blog);
                 await _context.SaveChangesAsync();
             }
@@ -161,7 +161,7 @@ namespace furni.Presentation.Areas.Admin
 
         private bool BlogExists(int id)
         {
-            return (_context.Blogs?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Blog?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         [HttpPost]
@@ -173,12 +173,12 @@ namespace furni.Presentation.Areas.Admin
             var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
             var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
 
-            var Blogs = _context.Blogs
+            var Blogs = _context.Blog
                 .Include(b => b.Thumbnail)
-                .Include(b => b.User)
+                .Include(b => b.AppUser)
                 .Include(b => b.Topic)
-                .OrderByDescending(b => b.CreatedAt)
-                .Where(p => !p.IsDetele)
+                .OrderByDescending(b => b.CreateAt)
+                .Where(p => !p.IsDeteled)
                 .AsQueryable();
 
             switch (sortColumn.ToLower())
@@ -193,7 +193,7 @@ namespace furni.Presentation.Areas.Admin
                     Blogs = sortColumnDirection.ToLower() == "asc" ? Blogs.OrderBy(o => o.Topic.Name) : Blogs.OrderByDescending(o => o.Topic.Name);
                     break;
                 case "user":
-                    Blogs = sortColumnDirection.ToLower() == "asc" ? Blogs.OrderBy(o => o.User.FullName) : Blogs.OrderByDescending(o => o.User.FullName);
+                    Blogs = sortColumnDirection.ToLower() == "asc" ? Blogs.OrderBy(o => o.AppUser.FullName) : Blogs.OrderByDescending(o => o.AppUser.FullName);
                     break;
                 default:
                     Blogs = Blogs.OrderBy(o => o.Id);
@@ -207,7 +207,7 @@ namespace furni.Presentation.Areas.Admin
 
             if (topics.Length != 0)
             {
-                Blogs = Blogs.Where(u => topics.Contains(u.TopicID));
+                Blogs = Blogs.Where(u => topics.Contains(u.TopicId));
             }
 
             var recordsTotal = Blogs.Count();
