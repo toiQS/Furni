@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace furni.Domain.Entities
 {
-    public class AppUser : IdentityUser<String>
+    public class AppUser : IdentityUser
     {
         public ICollection<Blog>? Blogs { get; set; }
 
