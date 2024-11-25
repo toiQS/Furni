@@ -10,6 +10,7 @@ using furni.Infrastructure.IServices;
 using furni.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
+using furni.Presentation.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,9 +49,21 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    endpoints.MapHub<OrderHub>("/orderHub");
+    endpoints.MapHub<CommentHub>("/commentHub");
+});
+
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
