@@ -63,18 +63,21 @@ namespace furni.Presentation.Areas.Admin.Controllers
 
             var currentWeekRevenue = _context.Order
                 .Where(o => o.CreatedAt.Value.Date >= today.AddDays(-(int)currentDayOfWeek))
-                .GroupBy(o => o.CreatedAt.Value.Date.DayOfWeek)
+                .AsEnumerable() // Switch to client-side evaluation
+                .GroupBy(o => o.CreatedAt.Value.DayOfWeek)
                 .Select(g => new
                 {
                     DayOfWeek = g.Key,
                     Earnings = g.Sum(o => o.OrderStatus == OrderStatus.Confirmed ? o.SubTotal + o.ShippingFee : 0)
-                }).ToDictionary(item => item.DayOfWeek, item => item.Earnings);
+                })
+                .ToDictionary(item => item.DayOfWeek, item => item.Earnings);
 
             // Calculate revenue for the previous week
             var previousWeekRevenue = _context.Order
                 .Where(o => o.CreatedAt.Value.Date >= today.AddDays(-(int)currentDayOfWeek - 7) &&
                             o.CreatedAt.Value.Date < today.AddDays(-(int)currentDayOfWeek))
-                .GroupBy(o => o.CreatedAt.Value.Date.DayOfWeek)
+                .AsEnumerable() // Switch to client-side evaluation
+                .GroupBy(o => o.CreatedAt.Value.DayOfWeek)
                 .Select(g => new
                 {
                     DayOfWeek = g.Key,
