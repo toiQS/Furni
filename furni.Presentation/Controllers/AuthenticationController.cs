@@ -28,6 +28,7 @@ namespace furni.Presentation.Controllers
 
         public IActionResult Signin()
         {
+            if(_signInManager.IsSignedIn(User) && User.IsInRole("Admin")) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
             if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Home");
             var response = new SigninViewModel();
             return View(response);
@@ -36,6 +37,7 @@ namespace furni.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Signin(SigninViewModel loginViewModel, string? returnUrl)
         {
+            if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
             if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Home");
             if (!ModelState.IsValid) return View(loginViewModel);
 
@@ -53,6 +55,7 @@ namespace furni.Presentation.Controllers
                     if (result.Succeeded)
                     {
                         if (!string.IsNullOrEmpty(returnUrl)) return Redirect(returnUrl);
+                        if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
                         return RedirectToAction("Index", "Home");
                     }
                     if (result.IsLockedOut)
