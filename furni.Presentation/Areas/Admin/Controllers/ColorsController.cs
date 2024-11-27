@@ -1,31 +1,31 @@
-﻿using furni.Domain.Entities;
-using furni.Infrastructure.Data;
+﻿using furni.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using furni.Domain.Entities;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class ColorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CategoryController(ApplicationDbContext context)
+        public ColorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Category
+        // GET: Admin/Colors
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetCategory()
+        public async Task<IActionResult> GetColors()
         {
             try
             {
@@ -38,25 +38,25 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int recordsTotal = 0;
-                var categoryData = _context.Category.Where(b => b.IsDeleted == false).AsQueryable();
+                var colorData = _context.Color.Where(b => b.IsDeleted == false).AsQueryable();
                 switch (sortColumn.ToLower())
                 {
                     case "id":
-                        categoryData = sortColumnDirection.ToLower() == "asc" ? categoryData.OrderBy(o => o.Id) : categoryData.OrderByDescending(o => o.Id);
+                        colorData = sortColumnDirection.ToLower() == "asc" ? colorData.OrderBy(o => o.Id) : colorData.OrderByDescending(o => o.Id);
                         break;
                     case "name":
-                        categoryData = sortColumnDirection.ToLower() == "asc" ? categoryData.OrderBy(o => o.Name) : categoryData.OrderByDescending(o => o.Name);
+                        colorData = sortColumnDirection.ToLower() == "asc" ? colorData.OrderBy(o => o.Name) : colorData.OrderByDescending(o => o.Name);
                         break;
                     default:
-                        categoryData = categoryData.OrderBy(o => o.Id);
+                        colorData = colorData.OrderBy(o => o.Id);
                         break;
                 }
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-                    categoryData = categoryData.Where(m => m.Name.Contains(searchValue));
+                    colorData = colorData.Where(m => m.Name.Contains(searchValue));
                 }
-                recordsTotal = categoryData.Count();
-                var data = categoryData.Skip(skip).Take(pageSize).ToList();
+                recordsTotal = colorData.Count();
+                var data = colorData.Skip(skip).Take(pageSize).ToList();
                 var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
                 return Ok(jsonData);
             }
@@ -66,53 +66,52 @@ namespace furni.Presentation.Areas.Admin.Controllers
             }
         }
 
-
-        // GET: Admin/Category/Create
+        // GET: Admin/Colors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Category/Create
+        // POST: Admin/Colors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Color color)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(color);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(color);
         }
 
-        // GET: Admin/Category/Edit/5
+        // GET: Admin/Colors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Category == null)
+            if (id == null || _context.Color == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Category.FindAsync(id);
-            if (category == null)
+            var color = await _context.Color.FindAsync(id);
+            if (color == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(color);
         }
 
-        // POST: Admin/Category/Edit/5
+        // POST: Admin/Colors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Color color)
         {
-            if (id != category.Id)
+            if (id != color.Id)
             {
                 return NotFound();
             }
@@ -121,12 +120,12 @@ namespace furni.Presentation.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(color);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
+                    if (!ColorExists(color.Id))
                     {
                         return NotFound();
                     }
@@ -137,30 +136,49 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(color);
         }
 
-        // POST: Admin/Category/Delete/5
+        // GET: Admin/Colors/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Color == null)
+            {
+                return NotFound();
+            }
+
+            var color = await _context.Color
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (color == null)
+            {
+                return NotFound();
+            }
+
+            return View(color);
+        }
+
+        // POST: Admin/Colors/Delete/5
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Category == null)
+            if (_context.Color == null)
             {
-                return Problem("Entity set 'AppDbContext.Category'  is null.");
+                return Problem("Entity set 'AppDbContext.Color'  is null.");
             }
-            var category = await _context.Category.FindAsync(id);
-            if (category != null)
+
+            var color = await _context.Color.FindAsync(id);
+            if (color != null)
             {
-                category.IsDeleted = true;
+                color.IsDeleted = true;
             }
 
             await _context.SaveChangesAsync();
             return Ok(new { message = "Delete successfully" });
         }
 
-        private bool CategoryExists(int id)
+        private bool ColorExists(int id)
         {
-            return (_context.Category?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Color?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

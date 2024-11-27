@@ -9,11 +9,11 @@ namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         private readonly UserManager<AppUser> userManager;
 
-        public CustomerController(UserManager<AppUser> userManager)
+        public CustomersController(UserManager<AppUser> userManager)
         {
             this.userManager = userManager;
         }

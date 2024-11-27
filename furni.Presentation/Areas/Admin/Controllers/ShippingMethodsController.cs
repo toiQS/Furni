@@ -9,11 +9,11 @@ namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class ShippingMethodController : Controller
+    public class ShippingMethodsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ShippingMethodController(ApplicationDbContext context)
+        public ShippingMethodsController(ApplicationDbContext context)
         {
             _context = context;
         }

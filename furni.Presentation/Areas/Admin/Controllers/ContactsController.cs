@@ -8,12 +8,12 @@ namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class ContactController : Controller
+    public class ContactsController : Controller
     {
 
         private readonly ApplicationDbContext _context;
 
-        public ContactController(ApplicationDbContext context)
+        public ContactsController(ApplicationDbContext context)
         {
             _context = context;
         }

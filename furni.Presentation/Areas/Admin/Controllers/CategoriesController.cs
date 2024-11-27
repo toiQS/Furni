@@ -9,25 +9,23 @@ namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class BrandController : Controller
+    public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BrandController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Brands
+        // GET: Admin/Categories
         public async Task<IActionResult> Index()
         {
-            return _context.Brand != null ?
-                        View(await _context.Brand.Where(c => c.IsDeleted == false).ToListAsync()) :
-                        Problem("Entity set 'AppDbContext.Brands'  is null.");
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetBrands()
+        public async Task<IActionResult> GetCategories()
         {
             try
             {
@@ -40,7 +38,7 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int recordsTotal = 0;
-                var categoryData = _context.Brand.Where(b => b.IsDeleted == false).AsQueryable();
+                var categoryData = _context.Category.Where(b => b.IsDeleted == false).AsQueryable();
                 switch (sortColumn.ToLower())
                 {
                     case "id":
@@ -59,7 +57,7 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 }
                 recordsTotal = categoryData.Count();
                 var data = categoryData.Skip(skip).Take(pageSize).ToList();
-                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
+                var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
                 return Ok(jsonData);
             }
             catch (Exception ex)
@@ -68,52 +66,53 @@ namespace furni.Presentation.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/Brands/Create
+
+        // GET: Admin/Categories/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Brands/Create
+        // POST: Admin/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Brand brand)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(brand);
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(brand);
+            return View(category);
         }
 
-        // GET: Admin/Brands/Edit/5
+        // GET: Admin/Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Brand == null)
+            if (id == null || _context.Category == null)
             {
                 return NotFound();
             }
 
-            var brand = await _context.Brand.FindAsync(id);
-            if (brand == null)
+            var category = await _context.Category.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return View(brand);
+            return View(category);
         }
 
-        // POST: Admin/Brands/Edit/5
+        // POST: Admin/Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Brand brand)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
         {
-            if (id != brand.Id)
+            if (id != category.Id)
             {
                 return NotFound();
             }
@@ -122,12 +121,12 @@ namespace furni.Presentation.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(brand);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BrandExists(brand.Id))
+                    if (!CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -138,30 +137,30 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(brand);
+            return View(category);
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        // POST: Admin/Categories/Delete/5
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Brand == null)
+            if (_context.Category == null)
             {
-                return Problem("Entity set 'AppDbContext.Brands'  is null.");
+                return Problem("Entity set 'AppDbContext.Categories'  is null.");
             }
-            var brand = await _context.Brand.FindAsync(id);
-            if (brand != null)
+            var category = await _context.Category.FindAsync(id);
+            if (category != null)
             {
-                brand.IsDeleted = true;
+                category.IsDeleted = true;
             }
 
             await _context.SaveChangesAsync();
-            return Ok(new { message = "Success delete brand!" });
+            return Ok(new { message = "Delete successfully" });
         }
 
-        private bool BrandExists(int id)
+        private bool CategoryExists(int id)
         {
-            return (_context.Brand?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Category?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

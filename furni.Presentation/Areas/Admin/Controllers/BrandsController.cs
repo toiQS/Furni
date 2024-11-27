@@ -1,31 +1,33 @@
-﻿using furni.Infrastructure.Data;
+﻿using furni.Domain.Entities;
+using furni.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using furni.Domain.Entities;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class ColorController : Controller
+    public class BrandsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ColorController(ApplicationDbContext context)
+        public BrandsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Colors
+        // GET: Admin/Brands
         public async Task<IActionResult> Index()
         {
-            return View();
+            return _context.Brand != null ?
+                        View(await _context.Brand.Where(c => c.IsDeleted == false).ToListAsync()) :
+                        Problem("Entity set 'AppDbContext.Brands'  is null.");
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetColors()
+        public async Task<IActionResult> GetBrands()
         {
             try
             {
@@ -38,25 +40,25 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int recordsTotal = 0;
-                var colorData = _context.Color.Where(b => b.IsDeleted == false).AsQueryable();
+                var categoryData = _context.Brand.Where(b => b.IsDeleted == false).AsQueryable();
                 switch (sortColumn.ToLower())
                 {
                     case "id":
-                        colorData = sortColumnDirection.ToLower() == "asc" ? colorData.OrderBy(o => o.Id) : colorData.OrderByDescending(o => o.Id);
+                        categoryData = sortColumnDirection.ToLower() == "asc" ? categoryData.OrderBy(o => o.Id) : categoryData.OrderByDescending(o => o.Id);
                         break;
                     case "name":
-                        colorData = sortColumnDirection.ToLower() == "asc" ? colorData.OrderBy(o => o.Name) : colorData.OrderByDescending(o => o.Name);
+                        categoryData = sortColumnDirection.ToLower() == "asc" ? categoryData.OrderBy(o => o.Name) : categoryData.OrderByDescending(o => o.Name);
                         break;
                     default:
-                        colorData = colorData.OrderBy(o => o.Id);
+                        categoryData = categoryData.OrderBy(o => o.Id);
                         break;
                 }
                 if (!string.IsNullOrEmpty(searchValue))
                 {
-                    colorData = colorData.Where(m => m.Name.Contains(searchValue));
+                    categoryData = categoryData.Where(m => m.Name.Contains(searchValue));
                 }
-                recordsTotal = colorData.Count();
-                var data = colorData.Skip(skip).Take(pageSize).ToList();
+                recordsTotal = categoryData.Count();
+                var data = categoryData.Skip(skip).Take(pageSize).ToList();
                 var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
                 return Ok(jsonData);
             }
@@ -66,52 +68,52 @@ namespace furni.Presentation.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/Colors/Create
+        // GET: Admin/Brands/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Colors/Create
+        // POST: Admin/Brands/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Color color)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Brand brand)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(color);
+                _context.Add(brand);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(color);
+            return View(brand);
         }
 
-        // GET: Admin/Colors/Edit/5
+        // GET: Admin/Brands/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Color == null)
+            if (id == null || _context.Brand == null)
             {
                 return NotFound();
             }
 
-            var color = await _context.Color.FindAsync(id);
-            if (color == null)
+            var brand = await _context.Brand.FindAsync(id);
+            if (brand == null)
             {
                 return NotFound();
             }
-            return View(color);
+            return View(brand);
         }
 
-        // POST: Admin/Colors/Edit/5
+        // POST: Admin/Brands/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Color color)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Brand brand)
         {
-            if (id != color.Id)
+            if (id != brand.Id)
             {
                 return NotFound();
             }
@@ -120,12 +122,12 @@ namespace furni.Presentation.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(color);
+                    _context.Update(brand);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ColorExists(color.Id))
+                    if (!BrandExists(brand.Id))
                     {
                         return NotFound();
                     }
@@ -136,49 +138,30 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(color);
+            return View(brand);
         }
 
-        // GET: Admin/Colors/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Color == null)
+            if (_context.Brand == null)
             {
-                return NotFound();
+                return Problem("Entity set 'AppDbContext.Brands'  is null.");
             }
-
-            var color = await _context.Color
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (color == null)
+            var brand = await _context.Brand.FindAsync(id);
+            if (brand != null)
             {
-                return NotFound();
-            }
-
-            return View(color);
-        }
-
-        // POST: Admin/Colors/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Color == null)
-            {
-                return Problem("Entity set 'AppDbContext.Color'  is null.");
-            }
-
-            var color = await _context.Color.FindAsync(id);
-            if (color != null)
-            {
-                color.IsDeleted = true;
+                brand.IsDeleted = true;
             }
 
             await _context.SaveChangesAsync();
-            return Ok(new { message = "Delete successfully" });
+            return Ok(new { message = "Success delete brand!" });
         }
 
-        private bool ColorExists(int id)
+        private bool BrandExists(int id)
         {
-            return (_context.Color?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Brand?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

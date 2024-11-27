@@ -11,13 +11,13 @@ namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class OrderController : Controller
+    public class OrdersController : Controller
     {
         public readonly ApplicationDbContext _context;
         IHubContext<OrderHub> _orderHubContext;
 
 
-        public OrderController(ApplicationDbContext context, IHubContext<OrderHub> orderHubContext)
+        public OrdersController(ApplicationDbContext context, IHubContext<OrderHub> orderHubContext)
         {
             _context = context;
             _orderHubContext = orderHubContext;

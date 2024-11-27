@@ -9,11 +9,11 @@ namespace furni.Presentation.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Area("Admin")]
-    public class SizeController : Controller
+    public class SizesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SizeController(ApplicationDbContext context)
+        public SizesController(ApplicationDbContext context)
         {
             _context = context;
         }
