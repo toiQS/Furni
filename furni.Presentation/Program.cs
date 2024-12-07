@@ -11,6 +11,7 @@ using furni.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 using furni.Presentation.Hubs;
+using furni.Infrastructure.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,66 +71,13 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<CommentHub>("/commentHub");
 });
 
-using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope()) // Create a scoped service provider
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var roles = new[] { "Admin", "User" };
-    foreach (var role in roles)
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
+    var services = scope.ServiceProvider;
 
-    }
+    // Pass the scoped service provider to the seeder
+    BrandSeeder.Initialize(services);
+}
 
-}
-using (var scope = app.Services.CreateScope())
-{
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-    var email = "admin@admin.com";
-    var name = "Admin";
-    var password = "Admin@1234";
-    try
-    {
-        var identityUser = new AppUser
-        {
-            Id = "user-default",
-            UserName = name,
-            Email = email,
-            EmailConfirmed = false,
-        };
-        await userManager.CreateAsync(identityUser, password);
-        await userManager.AddToRoleAsync(identityUser, "Admin");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.ToString());
-        Console.WriteLine(ex.StackTrace?.ReplaceLineEndings());
-    }
-}
-using (var scope = app.Services.CreateScope())
-{
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-    var email = "user1@user1.com";
-    var name = "user";
-    var password = "User@1234";
-    try
-    {
-        var identityUser = new AppUser
-        {
-            Id = "user-1",
-            UserName = name,
-            Email = email,
-            EmailConfirmed = false,
-        };
-        await userManager.CreateAsync(identityUser, password);
-        await userManager.AddToRoleAsync(identityUser, "User");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.ToString());
-        Console.WriteLine(ex.StackTrace?.ReplaceLineEndings());
-    }
-}
+
 app.Run();

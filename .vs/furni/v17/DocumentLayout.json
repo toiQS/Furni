@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\Coding\\Local\\Furni\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\coding\\local\\furni\\furni.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\coding\\local\\furni\\furni.infrastructure\\migrations\\20241124031343_initdb1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\migrations\\20241124031343_initdb1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,15 +9,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
@@ -41,30 +32,12 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Program.cs",
-              "RelativeDocumentMoniker": "furni.Presentation\\Program.cs",
-              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Program.cs",
-              "RelativeToolTip": "furni.Presentation\\Program.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T03:25:14.753Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1ce3aef-c78d-49ee-b72b-ec1fbc908313}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20241124031343_InitDB1.cs",
-              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Infrastructure\\Migrations\\20241124031343_InitDB1.cs",
-              "RelativeDocumentMoniker": "furni.Infrastructure\\Migrations\\20241124031343_InitDB1.cs",
-              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Infrastructure\\Migrations\\20241124031343_InitDB1.cs",
-              "RelativeToolTip": "furni.Infrastructure\\Migrations\\20241124031343_InitDB1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T03:13:44.384Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{b1ce3aef-c78d-49ee-b72b-ec1fbc908313}"
             }
           ]
         }
