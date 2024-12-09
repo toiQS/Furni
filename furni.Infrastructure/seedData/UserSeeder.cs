@@ -1,4 +1,4 @@
-﻿using furni.Domain.Entities;
+﻿    using furni.Domain.Entities;
 using furni.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +13,7 @@ namespace furni.Infrastructure.seedData
     public static class UserSeeder
     {
         
-        public static async void Initialize(this IServiceProvider serviceProvider)
+        public static async void Initialize(IServiceProvider serviceProvider)
         {
             // seed admin
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();

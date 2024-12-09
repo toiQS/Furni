@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
 using furni.Presentation.Hubs;
 using furni.Infrastructure.SeedData;
+using furni.Infrastructure.seedData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,9 @@ using (var scope = app.Services.CreateScope()) // Create a scoped service provid
 
     // Pass the scoped service provider to the seeder
     BrandSeeder.Initialize(services);
+    //ColorSeeder.Initialize(services);
+    CategorySeeder.Initialize(services);
+
 }
 
 

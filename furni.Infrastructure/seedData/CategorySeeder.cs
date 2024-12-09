@@ -1,20 +1,17 @@
 ﻿using furni.Domain.Entities;
 using furni.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace furni.Infrastructure.seedData
 {
-    public static class CategorySeed
+    public static class CategorySeeder
     {
-        public static void Initialize(this IServiceProvider serviceProvider)
+        public static void Initialize(IServiceProvider serviceProvider)
         {
-            using var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-            if(context.Category.Any()) return;
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+            if (context.Category.Any()) return;
+
             context.Category.AddRange(
                 new Category()
                 {
@@ -45,9 +42,12 @@ namespace furni.Infrastructure.seedData
                     Name = "Phụ kiện",
                     IsDeleted = false,
                     Products = new List<Product>()
-                });
+                }
+            );
+
             context.SaveChanges();
         }
+
 
     }
 }

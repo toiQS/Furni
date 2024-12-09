@@ -7,7 +7,7 @@ namespace furni.Infrastructure.seedData
 {
     public static class AddressSeeder
     {
-        public static void Initialize(this IServiceProvider serviceProvider)
+        public static void Initialize( IServiceProvider serviceProvider)
         {
             using var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             if(context.Address.Any ()) return;
