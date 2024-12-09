@@ -1,6 +1,7 @@
 ﻿using furni.Domain.Entities;
 using furni.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,7 @@ namespace furni.Infrastructure.SeedData
         public static void Initialize(IServiceProvider serviceProvider)
         {
             // Use the scoped provider to get ApplicationDbContext
-            using var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
             // Check if any Brand exists; if not, seed data
             if (context.Brand.Any()) return;

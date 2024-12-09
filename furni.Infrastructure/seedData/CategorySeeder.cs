@@ -1,5 +1,6 @@
 ﻿using furni.Domain.Entities;
 using furni.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace furni.Infrastructure.seedData

@@ -13,7 +13,7 @@ namespace furni.Infrastructure.seedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             if (context.Size.Any()) return;
             context.Size.AddRange(
                 new Size { Value = "36", IsDeleted = false },

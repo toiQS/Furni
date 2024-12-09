@@ -13,7 +13,7 @@ namespace furni.Infrastructure.seedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             context.VariantSize.AddRange(
                 new VariantSize { IsActive = true, SizeId = 1, Quantity =10, VariantId = 1},
                 new VariantSize { IsActive = true, SizeId = 2, Quantity =10, VariantId = 1},
