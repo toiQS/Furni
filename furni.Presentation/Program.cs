@@ -1,18 +1,9 @@
-using furni.Application.Interfaces.Management;
-using furni.Application.Management;
-
-
-using furni.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using furni.Infrastructure.Configurations;
+﻿using furni.Infrastructure.Configurations;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.IServices;
 using furni.Infrastructure.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity.Client;
 using furni.Presentation.Hubs;
-using furni.Infrastructure.SeedData;
-using furni.Infrastructure.seedData;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,12 +18,6 @@ builder.Services.AddSignalR();
 builder.Services.AddTransient<ISendMailService, SendMailService>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
-
-
-builder.Services.AddScoped<ICartManagement, CartManagement>();
-
-builder.Services.AddScoped<IBrandManageServices, BrandManageServices>();
-
 
 var app = builder.Build();
 
@@ -71,17 +56,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<OrderHub>("/orderHub");
     endpoints.MapHub<CommentHub>("/commentHub");
 });
-
-using (var scope = app.Services.CreateScope()) // Create a scoped service provider
-{
-    var services = scope.ServiceProvider;
-
-    // Pass the scoped service provider to the seeder
-    BrandSeeder.Initialize(services);
-    //ColorSeeder.Initialize(services);
-    CategorySeeder.Initialize(services);
-
-}
 
 
 app.Run();

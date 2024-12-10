@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace furni.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class pmadddata : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,6 +56,24 @@ namespace furni.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contact",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsSeen = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -89,7 +109,7 @@ namespace furni.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<int>(type: "int", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -118,11 +138,11 @@ namespace furni.Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: true),
-                    URLImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfileImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: true),
                     BirthDay = table.Column<DateTime>(type: "datetime2", nullable: true),
                     JoinTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProfileImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -142,43 +162,6 @@ namespace furni.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Product",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PriceSale = table.Column<float>(type: "real", nullable: false),
-                    IsFeatured = table.Column<bool>(type: "bit", nullable: false),
-                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Label = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Product", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Product_Brand_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brand",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Product_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -221,40 +204,6 @@ namespace furni.Infrastructure.Migrations
                     table.PrimaryKey("PK_Address", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Address_Users_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Blog",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TopicId = table.Column<int>(type: "int", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsPublic = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeteled = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blog", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Blog_Topic_TopicId",
-                        column: x => x.TopicId,
-                        principalTable: "Topic",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Blog_Users_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -347,6 +296,136 @@ namespace furni.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShippingFee = table.Column<double>(type: "float", nullable: false),
+                    SubTotal = table.Column<double>(type: "float", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
+                    PaymentMethod = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentStatus = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ShippingMethodId = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_ShippingMethod_ShippingMethodId",
+                        column: x => x.ShippingMethodId,
+                        principalTable: "ShippingMethod",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Order_Users_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Blog",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TopicId = table.Column<int>(type: "int", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ThumbnailId = table.Column<int>(type: "int", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPublic = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeteled = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blog", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Blog_Topic_TopicId",
+                        column: x => x.TopicId,
+                        principalTable: "Topic",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Blog_Users_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Image",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VariantId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PriceSale = table.Column<float>(type: "real", nullable: false),
+                    IsFeatured = table.Column<bool>(type: "bit", nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Label = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    ThumbnailId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_Brand_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brand",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Product_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Product_Image_ThumbnailId",
+                        column: x => x.ThumbnailId,
+                        principalTable: "Image",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductVariant",
                 columns: table => new
                 {
@@ -354,8 +433,8 @@ namespace furni.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     ColorId = table.Column<int>(type: "int", nullable: false),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Images = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThumbnailId = table.Column<int>(type: "int", nullable: true),
+                    Position = table.Column<int>(type: "int", nullable: false),
                     SizeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -367,6 +446,11 @@ namespace furni.Infrastructure.Migrations
                         principalTable: "Color",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariant_Image_ThumbnailId",
+                        column: x => x.ThumbnailId,
+                        principalTable: "Image",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProductVariant_Product_ProductId",
                         column: x => x.ProductId,
@@ -404,46 +488,6 @@ namespace furni.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Review_Users_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ShippingFee = table.Column<double>(type: "float", nullable: false),
-                    SubTotal = table.Column<double>(type: "float", nullable: false),
-                    OrderStatus = table.Column<int>(type: "int", nullable: false),
-                    PaymentMethod = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentStatus = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingMethodId = table.Column<int>(type: "int", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Order_Address_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Address",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Order_ShippingMethod_ShippingMethodId",
-                        column: x => x.ShippingMethodId,
-                        principalTable: "ShippingMethod",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Order_Users_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -506,6 +550,86 @@ namespace furni.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Brand",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "Canifa" },
+                    { 2, false, "New Fashion" },
+                    { 3, false, "IVY Moda" },
+                    { 4, false, "Format" },
+                    { 5, false, "Routine" },
+                    { 6, false, "K&K Fashion" },
+                    { 7, false, "Libé" },
+                    { 8, false, "BOO " },
+                    { 9, false, "Hnoss Fashion" },
+                    { 10, false, "Adidas" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "Nón" },
+                    { 2, false, "Áo" },
+                    { 3, false, "Quần" },
+                    { 4, false, "Giày" },
+                    { 5, false, "Phụ kiện" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Color",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "Red" },
+                    { 2, false, "Blue" },
+                    { 3, false, "Black" },
+                    { 4, false, "While" },
+                    { 5, false, "Green" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ShippingMethod",
+                columns: new[] { "Id", "Cost", "Description", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, 10.5, "", false, "" },
+                    { 2, 12.0, "", false, "" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Size",
+                columns: new[] { "Id", "IsDeleted", "Value" },
+                values: new object[,]
+                {
+                    { 1, false, "36" },
+                    { 2, false, "37" },
+                    { 3, false, "38" },
+                    { 4, false, "39" },
+                    { 5, false, "40" },
+                    { 6, false, "41" },
+                    { 7, false, "42" },
+                    { 8, false, "43" },
+                    { 9, false, "44" },
+                    { 10, false, "45" },
+                    { 11, false, "46" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Topic",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "" },
+                    { 2, false, "" },
+                    { 3, false, "" },
+                    { 4, false, "" },
+                    { 5, false, "" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Address_AppUserId",
                 table: "Address",
@@ -517,9 +641,19 @@ namespace furni.Infrastructure.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Blog_ThumbnailId",
+                table: "Blog",
+                column: "ThumbnailId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Blog_TopicId",
                 table: "Blog",
                 column: "TopicId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_VariantId",
+                table: "Image",
+                column: "VariantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_AddressId",
@@ -557,6 +691,11 @@ namespace furni.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_ThumbnailId",
+                table: "Product",
+                column: "ThumbnailId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductVariant_ColorId",
                 table: "ProductVariant",
                 column: "ColorId");
@@ -570,6 +709,11 @@ namespace furni.Infrastructure.Migrations
                 name: "IX_ProductVariant_SizeId",
                 table: "ProductVariant",
                 column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariant_ThumbnailId",
+                table: "ProductVariant",
+                column: "ThumbnailId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Review_AppUserId",
@@ -629,13 +773,38 @@ namespace furni.Infrastructure.Migrations
                 name: "IX_VariantSize_VariantId",
                 table: "VariantSize",
                 column: "VariantId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Blog_Image_ThumbnailId",
+                table: "Blog",
+                column: "ThumbnailId",
+                principalTable: "Image",
+                principalColumn: "Id");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Image_ProductVariant_VariantId",
+                table: "Image",
+                column: "VariantId",
+                principalTable: "ProductVariant",
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Product_Image_ThumbnailId",
+                table: "Product");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProductVariant_Image_ThumbnailId",
+                table: "ProductVariant");
+
             migrationBuilder.DropTable(
                 name: "Blog");
+
+            migrationBuilder.DropTable(
+                name: "Contact");
 
             migrationBuilder.DropTable(
                 name: "OrderDetail");
@@ -677,10 +846,13 @@ namespace furni.Infrastructure.Migrations
                 name: "ShippingMethod");
 
             migrationBuilder.DropTable(
-                name: "ProductVariant");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Image");
+
+            migrationBuilder.DropTable(
+                name: "ProductVariant");
 
             migrationBuilder.DropTable(
                 name: "Color");

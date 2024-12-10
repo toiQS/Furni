@@ -12,8 +12,8 @@ using furni.Infrastructure.Data;
 namespace furni.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241120145614_initial")]
-    partial class initial
+    [Migration("20241210000715_pm-add-data")]
+    partial class pmadddata
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace furni.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -228,6 +228,9 @@ namespace furni.Infrastructure.Migrations
                     b.Property<int?>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -258,7 +261,6 @@ namespace furni.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfileImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -269,10 +271,6 @@ namespace furni.Infrastructure.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("URLImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -314,10 +312,6 @@ namespace furni.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeteled")
                         .HasColumnType("bit");
 
@@ -332,12 +326,17 @@ namespace furni.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ThumbnailId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("ThumbnailId");
 
                     b.HasIndex("TopicId");
 
@@ -362,6 +361,68 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brand");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Canifa"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "New Fashion"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "IVY Moda"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "Format"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Routine"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Name = "K&K Fashion"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Name = "Libé"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Name = "BOO "
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Name = "Hnoss Fashion"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            Name = "Adidas"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Category", b =>
@@ -382,6 +443,38 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Nón"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Áo"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "Quần"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "Giày"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Phụ kiện"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Color", b =>
@@ -402,6 +495,93 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Color");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Blue"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "Black"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "While"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Green"
+                        });
+                });
+
+            modelBuilder.Entity("furni.Domain.Entities.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSeen")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contact");
+                });
+
+            modelBuilder.Entity("furni.Domain.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("VariantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VariantId");
+
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Order", b =>
@@ -534,15 +714,16 @@ namespace furni.Infrastructure.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("Thumbnail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ThumbnailId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ThumbnailId");
 
                     b.ToTable("Product");
                 });
@@ -609,6 +790,24 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShippingMethod");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cost = 10.5,
+                            Description = "",
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cost = 12.0,
+                            Description = "",
+                            IsDeleted = false,
+                            Name = ""
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Size", b =>
@@ -622,12 +821,81 @@ namespace furni.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Size");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Value = "36"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Value = "37"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Value = "38"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Value = "39"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Value = "40"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Value = "41"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Value = "42"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Value = "43"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Value = "44"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            Value = "45"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsDeleted = false,
+                            Value = "46"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Topic", b =>
@@ -648,6 +916,38 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Topic");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = ""
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Variant", b =>
@@ -661,9 +961,8 @@ namespace furni.Infrastructure.Migrations
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Images")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -671,9 +970,8 @@ namespace furni.Infrastructure.Migrations
                     b.Property<int?>("SizeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Thumbnail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ThumbnailId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -682,6 +980,8 @@ namespace furni.Infrastructure.Migrations
                     b.HasIndex("ProductId");
 
                     b.HasIndex("SizeId");
+
+                    b.HasIndex("ThumbnailId");
 
                     b.ToTable("ProductVariant");
                 });
@@ -717,7 +1017,7 @@ namespace furni.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -744,7 +1044,7 @@ namespace furni.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -785,6 +1085,10 @@ namespace furni.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("furni.Domain.Entities.Image", "Thumbnail")
+                        .WithMany()
+                        .HasForeignKey("ThumbnailId");
+
                     b.HasOne("furni.Domain.Entities.Topic", "Topic")
                         .WithMany("Blogs")
                         .HasForeignKey("TopicId")
@@ -793,7 +1097,16 @@ namespace furni.Infrastructure.Migrations
 
                     b.Navigation("AppUser");
 
+                    b.Navigation("Thumbnail");
+
                     b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("furni.Domain.Entities.Image", b =>
+                {
+                    b.HasOne("furni.Domain.Entities.Variant", null)
+                        .WithMany("Images")
+                        .HasForeignKey("VariantId");
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Order", b =>
@@ -856,9 +1169,15 @@ namespace furni.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("furni.Domain.Entities.Image", "Thumbnail")
+                        .WithMany()
+                        .HasForeignKey("ThumbnailId");
+
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Thumbnail");
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Review", b =>
@@ -898,9 +1217,15 @@ namespace furni.Infrastructure.Migrations
                         .WithMany("ProductVariants")
                         .HasForeignKey("SizeId");
 
+                    b.HasOne("furni.Domain.Entities.Image", "Thumbnail")
+                        .WithMany()
+                        .HasForeignKey("ThumbnailId");
+
                     b.Navigation("Color");
 
                     b.Navigation("Product");
+
+                    b.Navigation("Thumbnail");
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.VariantSize", b =>
@@ -980,6 +1305,8 @@ namespace furni.Infrastructure.Migrations
 
             modelBuilder.Entity("furni.Domain.Entities.Variant", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("VariantSizes");
                 });
 

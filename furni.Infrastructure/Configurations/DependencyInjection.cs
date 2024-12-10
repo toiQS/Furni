@@ -1,7 +1,6 @@
 using furni.Domain.Entities;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.IServices;
-using furni.Infrastructure.SeedData;
 using furni.Infrastructure.Service;
 using furni.Infrastructure.Services;
 
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
 
 namespace furni.Infrastructure.Configurations;
 

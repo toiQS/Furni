@@ -358,6 +358,68 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brand");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Canifa"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "New Fashion"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "IVY Moda"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "Format"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Routine"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Name = "K&K Fashion"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Name = "Libé"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Name = "BOO "
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Name = "Hnoss Fashion"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            Name = "Adidas"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Category", b =>
@@ -378,6 +440,38 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Nón"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Áo"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "Quần"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "Giày"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Phụ kiện"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Color", b =>
@@ -398,6 +492,38 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Color");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Blue"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "Black"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "While"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "Green"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Contact", b =>
@@ -661,6 +787,24 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShippingMethod");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cost = 10.5,
+                            Description = "",
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cost = 12.0,
+                            Description = "",
+                            IsDeleted = false,
+                            Name = ""
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Size", b =>
@@ -681,6 +825,74 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Size");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Value = "36"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Value = "37"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Value = "38"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Value = "39"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Value = "40"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Value = "41"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Value = "42"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Value = "43"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Value = "44"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsDeleted = false,
+                            Value = "45"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsDeleted = false,
+                            Value = "46"
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Topic", b =>
@@ -701,6 +913,38 @@ namespace furni.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Topic");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = ""
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = ""
+                        });
                 });
 
             modelBuilder.Entity("furni.Domain.Entities.Variant", b =>
