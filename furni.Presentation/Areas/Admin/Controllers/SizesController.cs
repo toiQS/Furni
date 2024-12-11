@@ -77,7 +77,7 @@ namespace furni.Presentation.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Size size)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(size);
                 await _context.SaveChangesAsync();
@@ -114,7 +114,7 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
