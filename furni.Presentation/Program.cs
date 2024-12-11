@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectString1"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DockerConnetcString"));
 });
 
 // Add services to the container.
@@ -62,7 +62,7 @@ app.UseEndpoints(endpoints =>
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var roles = new[] { "Admin", "User" };
+    var roles = new[] { UserRoles.Admin, UserRoles.Customer };
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))

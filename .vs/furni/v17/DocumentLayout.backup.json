@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "F:\\Coding\\Local\\Furni\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\coding\\local\\furni\\furni.presentation\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\coding\\local\\furni\\furni.presentation\\areas\\admin\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\areas\\admin\\views\\products\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\coding\\local\\furni\\furni.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,15 +50,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthenticationController.cs",
-              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Controllers\\AuthenticationController.cs",
-              "RelativeDocumentMoniker": "furni.Presentation\\Controllers\\AuthenticationController.cs",
-              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Controllers\\AuthenticationController.cs",
-              "RelativeToolTip": "furni.Presentation\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAzAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "furni.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAO4AAAAAAAAAAAAAAI4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T07:52:37.037Z",
+              "WhenOpened": "2024-12-11T13:59:05.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "RelativeDocumentMoniker": "furni.Presentation\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "RelativeToolTip": "furni.Presentation\\Areas\\Admin\\Views\\Products\\Create.cshtml",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAAAL4AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-11T13:57:08.368Z",
               "EditorCaption": ""
             }
           ]

@@ -1,4 +1,5 @@
 ﻿using furni.Domain.Entities;
+using furni.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,7 +24,7 @@ public static class UserSeeder
             var createAdminResult = await userManager.CreateAsync(adminUser, "Admin@1234");
             if (createAdminResult.Succeeded)
             {
-                await userManager.AddToRoleAsync(adminUser, "Admin");
+                await userManager.AddToRoleAsync(adminUser, UserRoles.Admin);
             }
         }
 
@@ -48,7 +49,7 @@ public static class UserSeeder
             var createUserResult = await userManager.CreateAsync(normalUser, "User@1234");
             if (createUserResult.Succeeded)
             {
-                await userManager.AddToRoleAsync(normalUser, "User");
+                await userManager.AddToRoleAsync(normalUser, UserRoles.Customer);
             }
         }
     }
