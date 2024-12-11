@@ -1,8 +1,10 @@
 ﻿using furni.Infrastructure.Configurations;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.IServices;
+using furni.Infrastructure.seedData;
 using furni.Infrastructure.Services;
 using furni.Presentation.Hubs;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,5 +59,37 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<CommentHub>("/commentHub");
 });
 
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "User" };
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+
+    }
+
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await UserSeeder.Initialize(services);
+} 
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    AddressSeeder.Initialize(services);
+} 
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    BlogSeeder.Initialize(services);
+//}   
 
 app.Run();

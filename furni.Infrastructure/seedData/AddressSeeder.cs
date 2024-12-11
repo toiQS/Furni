@@ -7,12 +7,28 @@ namespace furni.Infrastructure.seedData
 {
     public static class AddressSeeder
     {
-        public static void Initialize( IServiceProvider serviceProvider)
+        public static void Initialize(IServiceProvider serviceProvider)
         {
-            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-            if(context.Address.Any ()) return;
-            context.Address.AddRange(
-                new Address
+            using var scope = serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            // Kiểm tra và thêm dữ liệu vào bảng Users
+            if (!context.Users.Any(u => u.Id == "user-1"))
+            {
+                context.Users.Add(new AppUser
+                {
+                    Id = "user-1",
+                    UserName = "nguyenvana",
+                    Email = "nguyenvana@gmail.com",
+                    // Các trường khác cần thiết cho User
+                });
+                context.SaveChanges();
+            }
+
+            // Thêm Address
+            if (!context.Address.Any())
+            {
+                context.Address.Add(new Address
                 {
                     AppUserId = "user-1",
                     FullName = "Nguyen Van A",
@@ -22,9 +38,10 @@ namespace furni.Infrastructure.seedData
                     IsDefault = true,
                     IsDeleted = false,
                     Orders = new List<Order>()
-                }
-            );
-            context.SaveChanges();
+                });
+                context.SaveChanges();
+            }
         }
+
     }
 }
