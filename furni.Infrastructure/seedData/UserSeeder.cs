@@ -1,69 +1,54 @@
 ﻿using furni.Domain.Entities;
-using furni.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace furni.Infrastructure.seedData
+public static class UserSeeder
 {
-    public static class UserSeeder
+    public static async Task Initialize(IServiceProvider serviceProvider)
     {
-        
-        public static async void Initialize(this IServiceProvider serviceProvider)
-        {
-            // seed admin
-            var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
-            var email = "admin@admin.com";
-            var name = "Admin";
-            var password = "Admin@1234";
-            try
-            {
-                var identityUser = new AppUser
-                {
-                    Id = "admin-1",
-                    UserName = name,
-                    Email = email,
-                    EmailConfirmed = false,
-                };
-                await userManager.CreateAsync(identityUser, password);
-                await userManager.AddToRoleAsync(identityUser, "Admin");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                Console.WriteLine(ex.StackTrace?.ReplaceLineEndings());
-            }
+        var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
 
-            // seed user
-            AppUser user = new AppUser()
+        // Seed admin
+        var adminId = "admin-1";
+        if (await userManager.FindByIdAsync(adminId) == null)
+        {
+            var adminUser = new AppUser
             {
-                Id = "use-1",
-                ProfileImageUrl = "",
+                Id = adminId,
+                UserName = "Admin",
+                Email = "admin@admin.com",
+                EmailConfirmed = true,
+            };
+
+            var createAdminResult = await userManager.CreateAsync(adminUser, "Admin@1234");
+            if (createAdminResult.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
+        }
+
+        // Seed user
+        var userId = "use-1";
+        if (await userManager.FindByIdAsync(userId) == null)
+        {
+            var normalUser = new AppUser
+            {
+                Id = userId,
+                UserName = "NguyenVanA",
                 Email = "nguyenvana@gmail.com",
-                EmailConfirmed = false,
-                Gender = 1,
+                EmailConfirmed = true,
+                FullName = "Nguyễn Văn A",
                 BirthDay = DateTime.Now,
                 JoinTime = DateTime.Now,
-                FullName = "Nguyễn Văn A",
-                Addresses = new List<Address>(),
-                Blogs = new List<Blog>(),
-                Orders = new List<Order>(),
+                Gender = 1,
                 IsDeleted = false,
-                Status = true
+                Status = true,
             };
-            try
+
+            var createUserResult = await userManager.CreateAsync(normalUser, "User@1234");
+            if (createUserResult.Succeeded)
             {
-                await userManager.CreateAsync(user);
-                await userManager.AddToRoleAsync(user, "User");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                Console.WriteLine(ex.StackTrace?.ReplaceLineEndings());
+                await userManager.AddToRoleAsync(normalUser, "User");
             }
         }
     }

@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "F:\\Coding\\Local\\Furni\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|f:\\coding\\local\\furni\\furni.infrastructure\\seeddata\\productseed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46F9CF74-564F-4A60-8773-495F3D73BD3C}|furni.Infrastructure\\furni.Infrastructure.csproj|solutionrelative:furni.infrastructure\\seeddata\\productseed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|f:\\coding\\local\\furni\\furni.presentation\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1B4B7F7-3A44-4BF2-8214-00674F3CF02C}|furni.Presentation\\furni.Presentation.csproj|solutionrelative:furni.presentation\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,40 +34,27 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{b1ce3aef-c78d-49ee-b72b-ec1fbc908313}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{b1ce3aef-c78d-49ee-b72b-ec1fbc908313}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "76b4d427-8764-43d7-abc5-f5451f9cc558",
-        "Display": 1,
-        "X": 303,
-        "Y": 88,
-        "Width": 1228,
-        "Height": 788,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductSeed.cs",
-              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Infrastructure\\seedData\\ProductSeed.cs",
-              "RelativeDocumentMoniker": "furni.Infrastructure\\seedData\\ProductSeed.cs",
-              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Infrastructure\\seedData\\ProductSeed.cs",
-              "RelativeToolTip": "furni.Infrastructure\\seedData\\ProductSeed.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "furni.Presentation\\Controllers\\AuthenticationController.cs",
+              "ToolTip": "F:\\Coding\\Local\\Furni\\furni.Presentation\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "furni.Presentation\\Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T15:05:54.457Z",
+              "WhenOpened": "2024-12-11T07:52:37.037Z",
               "EditorCaption": ""
             }
           ]

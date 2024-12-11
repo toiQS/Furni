@@ -1,17 +1,11 @@
-using furni.Application.Interfaces.Management;
-using furni.Application.Management;
-
-
-using furni.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using furni.Infrastructure.Configurations;
+﻿using furni.Infrastructure.Configurations;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.IServices;
+using furni.Infrastructure.seedData;
 using furni.Infrastructure.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity.Client;
 using furni.Presentation.Hubs;
-using furni.Infrastructure.SeedData;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,12 +20,6 @@ builder.Services.AddSignalR();
 builder.Services.AddTransient<ISendMailService, SendMailService>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
-
-
-builder.Services.AddScoped<ICartManagement, CartManagement>();
-
-builder.Services.AddScoped<IBrandManageServices, BrandManageServices>();
-
 
 var app = builder.Build();
 
@@ -71,13 +59,37 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<CommentHub>("/commentHub");
 });
 
-using (var scope = app.Services.CreateScope()) // Create a scoped service provider
+using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "User" };
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
 
-    // Pass the scoped service provider to the seeder
-    BrandSeeder.Initialize(services);
+    }
+
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await UserSeeder.Initialize(services);
+} 
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    AddressSeeder.Initialize(services);
+} 
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    BlogSeeder.Initialize(services);
+//}   
 
 app.Run();
