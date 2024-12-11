@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
@@ -81,7 +82,7 @@ namespace furni.Presentation.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Cost,isDelete")] ShippingMethod shippingMethod)
         {
-            if (ModelState.IsValid)
+            if (shippingMethod.Id!=null && shippingMethod.Name!=null && shippingMethod.Description!=null && shippingMethod.Cost!=null)
             {
                 _context.Add(shippingMethod);
                 await _context.SaveChangesAsync();
@@ -118,7 +119,7 @@ namespace furni.Presentation.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (shippingMethod.Id != null && shippingMethod.Name != null && shippingMethod.Description != null && shippingMethod.Cost != null)
             {
                 try
                 {
