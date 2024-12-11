@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DockerConnetcString"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectString1"));
 });
 
 // Add services to the container.

@@ -25,7 +25,7 @@ public static class DependencyInjection
     }
     public static void ConfigurationConnectionToDataBase(this IServiceCollection services, IConfiguration configuration)
     {
-        string connectionString = configuration.GetConnectionString("DockerConnetcString") ?? string.Empty;
+        string connectionString = configuration.GetConnectionString("DefaultConnectString1") ?? string.Empty;
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
     }
     public static void RegisterServices(IServiceCollection services)
