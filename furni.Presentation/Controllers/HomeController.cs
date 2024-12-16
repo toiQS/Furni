@@ -27,19 +27,19 @@ public class HomeController : Controller
     {
         ViewBag.Featured = await _context.Product.Where(p => p.IsFeatured == true)
             .Where(p => !p.IsDeleted)
-            //.Include(p => p.Thumbnail)
+            .Include(p => p.Thumbnail)
             .OrderByDescending(p => p.CreatedAt)
             .Take(8)
             .ToListAsync();
         ViewBag.NewProduct = await _context.Product
-            //.Include(p => p.Thumbnail)
+            .Include(p => p.Thumbnail)
             .Where(p => !p.IsDeleted)
             .OrderByDescending(p => p.CreatedAt)
             .Take(8)
             .ToListAsync();
 
         ViewBag.SuggestPost = await _context.Blog
-            //.Include(p => p.Image)
+            .Include(p => p.Thumbnail)
             .Where(p => !p.IsDeteled && p.IsPublic)
             .Include(b => b.Topic)
             .Include(b => b.AppUser)
