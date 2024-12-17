@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddTransient<ISendMailService, SendMailService>();
+builder.Services.AddScoped<IPayPalService, PayPalService>();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
