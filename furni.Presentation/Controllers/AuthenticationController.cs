@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System;
 using furni.Infrastructure.IServices;
 using furni.Infrastructure.Data;
+using System.Security.Claims;
 
 namespace furni.Presentation.Controllers
 {
@@ -28,8 +29,10 @@ namespace furni.Presentation.Controllers
 
         public IActionResult Signin()
         {
-            Debug.WriteLine(User.IsInRole("User"));
-            if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
+            //var roles = User.FindAll(ClaimTypes.Role).Select(c => c.Value).ToList();
+            //Debug.WriteLine("User roles: " + string.Join(", ", roles));
+            //Debug.WriteLine("ggg"+User.IsInRole("Admin"));
+            if (_signInManager.IsSignedIn(User) && User.IsInRole(UserRoles.Admin)) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
             if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Home");
             var response = new SigninViewModel();
             return View(response);
@@ -38,8 +41,8 @@ namespace furni.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Signin(SigninViewModel loginViewModel, string? returnUrl)
         {
-            Debug.WriteLine(User.IsInRole("User"));
-            if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
+            //Debug.WriteLine("ggg" + User.IsInRole(UserRoles.Admin));
+            if (_signInManager.IsSignedIn(User) && User.IsInRole(UserRoles.Admin)) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
             if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Home");
             if (!ModelState.IsValid) return View(loginViewModel);
 
@@ -57,7 +60,7 @@ namespace furni.Presentation.Controllers
                     if (result.Succeeded)
                     {
                         if (!string.IsNullOrEmpty(returnUrl)) return Redirect(returnUrl);
-                        if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
+                        if (_signInManager.IsSignedIn(User) && User.IsInRole(UserRoles.Admin)) return RedirectToAction(actionName: "Index", controllerName: "Home", new { area = "Admin" });
                         return RedirectToAction("Index", "Home");
                     }
                     if (result.IsLockedOut)
@@ -98,7 +101,6 @@ namespace furni.Presentation.Controllers
                 TempData["Error"] = "This username address is already in use";
                 return View(registerViewModel);
             }
-
             var newUser = new AppUser()
             {
                 FullName = registerViewModel.FullName,
@@ -113,7 +115,6 @@ namespace furni.Presentation.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
             if (newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.Customer);
-
             return RedirectToAction("Index", "Home");
         }
 

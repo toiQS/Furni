@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = UserRoles.Admin)]
     [Area("Admin")]
     public class ProductsController : Controller
     {

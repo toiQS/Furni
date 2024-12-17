@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = UserRoles.Admin)]
     [Area("Admin")]
     public class OrdersController : Controller
     {

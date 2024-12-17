@@ -7,7 +7,7 @@ using furni.Domain.Entities;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = UserRoles.Admin)]
     [Area("Admin")]
     public class ColorsController : Controller
     {
