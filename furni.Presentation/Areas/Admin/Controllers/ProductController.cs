@@ -7,6 +7,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace furni.Presentation.Areas.Admin.Controllers
 {
@@ -40,72 +41,73 @@ namespace furni.Presentation.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> GetProducts(string query, int[] categories, int[] colors, int[] brands, string[] prices)
         {
-            var draw = int.Parse(Request.Form["draw"].FirstOrDefault());
-            var skip = int.Parse(Request.Form["start"].FirstOrDefault());
-            var pageSize = int.Parse(Request.Form["length"].FirstOrDefault());
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-
-            var products = _context.Product
-                .Include(product => product.Thumbnail)
-                .Include(product => product.Category)
-                .Include(product => product.Brand)
-                .Where(p => !p.IsDeleted)
-                .AsQueryable();
-
-            switch (sortColumn.ToLower())
+            try
             {
-                case "id":
-                    products = sortColumnDirection.ToLower() == "asc" ? products.OrderBy(o => o.Id) : products.OrderByDescending(o => o.Id);
-                    break;
-                case "name":
-                    products = sortColumnDirection.ToLower() == "asc" ? products.OrderBy(o => o.Name) : products.OrderByDescending(o => o.Name);
-                    break;
-                case "price":
-                    products = sortColumnDirection.ToLower() == "asc" ? products.OrderBy(o => o.Price) : products.OrderByDescending(o => o.Price);
-                    break;
-                default:
-                    products = products.OrderBy(o => o.Id);
-                    break;
-            }
+                var draw = int.TryParse(Request.Form["draw"].FirstOrDefault(), out var parsedDraw) ? parsedDraw : 0;
+                var skip = int.TryParse(Request.Form["start"].FirstOrDefault(), out var parsedSkip) ? parsedSkip : 0;
+                var pageSize = int.TryParse(Request.Form["length"].FirstOrDefault(), out var parsedPageSize) ? parsedPageSize : 10;
+                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(query))
+                var products = _context.Product
+                    .Include(product => product.Thumbnail)
+                    .Include(product => product.Category)
+                    .Include(product => product.Brand)
+                    .Where(p => !p.IsDeleted)
+                    .AsQueryable();
+
+                if (!string.IsNullOrEmpty(query))
+                    products = products.Where(m => m.Name.Contains(query));
+
+                if (categories?.Length > 0)
+                    products = products.Where(u => categories.Contains(u.CategoryId));
+
+                if (colors?.Length > 0)
+                    products = products.Where(u => u.ProductVariants.Any(item => colors.Contains(item.ColorId)));
+
+                if (brands?.Length > 0)
+                    products = products.Where(u => brands.Contains(u.BrandId));
+
+                if (prices?.Length > 0)
+                {
+                    var priceRangeList = PriceRangesConverter.Parse(prices);
+                    products = products.ToList().Where(product =>
+                        priceRangeList.Any(range =>
+                            product.Price >= range.Min && product.Price <= range.Max ||
+                            product.PriceSale != 0 && product.PriceSale >= range.Min && product.PriceSale <= range.Max
+                        )
+                    ).AsQueryable();
+
+                }
+
+                // Sorting
+                switch (sortColumn?.ToLower())
+                {
+                    case "id":
+                        products = sortColumnDirection == "asc" ? products.OrderBy(o => o.Id) : products.OrderByDescending(o => o.Id);
+                        break;
+                    case "name":
+                        products = sortColumnDirection == "asc" ? products.OrderBy(o => o.Name) : products.OrderByDescending(o => o.Name);
+                        break;
+                    case "price":
+                        products = sortColumnDirection == "asc" ? products.OrderBy(o => o.Price) : products.OrderByDescending(o => o.Price);
+                        break;
+                    default:
+                        products = products.OrderBy(o => o.Id);
+                        break;
+                }
+
+                var recordsTotal = await products.CountAsync();
+                var data = await products.Skip(skip).Take(pageSize).ToListAsync();
+
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
+                return Ok(jsonData);
+            }
+            catch (Exception ex)
             {
-                products = products.Where(m => m.Name.Contains(query));
+                Debug.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, new { message = "An internal server error occurred.", details = ex.Message });
             }
-
-            if (categories.Length != 0)
-            {
-                products = products.Where(u => categories.Contains(u.CategoryId));
-            }
-
-            if (colors.Length != 0)
-            {
-                products = products.Where(u => u.ProductVariants.Any(item => colors.Contains(item.ColorId)));
-            }
-
-            if (brands.Length != 0)
-            {
-                products = products.Where(u => brands.Contains(u.BrandId));
-            }
-
-            if (prices.Length != 0)
-            {
-                var priceRangeList = PriceRangesConverter.Parse(prices);
-                priceRangeList.ForEach(e => Console.WriteLine(e));
-                products = products.ToList().Where(product =>
-                    priceRangeList.Any(range =>
-                        product.Price >= range.Min && product.Price <= range.Max ||
-                        product.PriceSale != 0 && product.PriceSale >= range.Min && product.PriceSale <= range.Max
-                    )
-                ).AsQueryable();
-            }
-
-            var recordsTotal = products.Count();
-            var data = products.OrderByDescending(o => o.Id).Skip(skip).Take(pageSize).ToList();
-
-            var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
-            return Ok(jsonData);
         }
 
         public async Task<IActionResult> Create()
