@@ -8,6 +8,7 @@ using System;
 using furni.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using furni.Infrastructure.Helpers;
+using System.Diagnostics;
 
 namespace furni.Presentation.Controllers
 {
@@ -225,7 +226,7 @@ namespace furni.Presentation.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost("/Product/GetCart")]
         public async Task<IActionResult> GetCart([FromBody] CartViewModel cart)
         {
             var variantSize = await _context.VariantSize
@@ -237,7 +238,7 @@ namespace furni.Presentation.Controllers
                         Productlug = v.Variant.Product.Slug,
                         SizeName = v.Size.Value,
                         ColorName = v.Variant.Color.Name,
-                        Thumbnail = v.Variant.Thumbnail,
+                        Thumbnail = v.Variant.Thumbnail.Name,
                         Title = v.Variant.Product.Name,
                         Price = v.Variant.Product.Price,
                         PriceSale = v.Variant.Product.PriceSale,

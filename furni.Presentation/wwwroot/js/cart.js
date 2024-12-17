@@ -36,7 +36,7 @@
 	}
 	$('#tbl-cart').html(html);
 	$('#total-cart-price-tbl').text(`$${getTotalPrice()}`);
-	//$('.cart_bt strong').text(getTotalProduct());
+	$('.cart_bt strong').text(getTotalProduct());
 }
 
 $(document).on('click', '.button_inc', function () {
