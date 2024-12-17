@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using furni.Infrastructure.Data;
 using furni.Infrastructure.IServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace furni.Presentation.Controllers
 {
@@ -27,7 +28,7 @@ namespace furni.Presentation.Controllers
         public async Task<IActionResult> CreatePaymentUrl([FromBody] PaymentViewModel paymentInfo)
         {
             var cartVariantSizeIds = paymentInfo.Cart.Select(ci => ci.VariantSizeId).ToList();
-            var variantSize = await _context.VariantSizes
+            var variantSize = await _context.VariantSize
                 .Where(v => cartVariantSizeIds.Contains(v.Id))
                 .Select(v => new OrderDetail
                 {
@@ -49,7 +50,7 @@ namespace furni.Presentation.Controllers
                 paymentInfo.AddressId = paymentInfo.NewAddress.Id;
             }
 
-            var shippingMethod = await _context.ShippingMethods.FindAsync(paymentInfo.ShippingMethodId);
+            var shippingMethod = await _context.ShippingMethod.FindAsync(paymentInfo.ShippingMethodId);
 
             var order = new Order
             {
@@ -85,7 +86,7 @@ namespace furni.Presentation.Controllers
         {
             if (TempData["OrderId"] is int orderId)
             {
-                var order = _context.Orders
+                var order = _context.Order
                     .Where(o => o.Id == orderId)
                     .Select(o => new
                     {
@@ -105,7 +106,7 @@ namespace furni.Presentation.Controllers
                             ProductSlug = p.VariantSize.Variant.Product.Slug,
                             Name = p.VariantSize.Variant.Product.Name,
                             Thumbnail = p.VariantSize.Variant.Product.Thumbnail.Name,
-                            Size = p.VariantSize.Size.Name,
+                            Size = p.VariantSize.Size.Value,
                             Color = p.VariantSize.Variant.Color.Name,
                             p.Price,
                             p.Quantity,
@@ -127,7 +128,7 @@ namespace furni.Presentation.Controllers
             {
                 if (payment_method == "PayPal")
                 {
-                    var order = _context.Orders.FirstOrDefault(o => o.Id == order_id);
+                    var order = _context.Order.FirstOrDefault(o => o.Id == order_id);
 
                     if (order != null)
                     {

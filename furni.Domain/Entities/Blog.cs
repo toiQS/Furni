@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace furni.Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace furni.Domain.Entities
         public string Slug { get; set; }
         [ForeignKey("AppUserId")]
         public string AppUserId { get; set; }
+        [JsonIgnore]
         public virtual AppUser AppUser { get; set; }
         public int TopicId { get; set; }
         public Topic? Topic { get; set; }

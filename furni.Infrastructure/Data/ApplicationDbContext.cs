@@ -25,6 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, str
     public DbSet<VariantSize> VariantSize { get; set; }
     public DbSet<Contact> Contact { get; set; }
     public DbSet<Image> Image { get; set; }
+    public DbSet<PaymentResponse> PaymentResponse { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -301,6 +302,5 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, str
                 new Topic {Id = 3, Name = "", IsDeleted = false },
                 new Topic {Id =4 ,Name = "", IsDeleted = false },
                 new Topic {Id = 5, Name = "", IsDeleted = false });
-
     }
 }
