@@ -20,7 +20,8 @@ namespace furni.Presentation.Models
         [Required]
         [DataType(DataType.Password)]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$", ErrorMessage = "Password must contain at least one lowercase letter, one uppercase letter, and one digit")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$",
+    ErrorMessage = "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character")]
         public string Password { get; set; }
 
         [Display(Name = "Confirm password")]
