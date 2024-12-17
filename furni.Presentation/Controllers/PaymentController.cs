@@ -72,7 +72,7 @@ namespace furni.Presentation.Controllers
             if (paymentInfo.PaymentMethodId == 0)
             {
                 TempData["OrderId"] = order.Id;
-                return Json($"https://localhost:7107/Payment/PayPalReturn?payment_method=COD&success=1&order_id={order.Id}");
+                return Json($"https://localhost:44341/Payment/PayPalReturn?payment_method=COD&success=1&order_id={order.Id}");
             }
             else
             {

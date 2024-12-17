@@ -93,7 +93,7 @@ namespace furni.Presentation.Controllers
                 }
                 ViewBag.PriceRanges = ProductWithPrices;
                 ViewBag.Product = await _context.Product
-                    //.Include(product => product.Thumbnail)
+                    .Include(product => product.Thumbnail)
                     .OrderByDescending(product => product.CreatedAt)
                     .ToListAsync();
                 return View();
@@ -250,7 +250,7 @@ namespace furni.Presentation.Controllers
 
         #region lấy ra danh sách sản phẩm
         //lấy ra danh sách sản phẩm
-        [HttpGet, ActionName("allProduct")]
+        [HttpGet("Product/allProduct"), ActionName("allProduct")]
         public IActionResult GetProductList(
             int page = 1,
             int pageSize = 9,

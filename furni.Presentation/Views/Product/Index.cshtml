@@ -284,7 +284,7 @@
 
             function fetchData() {
                 const queryParams = getQueryParamString();
-                const urlFetch = "/Product/allProducts" + (queryParams.length > 0 ? queryParams : '');
+                const urlFetch = "/Product/allProduct" + (queryParams.length > 0 ? queryParams : '');
                 $.ajax({
                     url: urlFetch,
                     method: "get",
@@ -298,12 +298,12 @@
                                     <div class="grid_item">
                                                 ${getLabel(product)}
                                         <figure>
-                                            <a href="/products/${product.Slug}">
+                                            <a href="/product/${product.Slug}">
                                             <img class="img-fluid lazy loaded" src="img/products/${product.Thumbnail.Name}" alt="${product.name}" data-was-processed="true">
                                             </a>
                                         </figure>
                                                 <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i></div>
-                                            <a href="/products/${product.Slug}">
+                                            <a href="/product/${product.Slug}">
                                             <h3>${product.Name}</h3>
                                         </a>
                                         <div class="price_box">
@@ -334,7 +334,7 @@
                         }
                     },
                     error: function (err) {
-                        console.error(err.responseText);
+                        // console.error(err.responseText);
                     },
                 });
             }
